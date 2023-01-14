@@ -1,0 +1,41 @@
+@font-face {
+  font-family: 'icomoon';
+  src: url('~@assets-root-path/fonts/icomoon.eot?hddh2v');
+  src: url('~@assets-root-path/fonts/icomoon.eot?hddh2v#iefix') format('embedded-opentype'), url('~@assets-root-path/fonts/icomoon.ttf?hddh2v') format('truetype'), url('~@assets-root-path/fonts/icomoon.woff?hddh2v') format('woff'), url('~@assets-root-path/fonts/icomoon.svg?hddh2v#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('~@assets-root-path/fonts/RobotoLight.eot');
+  src: url('~@assets-root-path/fonts/RobotoLight.eot') format('embedded-opentype'), url('~@assets-root-path/fonts/RobotoLight.woff2') format('woff2'), url('~@assets-root-path/fonts/RobotoLight.woff') format('woff'), url('~@assets-root-path/fonts/RobotoLight.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('~@assets-root-path/fonts/RobotoRegular.eot');
+  src: url('~@assets-root-path/fonts/RobotoRegular.eot') format('embedded-opentype'), url('~@assets-root-path/fonts/RobotoRegular.woff2') format('woff2'), url('~@assets-root-path/fonts/RobotoRegular.woff') format('woff'), url('~@assets-root-path/fonts/RobotoRegular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('~@assets-root-path/fonts/RobotoMedium.eot');
+  src: url('~@assets-root-path/fonts/RobotoMedium.eot') format('embedded-opentype'), url('~@assets-root-path/fonts/RobotoMedium.woff2') format('woff2'), url('~@assets-root-path/fonts/RobotoMedium.woff') format('woff'), url('~@assets-root-path/fonts/RobotoMedium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('~@assets-root-path/fonts/RobotoBold.eot');
+  src: url('~@assets-root-path/fonts/RobotoBold.eot') format('embedded-opentype'), url('~@assets-root-path/fonts/RobotoBold.woff2') format('woff2'), url('~@assets-root-path/fonts/RobotoBold.woff') format('woff'), url('~@assets-root-path/fonts/RobotoBold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'PT Sans';
+  src: url('~@assets-root-path/fonts/PTSans-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}

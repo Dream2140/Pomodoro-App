@@ -1,0 +1,42 @@
+@import ( reference ) '~@less-helpers-module/_mixins.less'; 
+@import ( reference ) '~@less-helpers-module/_variables.less';
+
+.reports {
+
+    &__top-tabs {
+        margin-bottom: 213/@rem;
+    }
+
+    &__content {
+        .centered-flex-element();
+        margin-bottom: 191/@rem;
+    }
+
+    &__link-left {
+        .arrows();
+        left: 0;
+    }
+
+    &__graph {
+        position: relative;
+        max-width: 100%;
+        max-height: 100%;
+        .tooltip();
+
+        .reports-table {
+            width: 100%;
+            color: @white-color;
+            text-align: center;
+        }
+    }
+
+    &__temp-img {
+        margin: 0 auto;
+        width: 100%;
+        height: auto;
+    }
+
+}
+
+.reports-tablet();
+.reports-desktop();

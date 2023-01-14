@@ -1,0 +1,83 @@
+@import ( reference ) '~@less-helpers-module/_mixins.less'; 
+@import ( reference ) '~@less-helpers-module/_variables.less';
+
+.notification {
+    .opacity(0.85);
+    mix-blend-mode: normal;
+    border: 1/@rem solid @white-color;
+    box-shadow: -15.6 / @rem 9 / @rem 30.7 / @rem rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    position: fixed;
+    bottom: 32 / @rem;
+    right: 24 / @rem;
+    left: 24 / @rem;
+    width: calc(100% - 50px);
+
+    &__container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__icon-wrap {
+        .centered-flex-element();
+        background: rgba(255, 255, 255, 0.2);
+        padding: 12/@rem 20/@rem;
+        max-width: 100%;
+    }
+
+    &__icon:before {
+        font-size: 48 / @rem;
+        color: @white-color;
+    }
+
+    &__content {
+        .font-settings(22, 24, 700);
+        color: @white-color;
+        font-family: @roboto-font;
+        padding: 24/@rem 21/@rem;
+        white-space: nowrap;
+    }
+    &__text{
+        opacity: 1;
+    }
+    &__btn {
+        .btn();
+        padding: 20 / @vw;
+        font-size: 32 / @rem;
+        color: @white-color;
+    }
+
+
+    &--success {
+        background-color: @priority-low-color;
+        .notification__icon:before {
+            content: @notification-success;
+        }
+    }
+    &--error {
+        background-color: @priority-urgent-color;
+        .notification__icon:before {
+            content: @notification-error;
+        }
+    }
+    &--warning {
+        background-color: @priority-high-color;
+        .notification__icon:before {
+            content: @notification-warning;
+        }
+    }
+    &--info {
+        background-color: @education-category-color;
+        .notification__icon:before {
+            content: @notification-info;
+        }
+    }
+    @media screen and (max-width:620px) {
+      &__content{
+          font-size: 16/@rem;
+      }
+    }
+}
+.notification-tablet();
+.notification-desktop();

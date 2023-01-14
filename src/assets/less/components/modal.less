@@ -1,0 +1,227 @@
+.modal {
+    font-family: @roboto-font;
+
+    &__overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        bottom: 0;
+        z-index: 1;
+        background: #000000;
+        mix-blend-mode: normal;
+        opacity: 0.7;
+    }
+
+    &__container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: @background-color;
+        z-index: 2;
+        height: fit-content;
+        width: 100%;
+    }
+
+    &__top {
+        padding: 24/@rem;
+        display: flex;
+        flex-direction: row-reverse;
+        margin-bottom: 64/@rem;
+    }
+
+    &__title {
+        .font-settings(28, 28, 700);
+        color: @white-color;
+        margin-bottom: 64/@rem;
+        text-align: center;
+    }
+
+    &__btn {
+        .btn();
+        color: @nepal-color;
+        font-size: 32/@rem;
+
+        &:nth-of-type(2) {
+            margin-right: 32/@rem;
+        }
+    }
+
+    &__message {
+        .centered-flex-element();
+        .font-settings(36, 48, 300);
+        padding: 0 117/@rem;
+        margin: 316/@rem auto 344/@rem;
+        color: @nepal-color;
+        text-align: center;
+
+    }
+
+    &__buttons {
+        margin: 0 24/@rem;
+        width: auto;
+    }
+}
+
+.form {
+    padding: 0 96/@rem 80/@rem;
+
+    &__item {
+        display: flex;
+        flex-direction: column;
+        border-bottom: 1/@rem solid @settings-border-color;
+
+        &:not(:last-child) {
+            margin-bottom: 40/@rem;
+        }
+
+        &-title {
+            color: @white-color;
+            .font-settings(16, 20, 400);
+            text-transform: uppercase;
+            margin-bottom: 16/@rem;
+        }
+
+        &-input {
+            .font-settings(20, 24, 400);
+            .placeholder-color(@nepal-color);
+            color: @white-color;
+            padding-bottom: 12/@rem;
+        }
+    }
+}
+
+.category-item {
+    display: flex;
+    flex-wrap: wrap;
+
+
+    &__item {
+        padding-bottom: 12/@rem;
+
+        &:hover {
+            .category-item__label {
+                .dot-color();
+            }
+        }
+    }
+
+    &__input {
+        display: none;
+
+        &:checked+.category-item__label {
+            color: @white-color;
+            .dot-color();
+
+            &::after {
+                content: '';
+                position: absolute;
+                left: -20.5 / @rem;
+                top: 5.6 / @rem;
+                width: 4 / @rem;
+                height: 4 / @rem;
+                border-radius: 50%;
+                border: 2.4 / @rem solid @background-color;
+            }
+        }
+    }
+
+    &__label {
+        .btn();
+        .font-settings(20, 24, 400);
+
+        position: relative;
+        color: @nepal-color;
+        margin-left: 26/@rem;
+        margin-right: 20/@rem;
+
+        &:before {
+            content: "";
+            position: absolute;
+            width: 16/@rem;
+            height: 16/@rem;
+            border-radius: 50%;
+            top: 10%;
+            left: -24/@rem;
+            background: @nepal-color;
+        }
+
+
+    }
+}
+
+.form-estimation {
+    display: flex;
+    flex-wrap: wrap;
+
+    &--reverse{
+        display: flex;
+          flex-direction: row-reverse;
+          align-self: flex-start;
+          padding: 0 0 12/@rem;
+          .form-estimation__label {
+            position: relative;
+            margin-right: 10/@rem;
+            user-select: none;
+            cursor: pointer;
+          }
+    }
+
+    &>input:checked~.form-estimation__label {
+        &::before {
+            background: url('~@assets-root-path/images/fill-tomato.svg');
+        }
+    }
+    &:not(:checked)>.form-estimation__label:hover,
+        &:not(:checked)>.form-estimation__label:hover~.form-estimation__label {
+          &::before {
+            background: url('~@assets-root-path/images/fill-tomato.svg');
+          }
+        }
+
+        &>input:checked+.form-estimation__label:hover,
+        &>input:checked+.form-estimation__label:hover~.form-estimation__label,
+        &>input:checked~.form-estimation__label:hover,
+        &>input:checked~.form-estimation__label:hover~.form-estimation__label,
+        &>.form-estimation__label:hover~input:checked~.form-estimation__label {
+          &::before {
+            background: url('~@assets-root-path/images/fill-tomato.svg');
+          }
+        }
+    &__input {
+        display: none;
+
+        &:checked+.form-estimation__label::before {
+            background: url(@estimation-done);
+        }
+    
+
+    }
+
+    &__item {
+        width: 20/@rem;
+        height: 20/@rem;
+        margin-right: 20px;
+        margin-bottom: 12/@rem;
+    }
+
+    &__label {
+        width: 20/@rem;
+        height: 20/@rem;
+        position: relative;
+
+        &:before {
+            content: "";
+            position: absolute;
+            width: 20/@rem;
+            height: 20/@rem;
+            border-radius: 50%;
+            top: 0;
+            left: 0;
+            background: url(@estimation-empty);
+        }
+    }
+}
+
+.modal-tablet();

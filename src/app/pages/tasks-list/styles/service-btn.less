@@ -1,0 +1,32 @@
+.service-btn{
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    &__btn{
+        .font-settings(24,24,700);
+        width: 100%;
+        max-width: 48.5%;
+        height: 72/@rem;
+        color: @white-color;
+        font-family: @pt-sans-font;
+        &:only-child{
+            max-width: 97%;;
+        }
+        
+        &--red{
+            .service-btn('red');
+        }
+        &--green{
+            .service-btn('green');
+        }
+        &--blue{
+            .service-btn('blue');
+        }
+        
+    }
+    &--single{
+        justify-content: center;
+    }
+
+}
+.service-btn-tablet();

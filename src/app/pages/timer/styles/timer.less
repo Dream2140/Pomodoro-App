@@ -1,0 +1,156 @@
+@import ( reference ) '~@less-helpers-module/_mixins.less'; 
+@import ( reference ) '~@less-helpers-module/_variables.less';
+
+@import './estimation.less';
+
+.timer-section {
+    &__info {
+        font-family: @roboto-font;
+        color: @white-color;
+        text-align: center;
+        margin-bottom: 88/@rem;
+    }
+
+    &__title {
+        .font-settings(32, 36, 500);
+        margin-bottom: 20/@rem;
+    }
+
+    &_subtitle {
+        .font-settings(20, 24, 400);
+        margin-bottom: 32/@rem;
+    }
+
+    &__clock {
+        .centered-flex-element();
+    }
+
+    &__link {
+        .arrows();
+    }
+}
+
+.timer {
+    .centered-flex-element();
+
+    position: relative;
+    width: 264/@rem;
+    height: 264/@rem;
+    border-radius: 50%;
+    border: 5/@rem solid @work-category-color;
+
+    &__text {
+        .centered-flex-element();
+        .font-settings(26, 32, 400);
+        flex-direction: column;
+        width: 160/@rem;
+        height: 160/@rem;
+        font-family: @roboto-font;
+        color: @white-color;
+        text-align: center;
+
+        &-top {
+            .font-settings(16, 16, 400);
+            margin-bottom: 8/@rem;
+        }
+
+        &-time {
+            .font-settings(100, 76, 400);
+            margin-bottom: 8/@rem;
+        }
+
+        &-bottom {
+            .font-settings(24, 24, 400);
+        }
+    }
+    &__title{
+        .font-settings(26, 32, 400);
+        color: @white-color;
+        font-family: @roboto-font;
+    }
+    &__container {
+        .centered-flex-element();
+        width: 238/@rem;
+        height: 238/@rem;
+        position: relative;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+
+    &__left,
+    &__right {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 50%;
+        height: 100%;
+        overflow: hidden;
+
+        &:before {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            border: 40/@rem solid @nepal-color;
+            animation-duration: var(--animation-duration);
+            animation-iteration-count: 1;
+            animation-timing-function: linear;
+            animation-fill-mode: forwards;
+        }
+    }
+
+    &__left {
+        &::before {
+            border-right: none;
+            border-top-left-radius: 999/@rem;
+            border-bottom-left-radius: 999/@rem;
+            transform-origin: center right;
+            animation-name: left-rotate;
+        }
+    }
+
+    &__right {
+        right: 0;
+        left: auto;
+
+        &::before {
+            border-left: none;
+            border-top-right-radius: 999/@rem;
+            border-bottom-right-radius: 999/@rem;
+            transform-origin: center left;
+            animation-name: right-rotate;
+        }
+    }
+
+
+}
+.timer-tablet();
+.timer-desktop();
+@keyframes left-rotate {
+    0% {
+        transform: rotate(-180deg);
+    }
+
+    50% {
+        transform: rotate(-180deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes right-rotate {
+    0% {
+        transform: rotate(-180deg);
+    }
+
+    50% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}

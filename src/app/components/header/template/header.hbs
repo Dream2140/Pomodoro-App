@@ -1,0 +1,58 @@
+<header class="header ">
+    <div class="wrapper">
+        <div class="header__container">
+
+            <div class="header__logo logo">
+                <a href="#" class="logo__link">
+                    <img src="/images/header.svg" alt="header" class="logo__img">
+                </a>
+            </div>
+
+            <div class="header__title-wrapp">
+                <h1 class="header__title">{{pageTitle}}</h1>
+                {{#if titlePlusBtn}}
+                <button class="header__btn icon header__btn-showModal"></button>
+                {{/if}}
+            </div>
+
+            <nav class="navigation header__nav">
+                <ul class="navigation__list">
+                    {{#if buttonAddTask}}
+                    <li class="navigation__item navigation__item--plus">
+                        <button class="navigation__btn" title="Add Task">
+                            <span class="navigation__icon icon icon-add"></span>
+                        </button>
+                    </li>
+                    {{/if}}
+                    {{#if deleteBtn}}
+                    <li class="navigation__item">
+                        <button class="navigation__btn navigation__btn--delete" title="Delete Task">
+                            <span class="navigation__icon navigation__icon--delete icon icon-trash">
+                                <span class="navigation__counter"></span>
+                            </span>
+                        </button>
+                    </li>
+                    {{/if}}
+                    <li class="navigation__item">
+                        <button class="navigation__btn {{checkActivePage "task-list"}}" data-route="task-list" title="Go to Tasks">
+                            <span class="navigation__icon icon icon-tasks"></span>
+                        </button>
+                    </li>
+                    <li class="navigation__item">
+                        <button class="navigation__btn {{checkActivePage "reports"}}" data-route="reports/day/tasks" title="Go to Reports">
+                            <span class="navigation__icon icon icon-statistics"></span>
+                        </button>
+                    </li>
+                    <li class="navigation__item">
+                        <button class="navigation__btn {{checkActivePage "settings"}}"
+                            data-route="settings/pomodoros" title="Go to Settings">
+                            <span class="navigation__icon icon  icon-settings"></span>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+
+        </div>
+
+    </div>
+</header>

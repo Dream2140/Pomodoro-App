@@ -1,0 +1,24 @@
+<div class="cycle__caption cycle__caption--top">
+    <span class="cycle__caption-item cycle__caption-item--start">
+        <span class="cycle__caption-text">0m</span>
+    </span>
+    <span class="cycle__caption-item cycle__caption--center" style="flex-grow: {{data.firstCycleTime.full}};">
+        <span class="cycle__caption-text">First cycle:&nbsp;<span>
+                {{data.firstCycleTime.hours}}h {{data.firstCycleTime.minutes}}m</span>
+        </span>
+    </span>
+    <span class="cycle__caption-item cycle__caption--ends" style="flex-grow: 
+          {{data.secondCycleTime}};">
+        <span class="cycle__caption-text">
+            {{data.fullCycleTime.hours}}h {{data.fullCycleTime.minutes}}m</span>
+    </span>
+    </span>
+</div>
+
+<div class="cycle__line">
+    {{{cycleLine}}}
+</div>
+
+<div class="cycle__caption cycle__caption--bottom">
+    {{{timeLine}}}
+</div>

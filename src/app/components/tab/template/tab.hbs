@@ -1,0 +1,15 @@
+<div class="tab {{typeTabs}}">
+    <div class="tab__container">
+        {{#if leftTabs}}
+        <ul class="tab__item tab__item--left tab--hidden">
+            <li class="tab__btn tab__btn-select-daily-list">Select all</li>
+            <li class="tab__btn tab__btn-disselect-daily-list">Deselect all</li>
+        </ul>
+        {{/if}}
+        <ul class="tab__item {{tabPosition}}">
+            {{#each tabData}}
+            <li class="tab__btn {{isActive}} {{serviceClass}} {{checkActiveState period val}}" {{{dataTab}}}>{{data}}</li>
+            {{/each}}
+        </ul>
+    </div>
+</div>

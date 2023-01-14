@@ -1,0 +1,32 @@
+ {{> header}}
+ <main class="content timer-page">
+
+        <section class="timer-section">
+            <div class="wrapper">
+                <div class="timer-section__container">
+                    <div class="timer-section__info">
+                        <h1 class="timer-section__title">{{title}}</h1>
+                        <p class="timer-section_subtitle">{{description}}</p>
+                        <div class="estimation timer-section__estimation">
+                            <div class="estimation__container">
+                                {{{createPomodoros estimation}}}
+                                <button class="estimation__btn icon d-none icon-add"></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timer-section__clock">
+                        <a href="/task-list" class="timer-section__link timer-section__link--left icon icon-arrow-left go-to-task-list" title="Go to Global List"></a>
+                        <div class="timer timer-section__timer" id="timer">    
+
+                        </div>
+                        <a href="/reports/day/tasks" class="timer-section__link timer-section__link--right icon icon-right go-to-reports-page d-none" title="Go to Report"></a>
+                    </div>
+                    <div class="settings__buttons service-btn timer-section__btn">
+                        <button class="service-btn__btn service-btn__btn--green service-btn__btn-start-task">Start</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    </main>

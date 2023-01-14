@@ -1,0 +1,26 @@
+.estimation {
+    &__container {
+        .centered-flex-element();
+
+    }
+
+    &__item {
+        width: 24/@rem;
+        height: 24/@rem;
+        margin-right: 16/@rem;
+        background: url(@estimation-empty);
+        
+        &--failed {
+            background: url(@estimation-failed);
+        }
+
+        &--done {
+        
+            background: url(@estimation-done);
+        }
+        
+    }
+    &__btn{
+        .btn();
+    }
+}

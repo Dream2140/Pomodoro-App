@@ -1,0 +1,129 @@
+.settings{
+    &__title{
+        .font-settings(28,32,300);
+        font-family: @roboto-font;
+        color: @nepal-color;
+        text-align: center;
+        margin-bottom: 64/@rem;
+    }
+    &__options{
+        padding: 0 102/@vw;
+        margin-left: 36/@rem;
+    }
+    &__buttons{
+        margin-top: 271/@rem;
+    }
+}
+.cycle{
+    .settings__title{
+        margin: 64/@rem 0 24/@rem;
+        color: @white-color;
+    }
+    & + .settings__buttons{
+        margin-top: 70/@rem;
+    }
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+    &__container {
+      display: flex;
+      flex-direction: column;
+      width: 720/@vw;
+      margin-bottom: 72/@rem;
+    }
+
+
+    .cycle__line {
+      display: flex;
+      max-height: 10/@rem;
+      width: 720/@vw;
+
+      .line {
+        height: 10/@rem;
+
+        &--work {
+          flex-grow: 25;
+          background: @work-category-color;
+        }
+
+        &--short-break {
+          flex-grow: 5;
+          background: #57A6DC;
+        }
+
+        &--long-break {
+          flex-grow: 30;
+          background: @hobby-category-color;
+        }
+      }
+    }
+
+    .cycle__caption {
+        .font-settings(12, 15.36, 400);
+      display: flex;
+      position: relative;
+      
+      color: @nepal-color;
+
+      &--top {
+        margin-bottom: 12/@rem;
+        .cycle__caption-text{
+            top: -16/@rem;
+        }
+      }
+      &-text{
+        position: absolute;
+        right: -10/@rem;
+      }
+      .cycle__caption-item {
+        position: relative;
+        display: flex;
+        justify-content: flex-end;
+        white-space: nowrap;
+        width: 0;
+
+        &::before {
+          content: '';
+          background: @other-category-color;
+          width: 4/@rem;
+          height: 4/@rem;
+          position: absolute;
+          bottom: -5/@rem;
+          right: 0;
+          transform: translateX(50%);
+          border-radius: 50%;
+        }
+
+        &--end {
+          margin-left: auto;
+        }
+
+        &--hidden {
+          visibility: hidden;
+        }
+      }
+
+      .d-none {
+        display: none;
+      }
+
+      &--bottom {
+        width: 720/@vw;
+
+        .cycle__caption-item {
+          line-height: 48/@rem;
+
+          &::before {
+            content: '';
+            top: 8/@rem;
+          }
+        }
+      }
+    }
+}
+
+.settings-tablet();
+.settings-desktop();

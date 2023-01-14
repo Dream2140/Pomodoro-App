@@ -1,0 +1,397 @@
+.task {
+    display: flex;
+    position: relative;
+    background-color: @white-color;
+    box-shadow: 0 5/@rem 8.3/@rem rgba(34, 56, 73, 0.3);
+    margin-top: 12/@rem;
+    max-height: 100/@rem;
+    font-family: @roboto-font;
+
+    &--hidden {
+        display: none;
+    }
+
+    &__category {
+        width: 8/@rem;
+        height: 100%;
+
+        &--hobby {
+            .set-category-color(@hobby-category-color, @hobby-category-color-active);
+        }
+
+        &--work {
+            .set-category-color(@work-category-color, @work-category-color-active);
+        }
+
+        &--education {
+            .set-category-color(@education-category-color, @education-category-color-active);
+        }
+
+        &--other {
+            .set-category-color(@other-category-color, @other-category-color-active);
+        }
+
+        &--sport {
+            .set-category-color(@sport-category-color, @sport-category-color-active);
+        }
+
+    }
+
+    &__date {
+        .unset-user-selection();
+        .centered-flex-element();
+        flex-direction: column;
+        color: @dark-grey-color;
+        margin: 0 auto;
+        font-family: @roboto-font;
+        &-text {
+            .font-settings(11, 16, 700);
+            text-transform: uppercase;
+        
+        }
+
+        &-number {
+            .font-settings(28, 16, 700);
+            margin-bottom: 8/@rem;
+        }
+    }
+
+    &__info-wrapper {
+        .responsive-max-width(650px, {
+                & {
+                    max-width: 64/@rem;
+                }
+            }
+
+        );
+        position: relative;
+        display: flex;
+        max-width: 88/@rem;
+        width: 100%;
+    }
+
+    &__estimation {
+        .centered-flex-element();
+        padding: 26/@vh 20/@vh;
+        transition: all 1s ease-out;
+
+        &-btn {
+            position: relative;
+
+            &:hover {
+                .task__estimation-text {
+                    display: none;
+                }
+
+                &:before {
+                    content: "\E90E";
+                }
+
+            }
+        }
+
+        &-btn:before {
+            font-size: 50/@rem;
+            color: @white-color;
+        }
+
+        &--urgent {
+            .set-background-color(@priority-urgent-color, @priority-urgent-active);
+        }
+
+        &--high {
+            .set-background-color(@priority-high-color, @priority-high-active);
+        }
+
+        &--middle {
+            .set-background-color(@priority-middle-color, @priority-middle-active);
+        }
+
+        &--low {
+            .set-background-color(@priority-low-color, @priority-low-active);
+        }
+
+        &-text {
+            .font-settings(25, 25, 700);
+            color: @white-color;
+            font-family: @pt-sans-font;
+            position: absolute;
+            transform: translate(-50%, -40%);
+            left: 50%;
+            bottom: 0;
+        }
+
+
+    }
+
+    &__info {
+        margin-left: 16/@vw;
+        max-width: 100%;
+        padding: 16/@rem 0;
+        flex-grow: 2;
+        width: 396/@rem;
+
+        .responsive-max-width(650px, {
+                & {
+                    margin-left: 8/@vw;
+                }
+            }
+
+        );
+    }
+
+    &__title {
+        .unset-user-selection();
+        .font-settings(18, 24, 500);
+
+        .responsive-max-width(600px, {
+                & {
+                    font-size: 16/@rem;
+                }
+            }
+
+        );
+
+        &--urgent {
+            color: @priority-urgent-title;
+        }
+
+        &--high {
+            color: @priority-high-title;
+        }
+
+        &--middle {
+            color: @priority-middle-title;
+        }
+
+        &--low {
+            color: @priority-low-title;
+        }
+
+        &--done {
+            text-decoration: line-through;
+        }
+    }
+
+    &__text {
+        .unset-user-selection();
+        .font-settings(16, 20, 400);
+
+        .responsive-max-width(600px, {
+                & {
+                    font-size: 14/@rem;
+                }
+            }
+
+        );
+        margin-top: 4/@rem;
+        max-height: 65%;
+        color: @grey-color;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    &__btn {
+
+        &-wrapp {
+            .centered-flex-element();
+            width: 95/@rem;
+            max-width: 100%;
+            padding: 20/@vw;
+
+        }
+
+        &:not(:last-child) {
+            margin-right: 16/@rem;
+        }
+
+        &:hover {
+            &:before {
+                color: @nepal-color;
+            }
+        }
+
+        &:focus {
+            &:before {
+                color: @nepal-color;
+            }
+        }
+
+        &--hidden {
+            display: none;
+        }
+
+        &:before {
+            font-size: 20/@rem;
+            color: @light-gray-color;
+        }
+
+        .responsive-max-width(650px, {
+                &:before {
+                    font-size: 16/@rem;
+                }
+
+                &:not(:last-child) {
+                    margin-right: 10/@rem;
+                }
+            }
+
+        );
+    }
+
+    &__close {
+
+        .task__date {
+            visibility: hidden;
+        }
+
+        &:before {
+            color: @white-color;
+            font-size: 40 / @rem;
+            content: "\e906";
+            position: absolute;
+            transform: translate(-50%, -65%);
+            left: 50%;
+            bottom: 0;
+        }
+    }
+
+    &__delete {
+
+
+        .task__date {
+            visibility: hidden;
+        }
+
+        &:before {
+            color: @white-color;
+            font-size: 40 / @rem;
+            content: "\E914";
+            position: absolute;
+            transform: translate(-50%, -65%);
+            left: 50%;
+            bottom: 0;
+        }
+
+    }
+
+    &--work {
+
+        .task__delete,
+        .task__close {
+            .set-background-color(@work-category-color, @work-category-color-active);
+        }
+    }
+
+    &--education {
+
+        .task__delete,
+        .task__close {
+            .set-background-color(@education-category-color, @education-category-color-active);
+        }
+    }
+
+    &--sport {
+
+        .task__delete,
+        .task__close {
+            .set-background-color(@sport-category-color, @sport-category-color-active);
+        }
+    }
+
+    &--hobby {
+
+        .task__delete,
+        .task__close {
+            .set-background-color(@hobby-category-color, @hobby-category-color-active);
+        }
+    }
+
+    &--other {
+
+        .task__delete,
+        .task__close {
+            .set-background-color(@other-category-color, @other-category-color-active);
+        }
+    }
+
+    &--done {
+        opacity: 0.8;
+
+        .task__title {
+            text-decoration: line-through;
+        }
+
+        .task__btn-wrapp {
+            visibility: hidden;
+        }
+
+        .task__estimation-btn {
+            .user-select();
+        }
+    }
+}
+
+
+.global-list {
+    margin-bottom: 56/@rem;
+
+    &__title {
+        .unset-user-selection();
+        position: relative;
+        .font-settings(16, 20, 700);
+        font-family: @roboto-font;
+        margin-left: 23/@rem;
+        text-transform: uppercase;
+
+
+        &--work {
+            .global-list-title(@work-category-color);
+        }
+
+        &--education {
+            .global-list-title(@education-category-color);
+        }
+
+        &--sport {
+            .global-list-title(@sport-category-color);
+        }
+
+        &--hobby {
+            .global-list-title(@hobby-category-color);
+        }
+
+        &--other {
+            .global-list-title(@other-category-color);
+        }
+
+    }
+
+    .task {
+        &__category {
+            &--work {
+                .global-list-task-mark(@work-category-color);
+            }
+
+            &--education {
+                .global-list-task-mark(@education-category-color);
+            }
+
+            &--sport {
+                .global-list-task-mark(@sport-category-color);
+            }
+
+            &--hobby {
+                .global-list-task-mark(@hobby-category-color);
+            }
+
+            &--other {
+                .global-list-task-mark(@other-category-color);
+            }
+        }
+    }
+
+}
+
+.task-list-mobile();
+.task-list-tablet();

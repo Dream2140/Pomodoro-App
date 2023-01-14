@@ -1,0 +1,58 @@
+{{> header }}
+<main class="content task-list-page">
+
+    <section class="daily-content">
+        <div class="wrapper">
+            <div class="daily-content__container">
+
+                {{>tab}}
+                <div class="daily-content__content">
+
+                </div>
+                <div class="daily-content__content--done d-none">
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <section class="global-list">
+        <div class="wrapper">
+            <div class="global-list__container">
+                <div class="global-list__tabs tab">
+                    <div class="tab__container">
+                        <div>
+                        <div class="tab__item tab__item--global-btn">
+                            <button class="tab__btn tab__btn--global" title="Go to Global list">
+                                Global list
+                                <span class="tab__arrow icon icon-arrow-right"></span>
+                            </button>
+                        </div>
+                        <ul class="tab__item tab__item--left tab--hidden tab__item">
+                            <li class="tab__btn tab__btn-select-global-list">Select all</li>
+                            <li class="tab__btn tab__btn-disselect-global-list">Deselect all</li>
+                        </ul>
+                        </div>
+                        <ul class="tab__item item--right tab__item--global">
+                            <li class="tab__btn">All</li>
+                            <li class="tab__btn">Urgent</li>
+                            <li class="tab__btn">High</li>
+                            <li class="tab__btn">Middle</li>
+                            <li class="tab__btn">Low</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="global-list__content">
+
+                </div>
+
+                <div class="global-list__content--done d-none">
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+</main>

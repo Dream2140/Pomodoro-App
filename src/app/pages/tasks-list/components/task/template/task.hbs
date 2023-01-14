@@ -1,0 +1,28 @@
+<div class="task task--{{categoryId}} {{completedTask status}}" id="{{id}}">
+
+    <div class="task__info-wrapper icon">
+        <div class="task__category task__category--{{categoryId}}"></div>
+        <div class="task__date">
+            <span class="task__date-number">{{deadlineDate.day}}</span>
+            <span class="task__date-text">{{deadlineDate.month}}</span>
+        </div>
+    </div>
+    <div class="task__info">
+        <div class="task__title-wrapp">
+            <h2 class="task__title task__title--{{priority}}">{{title}}</h2>
+        </div>
+        <div class="task__text">
+            <p>{{description}}</p>
+        </div>
+    </div>
+    <div class="task__btn-wrapp">
+        <button class="task__btn icon icon-arrows-up {{checkButtonHidden status}} task__btn-up-task" title="Drag to Active"</button>
+        <button class="task__btn icon  icon-edit task__btn-edit" title="Edit Task"></button>
+        <button class="task__btn icon  icon-trash task__btn-delete" title="Delete Task"></button>
+    </div>
+    <div class="task__estimation task__estimation--{{priority}}">
+        <button class="task__estimation-btn icon icon-tomato" id="{{id}}" title="Go to Timer">
+            <span class="task__estimation-text">{{estimation}}</span>
+        </button>
+    </div>
+</div>

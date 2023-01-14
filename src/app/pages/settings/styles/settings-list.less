@@ -1,0 +1,29 @@
+.setting-list {
+    .font-settings(22, 24, 400);
+    font-family: @roboto-font;
+    color: @nepal-color;
+    text-transform: capitalize;
+
+    &__item {
+        .dot-color();
+        
+        position: relative;
+        padding-bottom: 12/@rem;
+        border-bottom: 1/@rem solid @settings-border-color;
+
+        &:not(:first-child) {
+            margin-top: 40/@rem;
+        }
+
+        &:before {
+            content: "";
+            position: absolute;
+            width: 16/@rem;
+            height: 16/@rem;
+            border-radius: 50%;
+            bottom: 19/@rem;
+            left: -36/@rem;
+        }
+    }
+
+}

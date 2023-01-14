@@ -1,0 +1,32 @@
+
+@import ( reference ) '~@less-helpers-module/_mixins.less'; 
+@import ( reference ) '~@less-helpers-module/_variables.less';
+
+// Import task item styles
+@import 'task.less';
+@import 'service-btn.less';
+@import 'message.less';
+
+.content{
+    padding-top: 56/@rem;  
+}
+
+.daily-content{
+    &__container{
+        margin-bottom: 80/@rem;
+        .message__container{
+            padding-top: 208/@rem;
+        }
+    }
+}
+
+.global-list{
+    .tab{
+        margin-bottom: 32/@rem;
+
+    }
+
+    &__item{
+        margin: 34/@rem 0 56/@rem;
+    }
+}

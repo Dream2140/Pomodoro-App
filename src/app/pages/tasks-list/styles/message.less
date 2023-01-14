@@ -1,0 +1,41 @@
+.message{
+
+    &__container{
+        padding-top: 288/@rem;
+        .centered-flex-element();
+        flex-direction: column;
+        justify-content: flex-end;
+
+        
+    }
+    &__img{
+        width: 200/@rem;
+        margin-bottom: 65/@rem;
+    }
+    &__text{
+        .unset-user-selection();
+        .font-settings(36,46,300);
+        font-family: @roboto-font;
+        color: @nepal-color;
+        text-align: center;
+
+        &--bottom-margin{
+            margin-bottom: 154/@rem;
+        }
+    }
+    &__icon{
+        display: block;
+        margin-top: 24/@rem;
+        &:before{
+            font-size: 3.5rem;
+        }
+    }
+    &--added-message{
+        .message__container{
+            padding: 64/@rem 0 188/@rem;
+        }
+    }
+   
+}
+.message-mobie();
+.message-tablet();

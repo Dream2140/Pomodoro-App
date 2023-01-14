@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/styles.css">
+    <title>Settings</title>
+</head>
+
+<body>
+    <!-- Add class  header--fixed  to header tag to show scroll menu -->
+    <header class="header ">
+        <div class="wrapper">
+            <div class="header__container">
+
+                <div class="header__logo logo">
+                    <a href="#" class="logo__link" alt="Logotype">
+                        <img src="/images/header.svg" alt="header" class="logo__img">
+                    </a>
+                </div>
+
+                <div class="header__title-wrapp">
+                    <h1 class="header__title">Settings</h1>
+                </div>
+
+                <nav class="navigation header__nav">
+                    <ul class="navigation__list">
+                        <li class="navigation__item navigation__item--hidden">
+                            <button class="navigation__btn">
+                                <span class="navigation__icon icon icon-add"></span>
+                            </button>
+                        </li>
+                        <li class="navigation__item navigation__item--hidden">
+                            <button class="navigation__btn">
+                                <span class="navigation__icon navigation__icon--delete icon icon-trash">
+                                    <span class="navigation__counter">5</span>
+                                </span>
+                            </button>
+                        </li>
+
+                        <li class="navigation__item">
+                            <button class="navigation__btn">
+                                <span class="navigation__icon icon icon-tasks"></span>
+                            </button>
+                        </li>
+                        <li class="navigation__item">
+                            <button class="navigation__btn navigation__btn--active">
+                                <span class="navigation__icon icon icon-statistics"></span>
+                            </button>
+                        </li>
+                        <li class="navigation__item">
+                            <button class="navigation__btn">
+                                <span class="navigation__icon icon  icon-settings"></span>
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
+
+            </div>
+
+        </div>
+    </header>
+
+    <main class="content settings-page">
+
+        <section class="settings">
+            <div class="wrapper">
+                <div class="settings__tabs tab">
+                    <div class="tab__container">
+                        <ul class="tab__item tab__item--right">
+                            <li class="tab__btn tab__btn--active">Pomodoros</li>
+                            <li class="tab__btn">Categories</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="settings__container d-none">
+                    <h2 class="settings__title">Categories list overview</h2>
+                    <ul class="settings__options setting-list">
+                        <li class="setting-list__item setting-list__item--work">
+                            Work
+                        </li>
+                        <li class="setting-list__item setting-list__item--education">
+                            Education
+                        </li>
+                        <li class="setting-list__item setting-list__item--other">
+                            Other
+                        </li>
+                        <li class="setting-list__item setting-list__item--sport">
+                            Sport
+                        </li>
+                        <li class="setting-list__item setting-list__item--hobby">
+                            Hobby
+                        </li>
+                    </ul>
+
+                    <div class="settings__buttons setting-list__btn service-btn service-btn--single">
+                        <button class="service-btn__btn service-btn__btn--blue">Skip</button>
+                    </div>
+                </div>
+                <!-- remove d-none -->
+                <div class="settings__container">
+                    <h2 class="settings__title">Pomodoros settings</h2>
+                    <ul class="settings__change change-list">
+                        <li class="change-list__item change-list__item--work" id="">
+                            <div class="change-list__info">
+                                <h4 class="change-list__title">Work time</h4>
+                                <div class="change-list__setting" id="work">
+                                    <button class="change-list__minus change-list__btn icon-minus icon"></button>
+                                    <span  class="change-list__input">25</span>
+                                    <button class="change-list__plus change-list__btn icon-plus icon"></button>
+                                </div>
+                            </div>
+                            <p class="change-list__details">
+                                Please select a value between 15 and 25 <span class="change-list__details--white">minutes</span>
+                            </p>
+                        </li>
+                        <li class="change-list__item change-list__item--other">
+                            <div class="change-list__info">
+                                <h4 class="change-list__title">Work Iteration</h4>
+                                <div class="change-list__setting" id="iteration">
+                                    <button class="change-list__minus change-list__btn icon-minus icon"></button>
+                                    <span  class="change-list__input">5</span>
+                                    <button class="change-list__plus change-list__btn icon-plus icon"></button>
+                                </div>
+                            </div>
+                            <p class="change-list__details">
+                                Please select a value between 2 and 5 <span class="change-list__details--white">iterations</span>
+                            </p>
+                        </li>
+                        <li class="change-list__item change-list__item--education">
+                            <div class="change-list__info">
+                                <h4 class="change-list__title">Short Break</h4>
+                                <div class="change-list__setting" id="shortBreak">
+                                    <button class="change-list__minus change-list__btn icon-minus icon"></button>
+                                    <span  class="change-list__input">5</span>
+                                    <button class="change-list__plus change-list__btn icon-plus icon"></button>
+                                </div>
+                            </div>
+                            <p class="change-list__details">
+                                Please select a value between 3 and 5 <span class="change-list__details--white">minutes</span>
+                            </p>
+                        </li>
+                        <li class="change-list__item change-list__item--hobby">
+                            <div class="change-list__info">
+                                <h4 class="change-list__title">Long Break</h4>
+                                <div class="change-list__setting" id="longBreak">
+                                    <button class="change-list__minus change-list__btn icon-minus icon"></button>
+                                    <span  class="change-list__input">15</span>
+                                    <button class="change-list__plus change-list__btn icon-plus icon"></button>
+                                </div>
+                            </div>
+                            <p class="change-list__details">
+                                Please select a value between 15 and 30 <span class="change-list__details--white">minutes</span>
+                            </p>
+                        </li>
+                    </ul>
+                    <section class="cycle">
+                        <h2 class="settings__title">Your cycle</h2>
+                        <div class="cycle__container">
+                        </div>
+                    </section>
+                    <div class="settings__buttons service-btn">
+                        <button class="service-btn__btn service-btn__btn--blue">Go to Task</button>
+                        <button class="service-btn__btn service-btn__btn--green">Save</button>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+
+    </main>
+
+
+
+    <script src="/bundle.js"></script>
+</body>
+
+</html>
