@@ -15,9 +15,19 @@ class SettingsData {
    */
   constructor(base) {
     this.db = base;
-    eventBus.subscribe('settings-page-loading', () =>
-      this.receiveData('settings')
-    );
+
+    eventBus.subscribe('settings-page-loading', async () => {
+      const userId = await this.getDataFromStorage('userId');
+
+      const userSettins = await this.getSettingsData(userId);
+      if (userSettins) {
+        this.setDataToStorage('settings', userSettins);
+      } else {
+        const defualtSettings = await this.getDefaultSettings()
+        this.setDataToStorage('settings', defualtSettings);
+      }
+      eventBus.post('load-page');
+    });
 
   }
 
@@ -38,6 +48,18 @@ class SettingsData {
     }
   }
 
+  async getSettingsData(userId) {
+    return await this.db.getData("users/" + userId + `/settings`);
+  }
+
+  async getTasksData(userId) {
+    this.setDataToStorage("tasks", this.db.data);
+    return await this.db.getData("users/" + userId + `/tasks`);
+  }
+
+  async getDefaultSettings() {
+    return await this.db.getData("defaultSettings/");
+  }
   /**
    * @description sends data to firebase
    * @param {string} key
@@ -46,16 +68,21 @@ class SettingsData {
    * @return {boolean}
    * @memberof SettingsData
    */
-  async sendData(key, data, id) {
-    return await this.db.sendData(key, data, id);
+  async sendData(id, key, data) {
+    return await this.db.sendData(id, key, data);
   }
 
-  async registerUser(email,password) {
-    return await this.db.registerUser(email,password);
+  async sendTask(id, data) {
+    const dataSchema = "users/" + id + "/tasks/";
+    return await this.db.writeData(dataSchema, data);
   }
 
-  async loginUser(email,password) {
-    return await this.db.loginUser(email,password);
+  async registerUser(email, password) {
+    return await this.db.registerUser(email, password);
+  }
+
+  async loginUser(email, password) {
+    return await this.db.loginUser(email, password);
   }
 
   /**
@@ -87,6 +114,16 @@ class SettingsData {
    */
   removeItem(key, ids) {
     return this.db.removeItem(key, ids);
+  }
+
+  async getUserData(key) {
+    try {
+      const userId = this.getDataFromStorage('userId');
+      const result = await this.db.getData(userId, key);
+      return result;
+    } catch (error) {
+      console.error(error);
+    }
   }
 }
 

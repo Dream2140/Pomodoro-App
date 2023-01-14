@@ -23,8 +23,9 @@ export class SettingsController {
 
         eventBus.subscribe('saveData', async key => {
             try {
+                const userId = this.model.settingsData.getDataFromStorage('userId');
                 await this.model.settingsData.sendData(
-                    key,
+                    userId, 'settings',
                     this.model.settingsData.getDataFromStorage(key)
                 );
 

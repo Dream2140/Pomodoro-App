@@ -136,7 +136,7 @@ export class ModalView {
           estimation: form.get('estimation'),
           priority: form.get('priority')
         };
-        console.log(options);
+    
         eventBus.post('create-task', options);
       }
     });

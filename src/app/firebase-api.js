@@ -23,8 +23,13 @@ class DataBase {
    * @return {object} promise which resolves with result
    * @memberof DataBase
    */
-  getData(key) {
-    return new Promise((resolve, reject) => {
+  async getData(searchSchema) {
+    let ref = this.db.ref(searchSchema);
+
+    const data = await ref.once("value");
+    return data.val()
+    /*return new Promise((resolve, reject) => {
+      const userRef = this.db.ref("users/" + userId);
       const ref = this.db.ref(key).orderByKey();
       ref.once(
         'value',
@@ -43,7 +48,7 @@ class DataBase {
           reject(error);
         }
       );
-    });
+    });*/
   }
 
   /**
@@ -74,46 +79,56 @@ class DataBase {
    * @param {string} id
    * @memberof DataBase
    */
-  async sendData(userId,typeData,data) {
+  async sendData(userId, typeData, data) {
     try {
-      
+      const content = {};
+      content[typeData] = data;
       const userRef = this.db.ref("users/" + userId);
-      await userRef.update({typeData: data});
+      await userRef.update(content);
     } catch (err) {
       console.error(err);
     }
   }
 
-  async registerUser(email,password){
-    try{
-      const user= await  firebase.auth().createUserWithEmailAndPassword(email, password);
+  async writeData(schema, data) {
+    try {
+      const userRef = this.db.ref(schema);
+      await userRef.update(data);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  async registerUser(email, password) {
+    try {
+      const user = await firebase.auth().createUserWithEmailAndPassword(email, password);
       const userId = user.user.uid;
       const userRef = await this.db.ref('users/' + userId);
-      eventBus.post('user-regestration-result',{
+      eventBus.post('user-regestration-result', {
         result: true,
-        userData :user
+        userData: user
       })
-    }catch(error){
-      eventBus.post('user-regestration-result',{
+    } catch (error) {
+      eventBus.post('user-regestration-result', {
         result: false,
-        message :error.message
+        message: error.message
       })
     }
   }
 
-async loginUser(email,password){
-  try{
-    const user= await  firebase.auth().signInWithEmailAndPassword(email, password);
-    eventBus.post('user-login-result',{
-      result: true,
-      userData :user
-    })
-  }catch(error){
-    eventBus.post('user-login-result',{
-      result: false,
-      message :error.message
-    })
+  async loginUser(email, password) {
+    try {
+      const user = await firebase.auth().signInWithEmailAndPassword(email, password);
+      eventBus.post('user-login-result', {
+        result: true,
+        userData: user
+      })
+    } catch (error) {
+      eventBus.post('user-login-result', {
+        result: false,
+        message: error.message
+      })
+    }
   }
-}
 }
 export const firebaseDB = new DataBase(firebase.initializeApp(firebaseConfig));

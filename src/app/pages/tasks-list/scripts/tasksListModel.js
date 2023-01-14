@@ -48,7 +48,12 @@ export class TasksListModel {
    * @memberof TasksListModel
    */
   async getAndSaveTaskList() {
-    let data = await this.settingsData.receiveData('tasks');
+    const userId = this.settingsData.getDataFromStorage('userId');
+    let data = await this.settingsData.getTasksData(userId);
+    data = Object.keys(data).map(function (key) {
+      return data[key];
+    });
+
     if (Array.isArray(data) && data.length) {
       data = data.filter(item => !!item);
       this.taskListCollection = data;
@@ -59,12 +64,12 @@ export class TasksListModel {
     }
   }
 
-  async registerNewsUser(email,password) {
-    await this.settingsData.registerUser(email,password);
+  async registerNewsUser(email, password) {
+    await this.settingsData.registerUser(email, password);
   }
-  
-  async loginUser(email,password) {
-    await this.settingsData.loginUser(email,password);
+
+  async loginUser(email, password) {
+    await this.settingsData.loginUser(email, password);
   }
 
   /**
@@ -233,7 +238,7 @@ export class TasksListModel {
   createNewTask(data) {
 
     if (!data || typeof (data) !== 'object') return;
-    
+
     const newTask = {
       ...data,
       status: 'GLOBAL_LIST',
@@ -246,7 +251,7 @@ export class TasksListModel {
     };
 
     this.taskListCollection.push(newTask);
- 
+
     this.createTaskListCollection();
     this.sendTaskData('tasks', newTask, newTask.id);
 
@@ -261,9 +266,10 @@ export class TasksListModel {
    * @memberof TasksListModel
    */
   sendTaskData(key, data, id) {
-
+    //this.sendTaskData('tasks', newTask, newTask.id);
+    const userId = settingsData.getDataFromStorage('userId');
     this.settingsData
-      .sendData(key, data, id)
+      .sendTask(userId, { [id]: data })
       .then(() => {
         $(document).notification('clean');
         $(document).notification({
@@ -318,8 +324,10 @@ export class TasksListModel {
       task => task.id === id
     );
     taskToBeChanged.status = newStatus;
+    const userId = settingsData.getDataFromStorage('userId');
 
-    return this.settingsData.sendData('tasks', taskToBeChanged, id);
+
+    return this.settingsData.sendTask(userId, 'tasks', { [id]: taskToBeChanged });
   }
 
   /**

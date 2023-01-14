@@ -62,7 +62,7 @@ export class TasksListView {
     });
     
     eventBus.subscribe('renderTaskListPage', async (isNewUser) => {
-      if (true) {
+      if (isNewUser) {
         this.renderFirstPage();
         eventBus.post('auth-modal');
         document.querySelector('.service-btn__btn-register').addEventListener('click', (e) => {
