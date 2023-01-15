@@ -57,19 +57,9 @@ class DataBase {
    * @param {object} ids to remove
    * @memberof DataBase
    */
-  removeItem(key, ids) {
-    return new Promise((resolve, reject) => {
-      const ref = this.db.ref(key);
-      ref
-        .once('value')
-        .then(() => {
-          ids.forEach(id => {
-            this.db.ref(`${key}/${id}`).remove();
-          });
-          resolve(true);
-        })
-        .catch(error => reject(error));
-    });
+  async removeItem(dataSchema) {
+    const ref = this.db.ref(dataSchema);
+    return await ref.remove();
   }
 
   /**
@@ -124,6 +114,7 @@ class DataBase {
         userData: user
       })
     } catch (error) {
+      console.log(error);
       eventBus.post('user-login-result', {
         result: false,
         message: error.message

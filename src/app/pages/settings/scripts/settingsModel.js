@@ -176,6 +176,7 @@ export class SettingsModel {
      */
     saveSettingsData(data) {
         const userId= settingsData.getDataFromStorage('userId');
+        console.log('here');
         sessionStorage.setItem('settings', JSON.stringify(data));
         settingsData.sendData(userId,'settings',data);
         this.changeButtonsEvent.notify(this.allSettingsData());

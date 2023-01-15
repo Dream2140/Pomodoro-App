@@ -191,7 +191,7 @@ export class TasksListModel {
    * @memberof TasksListModel
    */
   isNewUser() {
-    return JSON.parse(sessionStorage.getItem('isNewUser'));
+    return JSON.parse(sessionStorage.getItem('userId'));
   }
 
   /**
@@ -253,7 +253,7 @@ export class TasksListModel {
     this.taskListCollection.push(newTask);
 
     this.createTaskListCollection();
-    this.sendTaskData('tasks', newTask, newTask.id);
+    this.sendTaskData(newTask, newTask.id);
 
 
   }
@@ -265,11 +265,10 @@ export class TasksListModel {
    * @param {string} id of task
    * @memberof TasksListModel
    */
-  sendTaskData(key, data, id) {
+  sendTaskData(data, id) {
     //this.sendTaskData('tasks', newTask, newTask.id);
-    const userId = settingsData.getDataFromStorage('userId');
     this.settingsData
-      .sendTask(userId, { [id]: data })
+      .sendTask({ [id]: data })
       .then(() => {
         $(document).notification('clean');
         $(document).notification({
@@ -327,7 +326,7 @@ export class TasksListModel {
     const userId = settingsData.getDataFromStorage('userId');
 
 
-    return this.settingsData.sendTask(userId, 'tasks', { [id]: taskToBeChanged });
+    return this.settingsData.sendTask({ [id]: taskToBeChanged });
   }
 
   /**
@@ -366,7 +365,7 @@ export class TasksListModel {
       this.renderNoTasksLeftPageEvent.notify();
     }
 
-    return this.settingsData.removeItem('tasks', ids);
+    return this.settingsData.removeItem(ids);
   }
 
   /**
@@ -411,7 +410,7 @@ export class TasksListModel {
     );
 
     this.createTaskListCollection();
-    this.sendTaskData('tasks', updatedTask, updatedTask.id);
+    this.sendTaskData( updatedTask, updatedTask.id);
   }
 
 }

@@ -21,7 +21,6 @@ export class TasksListController {
 
     eventBus.subscribe('task-list-loading', () => {
       eventBus.post('renderTaskListPage', this.model.isNewUser());
-      eventBus.post('pageLoaded');
     });
 
     eventBus.subscribe('start-task', id => {

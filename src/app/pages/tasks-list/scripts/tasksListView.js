@@ -55,45 +55,67 @@ export class TasksListView {
 
 
     eventBus.subscribe('register-user', (data) => {
-      this.model.registerNewsUser(data.mail,data.password);
+      this.model.registerNewsUser(data.mail, data.password);
     });
     eventBus.subscribe('login-user', (data) => {
-      this.model.loginUser(data.mail,data.password);
+      this.model.loginUser(data.mail, data.password);
     });
-    
+
     eventBus.subscribe('renderTaskListPage', async (isNewUser) => {
-      if (isNewUser) {
-        this.renderFirstPage();
+      if (!isNewUser) {
         eventBus.post('auth-modal');
-        document.querySelector('.service-btn__btn-register').addEventListener('click', (e) => {
-          e.preventDefault();
-
-          const form = new FormData(document.querySelector('.modal__form'));
-          const mail = form.get('mail');
-          const password = form.get('password');
-          eventBus.post('register-user',{mail,password});
-        });
-        document.querySelector('.service-btn__btn-login').addEventListener('click', (e) => {
-          e.preventDefault();
-
-          const form = new FormData(document.querySelector('.modal__form'));
-          const mail = form.get('mail');
-          const password = form.get('password');
-          eventBus.post('login-user',{mail,password});
-        });
+        this.addAuthBtnsEventListeners();
       } else {
-
         this.renderTaskListContainer();
+        eventBus.post('pageLoaded');
         await this.model.getAndSaveTaskList();
       }
     });
     eventBus.subscribe('user-login-result', async (data) => {
-      if(data.result===true){
+      if (data.result === true) {
         eventBus.post('close-modal')
-        console.log(data);
-        settingsData.setDataToStorage('userId', data.userData.user.uid)
+        settingsData.setDataToStorage('userId', data.userData.user.uid);
+        this.renderTaskListContainer();
+        eventBus.post('pageLoaded');
+        await this.model.getAndSaveTaskList();
+        $(document).notification('clean');
+        $(document).notification({
+          type: 'success',
+          text: 'You are logged in',
+          showTime: 3,
+        });
+      } else {
+        $(document).notification('clean');
+        $(document).notification({
+          type: 'error',
+          text: data.message,
+          showTime: 3,
+        });
       }
     });
+    
+    eventBus.subscribe('user-regestration-result', async (data) => {
+      if (data.result === true) {
+        this.renderFirstPage();
+        eventBus.post('close-modal')
+        settingsData.setDataToStorage('userId', data.userData.user.uid);
+        console.log(data.userData);
+        $(document).notification('clean');
+        $(document).notification({
+          type: 'success',
+          text: `User with email ${data.userData.user.email} successfuly registered`,
+          showTime: 3,
+        });
+      } else {
+        $(document).notification('clean');
+        $(document).notification({
+          type: 'error',
+          text: data.message,
+          showTime: 3,
+        });
+      }
+    });
+
     eventBus.subscribe('render-page', () => {
       this.renderTaskListContainer(this.model.taskListSettings);
       this.model.createTaskListCollection();
@@ -108,6 +130,26 @@ export class TasksListView {
 
     eventBus.subscribe('toggle-remove-tasks-mode', () => {
       this.renderDeleteMode();
+    });
+  }
+
+  addAuthBtnsEventListeners() {
+    document.querySelector('.service-btn__btn-register').addEventListener('click', (e) => {
+      e.preventDefault();
+
+      const form = new FormData(document.querySelector('.modal__form'));
+      const mail = form.get('mail');
+      const password = form.get('password');
+      eventBus.post('register-user', { mail, password });
+    });
+
+    document.querySelector('.service-btn__btn-login').addEventListener('click', (e) => {
+
+      e.preventDefault();
+      const form = new FormData(document.querySelector('.modal__form'));
+      const mail = form.get('mail');
+      const password = form.get('password');
+      eventBus.post('login-user', { mail, password });
     });
   }
 

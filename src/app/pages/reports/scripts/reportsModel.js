@@ -109,8 +109,11 @@ export class ReportsModel {
     */
     async getAndSaveData(key) {
         try {
-            this.tasks = await this.settingsData.receiveData(key);
-
+            const data = await this.settingsData.getTasksData();
+            this.tasks =Object.keys(data).map(function(key) {
+                return data[key];
+            });
+            console.log(this.tasks );
         } catch (err) {
             console.error(err.message);
         }

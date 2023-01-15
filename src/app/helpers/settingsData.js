@@ -48,12 +48,18 @@ class SettingsData {
     }
   }
 
-  async getSettingsData(userId) {
-    return await this.db.getData("users/" + userId + `/settings`);
+  async getSettingsData() {
+    const userId = this.getDataFromStorage('userId');
+    const settings = await this.db.getData("users/" + userId + `/settings`);
+    if(!settings){
+      return this.setDataToStorage('settings', await this.getDefaultSettings());  
+    }
+      
+    this.setDataToStorage('settings', settings);
   }
 
-  async getTasksData(userId) {
-    this.setDataToStorage("tasks", this.db.data);
+  async getTasksData() {
+    const userId = this.getDataFromStorage('userId');
     return await this.db.getData("users/" + userId + `/tasks`);
   }
 
@@ -72,8 +78,9 @@ class SettingsData {
     return await this.db.sendData(id, key, data);
   }
 
-  async sendTask(id, data) {
-    const dataSchema = "users/" + id + "/tasks/";
+  async sendTask(data) {
+    const userId = this.getDataFromStorage('userId');
+    const dataSchema = "users/" + userId + "/tasks/";
     return await this.db.writeData(dataSchema, data);
   }
 
@@ -112,8 +119,10 @@ class SettingsData {
    * @return {object} promise
    * @memberof SettingsData
    */
-  removeItem(key, ids) {
-    return this.db.removeItem(key, ids);
+  async removeItem(ids) {
+    const userId = this.getDataFromStorage('userId');
+    const dataSchema = "users/" + userId + "/tasks/" + ids;
+    return await this.db.removeItem(dataSchema);
   }
 
   async getUserData(key) {

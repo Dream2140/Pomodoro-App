@@ -50,7 +50,7 @@ export class TimerModel {
 
     async getAndSaveSettings() {
         try {
-            await this.settingsData.receiveData('settings');
+            await this.settingsData.getSettingsData('settings');
             this.pomodoroSettings = this.settingsData.getDataFromStorage('settings');
 
             return this.pomodoroSettings;
@@ -126,7 +126,7 @@ export class TimerModel {
         }
 
         this.taskCompletedEvent.notify();
-        this.settingsData.sendData('tasks', this.activeTask, this.activeTask.id)
+        this.settingsData.sendTask({[this.activeTask.id]:this.activeTask})
             .then(() => {
                 this.showFinishPomodoroNotification(this.isLongBreak());
             })
