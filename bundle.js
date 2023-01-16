@@ -60949,7 +60949,18 @@ var TasksListModel = /*#__PURE__*/function () {
                 return this.settingsData.getTasksData(userId);
 
               case 3:
-                data = _context.sent;
+                _context.t0 = _context.sent;
+
+                if (_context.t0) {
+                  _context.next = 6;
+                  break;
+                }
+
+                _context.t0 = {};
+
+              case 6:
+                data = _context.t0;
+                console.log(data);
                 data = Object.keys(data).map(function (key) {
                   return data[key];
                 });
@@ -60964,7 +60975,7 @@ var TasksListModel = /*#__PURE__*/function () {
                   this.renderAddFirstTaskPageEvent.notify();
                 }
 
-              case 6:
+              case 10:
               case "end":
                 return _context.stop();
             }
@@ -61176,6 +61187,7 @@ var TasksListModel = /*#__PURE__*/function () {
       }
 
       if (this.dailyTasksActive.length === 0 && this.globalTasksActive.length === 0 && this.dailyTasksCompleted.length === 0) {
+        console.log(123);
         this.renderAddFirstTaskPageEvent.notify();
         return false;
       }
@@ -61571,10 +61583,13 @@ var TasksListView = /*#__PURE__*/function () {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
+                console.log(data);
+
                 if (data.result === true) {
+                  _helpers_eventBus__WEBPACK_IMPORTED_MODULE_6__["eventBus"].post('close-modal');
+
                   _this.renderFirstPage();
 
-                  _helpers_eventBus__WEBPACK_IMPORTED_MODULE_6__["eventBus"].post('close-modal');
                   _helpers_settingsData__WEBPACK_IMPORTED_MODULE_15__["settingsData"].setDataToStorage('userId', data.userData.user.uid);
                   console.log(data.userData);
                   $(document).notification('clean');
@@ -61592,7 +61607,7 @@ var TasksListView = /*#__PURE__*/function () {
                   });
                 }
 
-              case 1:
+              case 2:
               case "end":
                 return _context3.stop();
             }
