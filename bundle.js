@@ -62246,7 +62246,7 @@ __webpack_require__.r(__webpack_exports__);
 var Handlebars = __webpack_require__(65);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<section class=\"message\">\n    <div class=\"message__container\">\n        <img src=\"../../images/tomato-addv02.svg\" alt=\"Logo\" class=\"message__img\">\n        <div class=\"message__text message__text--bottom-margin\">\n            <p>Add your first task\n            </p>\n        </div>\n    </div>\n</section>";
+    return "<section class=\"message\">\n    <div class=\"message__container\">\n        <img src=\"./images/tomato-addv02.svg\" alt=\"Logo\" class=\"message__img\">\n        <div class=\"message__text message__text--bottom-margin\">\n            <p>Add your first task\n            </p>\n        </div>\n    </div>\n</section>";
 },"useData":true});
 
 /***/ }),
@@ -62259,7 +62259,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[8,"
     var stack1;
 
   return ((stack1 = container.invokePartial(__webpack_require__(113),depth0,{"name":"header","data":data,"helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
-    + "    <main class=\"content task-list-page\">\n        <section class=\"first-message message\">\n            <div class=\"wrapper\">\n                <div class=\"message__container\">\n                    <img src=\"../../images/tomato_settings.svg\" alt=\"Logo\" class=\"message__img\">\n                    <div class=\"message__text message__text--bottom-margin\">\n                        <p>As you visited site for a first time you can\n                            check and customize your default\n                            application settings\n                        </p>\n                    </div>\n                    <div class=\"message__buttons service-btn\">\n                        <button class=\"service-btn__btn service-btn__btn--blue message__buttons-skip\">Skip</button>\n                        <button class=\"service-btn__btn service-btn__btn--green message__buttons-settings\">Go to settings</button>\n                    </div>\n                </div>\n            </div>\n        </section>\n\n\n    </main>\n";
+    + "    <main class=\"content task-list-page\">\n        <section class=\"first-message message\">\n            <div class=\"wrapper\">\n                <div class=\"message__container\">\n                    <img src=\"./images/tomato_settings.svg\" alt=\"Logo\" class=\"message__img\">\n                    <div class=\"message__text message__text--bottom-margin\">\n                        <p>As you visited site for a first time you can\n                            check and customize your default\n                            application settings\n                        </p>\n                    </div>\n                    <div class=\"message__buttons service-btn\">\n                        <button class=\"service-btn__btn service-btn__btn--blue message__buttons-skip\">Skip</button>\n                        <button class=\"service-btn__btn service-btn__btn--green message__buttons-settings\">Go to settings</button>\n                    </div>\n                </div>\n            </div>\n        </section>\n\n\n    </main>\n";
 },"usePartial":true,"useData":true});
 
 /***/ }),
@@ -62269,7 +62269,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[8,"
 var Handlebars = __webpack_require__(65);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<section class=\"message\">\n    <div class=\"message__container\">\n        <img src=\"../../images/tomato_settings.svg\" alt=\"Logo\" class=\"message__img\">\n        <div class=\"message__text message__text--bottom-margin\">\n            <p>You don’t have any tasks left. Add new tasks to stay productive.\n            </p>\n        </div>\n    </div>\n</section>";
+    return "<section class=\"message\">\n    <div class=\"message__container\">\n        <img src=\"./images/tomato_settings.svg\" alt=\"Logo\" class=\"message__img\">\n        <div class=\"message__text message__text--bottom-margin\">\n            <p>You don’t have any tasks left. Add new tasks to stay productive.\n            </p>\n        </div>\n    </div>\n</section>";
 },"useData":true});
 
 /***/ }),
