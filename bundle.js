@@ -14292,45 +14292,41 @@ var SettingsData = /*#__PURE__*/function () {
 
     this.db = base;
     _eventBus__WEBPACK_IMPORTED_MODULE_5__["eventBus"].subscribe('settings-page-loading', /*#__PURE__*/_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_3___default.a.mark(function _callee() {
-      var userId, userSettins, defualtSettings;
+      var userSettins, defualtSettings;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_3___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return _this.getDataFromStorage('userId');
+              return _this.getSettingsData();
 
             case 2:
-              userId = _context.sent;
-              _context.next = 5;
-              return _this.getSettingsData(userId);
-
-            case 5:
               userSettins = _context.sent;
+              console.log(userSettins);
 
               if (!userSettins) {
-                _context.next = 10;
+                _context.next = 8;
                 break;
               }
 
               _this.setDataToStorage('settings', userSettins);
 
-              _context.next = 14;
+              _context.next = 12;
               break;
 
-            case 10:
-              _context.next = 12;
+            case 8:
+              _context.next = 10;
               return _this.getDefaultSettings();
 
-            case 12:
+            case 10:
               defualtSettings = _context.sent;
 
               _this.setDataToStorage('settings', defualtSettings);
 
-            case 14:
+            case 12:
               _eventBus__WEBPACK_IMPORTED_MODULE_5__["eventBus"].post('load-page');
 
-            case 15:
+            case 13:
             case "end":
               return _context.stop();
           }
@@ -14399,24 +14395,25 @@ var SettingsData = /*#__PURE__*/function () {
 
               case 3:
                 settings = _context3.sent;
+                console.log(settings);
 
                 if (settings) {
-                  _context3.next = 10;
+                  _context3.next = 11;
                   break;
                 }
 
                 _context3.t0 = this;
-                _context3.next = 8;
+                _context3.next = 9;
                 return this.getDefaultSettings();
 
-              case 8:
+              case 9:
                 _context3.t1 = _context3.sent;
                 return _context3.abrupt("return", _context3.t0.setDataToStorage.call(_context3.t0, 'settings', _context3.t1));
 
-              case 10:
+              case 11:
                 this.setDataToStorage('settings', settings);
 
-              case 11:
+              case 12:
               case "end":
                 return _context3.stop();
             }
@@ -59838,9 +59835,9 @@ var SettingsController = /*#__PURE__*/function () {
     value: function initSettingsPage() {
       var _this2 = this;
 
-      var currentRoute = window.location.pathname;
+      var currentRoute = window.location.hash;
 
-      if (/settings\/pomodoros/.test(currentRoute)) {
+      if (/^#\/settings\/pomodoros/.test(currentRoute)) {
         this.model.getAndSaveDataFromStorage();
         _helpers_eventBus__WEBPACK_IMPORTED_MODULE_4__["eventBus"].post('renderSettingsPage');
         _helpers_eventBus__WEBPACK_IMPORTED_MODULE_4__["eventBus"].subscribe('increaseValue', function (args) {
@@ -60163,9 +60160,10 @@ var SettingsView = /*#__PURE__*/function () {
       _helpers_eventBus__WEBPACK_IMPORTED_MODULE_3__["eventBus"].post('pageLoaded');
     });
     window.addEventListener('resize', function () {
-      var currentRoute = window.location.pathname;
+      var currentRoute = window.location.hash;
+      console.log('here');
 
-      if (/^\/settings/.test(currentRoute)) {
+      if (/^#\/settings/.test(currentRoute)) {
         _helpers_eventBus__WEBPACK_IMPORTED_MODULE_3__["eventBus"].post('load-page');
       }
     });
@@ -60548,7 +60546,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
         return undefined
     };
 
-  return "<header class=\"header \">\r\n    <div class=\"wrapper\">\r\n        <div class=\"header__container\">\r\n\r\n            <div class=\"header__logo logo\">\r\n                <a href=\"#\" class=\"logo__link\">\r\n                    <img src=\"/images/header.svg\" alt=\"header\" class=\"logo__img\">\r\n                </a>\r\n            </div>\r\n\r\n            <div class=\"header__title-wrapp\">\r\n                <h1 class=\"header__title\">"
+  return "<header class=\"header \">\r\n    <div class=\"wrapper\">\r\n        <div class=\"header__container\">\r\n\r\n            <div class=\"header__logo logo\">\r\n                <a href=\"#\" class=\"logo__link\">\r\n                    <img src=\"./images/header.svg\" alt=\"header\" class=\"logo__img\">\r\n                </a>\r\n            </div>\r\n\r\n            <div class=\"header__title-wrapp\">\r\n                <h1 class=\"header__title\">"
     + alias2(__default(__webpack_require__(114)).call(alias1,{"name":"pageTitle","hash":{},"data":data,"loc":{"start":{"line":12,"column":42},"end":{"line":12,"column":55}}}))
     + "</h1>\r\n"
     + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"titlePlusBtn") : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":13,"column":16},"end":{"line":15,"column":23}}})) != null ? stack1 : "")
@@ -62246,7 +62244,7 @@ __webpack_require__.r(__webpack_exports__);
 var Handlebars = __webpack_require__(65);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<section class=\"message\">\r\n    <div class=\"message__container\">\r\n        <img src=\"../../images/tomato-addv02.svg\" alt=\"Logo\" class=\"message__img\">\r\n        <div class=\"message__text message__text--bottom-margin\">\r\n            <p>Add your first task\r\n            </p>\r\n        </div>\r\n    </div>\r\n</section>";
+    return "<section class=\"message\">\r\n    <div class=\"message__container\">\r\n        <img src=\"./images/tomato-addv02.svg\" alt=\"Logo\" class=\"message__img\">\r\n        <div class=\"message__text message__text--bottom-margin\">\r\n            <p>Add your first task\r\n            </p>\r\n        </div>\r\n    </div>\r\n</section>";
 },"useData":true});
 
 /***/ }),
@@ -62259,7 +62257,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[8,"
     var stack1;
 
   return ((stack1 = container.invokePartial(__webpack_require__(113),depth0,{"name":"header","data":data,"helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
-    + "    <main class=\"content task-list-page\">\r\n        <section class=\"first-message message\">\r\n            <div class=\"wrapper\">\r\n                <div class=\"message__container\">\r\n                    <img src=\"../../images/tomato_settings.svg\" alt=\"Logo\" class=\"message__img\">\r\n                    <div class=\"message__text message__text--bottom-margin\">\r\n                        <p>As you visited site for a first time you can\r\n                            check and customize your default\r\n                            application settings\r\n                        </p>\r\n                    </div>\r\n                    <div class=\"message__buttons service-btn\">\r\n                        <button class=\"service-btn__btn service-btn__btn--blue message__buttons-skip\">Skip</button>\r\n                        <button class=\"service-btn__btn service-btn__btn--green message__buttons-settings\">Go to settings</button>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </section>\r\n\r\n\r\n    </main>\r\n";
+    + "    <main class=\"content task-list-page\">\r\n        <section class=\"first-message message\">\r\n            <div class=\"wrapper\">\r\n                <div class=\"message__container\">\r\n                    <img src=\"./images/tomato_settings.svg\" alt=\"Logo\" class=\"message__img\">\r\n                    <div class=\"message__text message__text--bottom-margin\">\r\n                        <p>As you visited site for a first time you can\r\n                            check and customize your default\r\n                            application settings\r\n                        </p>\r\n                    </div>\r\n                    <div class=\"message__buttons service-btn\">\r\n                        <button class=\"service-btn__btn service-btn__btn--blue message__buttons-skip\">Skip</button>\r\n                        <button class=\"service-btn__btn service-btn__btn--green message__buttons-settings\">Go to settings</button>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </section>\r\n\r\n\r\n    </main>\r\n";
 },"usePartial":true,"useData":true});
 
 /***/ }),
@@ -62269,7 +62267,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[8,"
 var Handlebars = __webpack_require__(65);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<section class=\"message\">\r\n  <div class=\"message__container\">\r\n    <img src=\"./../images/tomato_settings.svg\" alt=\"Logo\" class=\"message__img\" />\r\n    <div class=\"message__text message__text--bottom-margin\">\r\n      <p>You don’t have any tasks left. Add new tasks to stay productive.\r\n      </p>\r\n    </div>\r\n  </div>\r\n</section>";
+    return "<section class=\"message\">\r\n  <div class=\"message__container\">\r\n    <img src=\"./images/tomato_settings.svg\" alt=\"Logo\" class=\"message__img\" />\r\n    <div class=\"message__text message__text--bottom-margin\">\r\n      <p>You don’t have any tasks left. Add new tasks to stay productive.\r\n      </p>\r\n    </div>\r\n  </div>\r\n</section>";
 },"useData":true});
 
 /***/ }),
