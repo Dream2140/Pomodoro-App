@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.2.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 340 344" style="enable-background:new 0 0 340 344;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:url(#SVGID_1_);}
+	.st1{fill:url(#SVGID_2_);}
+	.st2{fill:url(#SVGID_3_);}
+	.st3{fill:#FFFFFF;}
+</style>
+<g>
+	
+		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="168.0122" y1="27.3878" x2="168.0122" y2="336.9879" gradientTransform="matrix(1 0 0 -1 0 348)">
+		<stop  offset="0" style="stop-color:#F05D4E"/>
+		<stop  offset="0.33" style="stop-color:#F27421"/>
+		<stop  offset="0.66" style="stop-color:#FCDB43"/>
+		<stop  offset="0.9335" style="stop-color:#27B899"/>
+	</linearGradient>
+	<path class="st0" d="M210.8,50.7c-11.1,0-22.1,1.4-32.6,4.3V11l-19.3,10.4c-0.5,0.3-0.9,0.8-0.9,1.4V55
+		c-10.6-2.8-21.5-4.3-32.6-4.3C58.9,50.7,4.8,102.1,4.8,165.3c0,41.5,17,80.4,47.8,109.8c30.7,29.1,72.1,45.5,115.4,45.5
+		c43.6,0,84.6-16.1,115.5-45.5c30.8-29.3,47.8-68.3,47.8-109.8C331.4,102.1,277.3,50.7,210.8,50.7z M167.8,80.1l54.7,15.6l-2.3-1.6
+		L189.9,72c6.8-1.4,13.8-2.1,20.9-2.1c55.3,0,100.3,42.8,100.3,95.4c0,75-64.2,136-143.1,136s-143.1-61-143.1-136
+		c0-52.6,45-95.4,100.3-95.4c7.1,0,14.1,0.7,20.9,2.1L113,96.1L167.8,80.1z"/>
+	<radialGradient id="SVGID_2_" cx="256.6948" cy="262.4242" r="71.0954" gradientUnits="userSpaceOnUse">
+		<stop  offset="0" style="stop-color:#77DB86"/>
+		<stop  offset="0.9335" style="stop-color:#27B899"/>
+	</radialGradient>
+	<path class="st1" d="M256.7,333.5L256.7,333.5c-39.3,0-71.1-31.8-71.1-71.1l0,0c0-39.3,31.8-71.1,71.1-71.1l0,0
+		c39.3,0,71.1,31.8,71.1,71.1l0,0C327.8,301.7,296,333.5,256.7,333.5z"/>
+	<radialGradient id="SVGID_3_" cx="256.6948" cy="262.4242" r="73.8298" gradientUnits="userSpaceOnUse">
+		<stop  offset="0" style="stop-color:#87DB43"/>
+		<stop  offset="0.9335" style="stop-color:#27B899"/>
+	</radialGradient>
+	<path class="st2" d="M256.7,336.3c-40.7,0-73.8-33.1-73.8-73.8s33.1-73.8,73.8-73.8s73.8,33.1,73.8,73.8S297.4,336.3,256.7,336.3z
+		 M256.7,194.1c-37.7,0-68.4,30.7-68.4,68.4s30.7,68.4,68.4,68.4s68.4-30.7,68.4-68.4S294.4,194.1,256.7,194.1z"/>
+	<path class="st3" d="M256.7,300.7c-1.5,0-2.7-1.2-2.7-2.7v-71.1c0-1.5,1.2-2.7,2.7-2.7c1.5,0,2.7,1.2,2.7,2.7V298
+		C259.4,299.5,258.2,300.7,256.7,300.7z"/>
+	<path class="st3" d="M295,262.4c0,1.5-1.2,2.7-2.7,2.7h-71.1c-1.5,0-2.7-1.2-2.7-2.7c0-1.5,1.2-2.7,2.7-2.7h71.1
+		C293.8,259.7,295,260.9,295,262.4z"/>
+</g>
+</svg>

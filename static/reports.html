@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/styles.css">
+    <title>Settings</title>
+</head>
+
+<body>
+    <!-- Add class  header--fixed  to header tag to show scroll menu -->
+    <header class="header ">
+        <div class="wrapper">
+            <div class="header__container">
+
+                <div class="header__logo logo">
+                    <a href="#" class="logo__link">
+                     <img src="/images/header.svg" alt="header" class="logo__img">
+                    </a>
+                </div>
+
+                <div class="header__title-wrapp">
+                    <h1 class="header__title">Report</h1>
+                </div>
+
+                <nav class="navigation header__nav">
+                    <ul class="navigation__list">
+                        <li class="navigation__item navigation__item--hidden">
+                            <button class="navigation__btn">
+                                <span class="navigation__icon icon icon-add"></span>
+                            </button>
+                        </li>
+                        <li class="navigation__item">
+                            <button class="navigation__btn">
+                                <span class="navigation__icon navigation__icon--delete icon icon-trash">
+                                    <span class="navigation__counter">5</span>
+                                </span>
+                            </button>
+                        </li>
+
+                        <li class="navigation__item">
+                            <button class="navigation__btn">
+                                <span class="navigation__icon icon icon-tasks"></span>
+                            </button>
+                        </li>
+                        <li class="navigation__item">
+                            <button class="navigation__btn navigation__btn--active">
+                                <span class="navigation__icon icon icon-statistics"></span>
+                            </button>
+                        </li>
+                        <li class="navigation__item">
+                            <button class="navigation__btn">
+                                <span class="navigation__icon icon  icon-settings"></span>
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
+
+            </div>
+
+        </div>
+    </header>
+
+    <main class="content reports-page">
+
+       <section class="reports">
+        <div class="wrapper">
+            <div class="reports__container">
+                <div class="reports__top-tabs tab">
+                    <div class="tab__container">
+                        <ul class="tab__item tab__item--centered">
+                            <li class="tab__btn">Day</li>
+                            <li class="tab__btn">Week</li>
+                            <li class="tab__btn">Month</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="reports__content">
+                    <a href="#" class="reports__link-left icon icon-arrow-left"></a>   
+                    <div class="reports__graph">
+                        <img class="reports__temp-img" src="/images/Graph.png" alt="graph">
+                    </div>
+                </div>
+                <div class="reports__bottom-tabs tab">
+                    <div class="tab__container">
+                        <div class="tab__item tab__item--centered">
+                            <button class="tab__btn">Pomodoro</button>
+                            <button class="tab__btn">Tasks</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       </section>
+
+
+    </main>
+
+
+
+
+    <script src="/bundle.js"></script>
+</body>
+
+</html>
