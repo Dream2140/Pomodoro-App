@@ -62269,7 +62269,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[8,"
 var Handlebars = __webpack_require__(65);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<section class=\"message\">\n    <div class=\"message__container\">\n        <img src=\"../../images/tomato_settings.svg\" alt=\"Logo\" class=\"message__img\">\n        <div class=\"message__text message__text--bottom-margin\">\n            <p>You don’t have any tasks left. Add new tasks to stay productive.\n            </p>\n        </div>\n    </div>\n</section>";
+    return "<section class=\"message\">\n    <div class=\"message__container\">\n        <img src=\"./images/tomato_settings.svg\" alt=\"Logo\" class=\"message__img\">\n        <div class=\"message__text message__text--bottom-margin\">\n            <p>You don’t have any tasks left. Add new tasks to stay productive.\n            </p>\n        </div>\n    </div>\n</section>";
 },"useData":true});
 
 /***/ }),
