@@ -12997,7 +12997,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var router = new _router__WEBPACK_IMPORTED_MODULE_2__["Router"]({
   mode: 'history',
-  root: '/'
+  root: '/Pomodoro-App/'
 });
 router.add(/task-list/, function () {
   _helpers_helpers__WEBPACK_IMPORTED_MODULE_1__["Helpers"].firstSession();
