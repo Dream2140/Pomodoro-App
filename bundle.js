@@ -12996,7 +12996,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var router = new _router__WEBPACK_IMPORTED_MODULE_2__["Router"]({
-  mode: 'hash',
+  mode: 'history',
   root: '/'
 });
 router.add(/task-list/, function () {
@@ -14292,41 +14292,45 @@ var SettingsData = /*#__PURE__*/function () {
 
     this.db = base;
     _eventBus__WEBPACK_IMPORTED_MODULE_5__["eventBus"].subscribe('settings-page-loading', /*#__PURE__*/_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_3___default.a.mark(function _callee() {
-      var userSettins, defualtSettings;
+      var userId, userSettins, defualtSettings;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_3___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return _this.getSettingsData();
+              return _this.getDataFromStorage('userId');
 
             case 2:
+              userId = _context.sent;
+              _context.next = 5;
+              return _this.getSettingsData(userId);
+
+            case 5:
               userSettins = _context.sent;
-              console.log(userSettins);
 
               if (!userSettins) {
-                _context.next = 8;
+                _context.next = 10;
                 break;
               }
 
               _this.setDataToStorage('settings', userSettins);
 
-              _context.next = 12;
+              _context.next = 14;
               break;
 
-            case 8:
-              _context.next = 10;
+            case 10:
+              _context.next = 12;
               return _this.getDefaultSettings();
 
-            case 10:
+            case 12:
               defualtSettings = _context.sent;
 
               _this.setDataToStorage('settings', defualtSettings);
 
-            case 12:
+            case 14:
               _eventBus__WEBPACK_IMPORTED_MODULE_5__["eventBus"].post('load-page');
 
-            case 13:
+            case 15:
             case "end":
               return _context.stop();
           }
@@ -14395,25 +14399,24 @@ var SettingsData = /*#__PURE__*/function () {
 
               case 3:
                 settings = _context3.sent;
-                console.log(settings);
 
                 if (settings) {
-                  _context3.next = 11;
+                  _context3.next = 10;
                   break;
                 }
 
                 _context3.t0 = this;
-                _context3.next = 9;
+                _context3.next = 8;
                 return this.getDefaultSettings();
 
-              case 9:
+              case 8:
                 _context3.t1 = _context3.sent;
                 return _context3.abrupt("return", _context3.t0.setDataToStorage.call(_context3.t0, 'settings', _context3.t1));
 
-              case 11:
+              case 10:
                 this.setDataToStorage('settings', settings);
 
-              case 12:
+              case 11:
               case "end":
                 return _context3.stop();
             }
@@ -56817,9 +56820,9 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[8,"
 
   return "<div class=\"notification notification--"
     + alias4(((helper = (helper = lookupProperty(helpers,"type") || (depth0 != null ? lookupProperty(depth0,"type") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"type","hash":{},"data":data,"loc":{"start":{"line":1,"column":39},"end":{"line":1,"column":47}}}) : helper)))
-    + "\">\r\n    <div class=\"notification__container\">\r\n        <div class=\"notification__icon-wrap\">\r\n            <span class=\"icon notification__icon\"></span>\r\n        </div>\r\n        <div class=\"notification__content\">\r\n            <p class=\"notification__text\">"
+    + "\">\n    <div class=\"notification__container\">\n        <div class=\"notification__icon-wrap\">\n            <span class=\"icon notification__icon\"></span>\n        </div>\n        <div class=\"notification__content\">\n            <p class=\"notification__text\">"
     + alias4(((helper = (helper = lookupProperty(helpers,"text") || (depth0 != null ? lookupProperty(depth0,"text") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"text","hash":{},"data":data,"loc":{"start":{"line":7,"column":42},"end":{"line":7,"column":50}}}) : helper)))
-    + "</p>\r\n        </div>\r\n        <button class=\"notification__btn icon icon-close notification--close\"></button>\r\n    </div>\r\n</div>";
+    + "</p>\n        </div>\n        <button class=\"notification__btn icon icon-close notification--close\"></button>\n    </div>\n</div>";
 },"useData":true});
 
 /***/ }),
@@ -59835,9 +59838,9 @@ var SettingsController = /*#__PURE__*/function () {
     value: function initSettingsPage() {
       var _this2 = this;
 
-      var currentRoute = window.location.hash;
+      var currentRoute = window.location.pathname;
 
-      if (/^#\/settings\/pomodoros/.test(currentRoute)) {
+      if (/settings\/pomodoros/.test(currentRoute)) {
         this.model.getAndSaveDataFromStorage();
         _helpers_eventBus__WEBPACK_IMPORTED_MODULE_4__["eventBus"].post('renderSettingsPage');
         _helpers_eventBus__WEBPACK_IMPORTED_MODULE_4__["eventBus"].subscribe('increaseValue', function (args) {
@@ -60160,10 +60163,9 @@ var SettingsView = /*#__PURE__*/function () {
       _helpers_eventBus__WEBPACK_IMPORTED_MODULE_3__["eventBus"].post('pageLoaded');
     });
     window.addEventListener('resize', function () {
-      var currentRoute = window.location.hash;
-      console.log('here');
+      var currentRoute = window.location.pathname;
 
-      if (/^#\/settings/.test(currentRoute)) {
+      if (/^\/settings/.test(currentRoute)) {
         _helpers_eventBus__WEBPACK_IMPORTED_MODULE_3__["eventBus"].post('load-page');
       }
     });
@@ -60447,23 +60449,23 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[8,"
         return undefined
     };
 
-  return "<div class=\"cycle__caption cycle__caption--top\">\r\n    <span class=\"cycle__caption-item cycle__caption-item--start\">\r\n        <span class=\"cycle__caption-text\">0m</span>\r\n    </span>\r\n    <span class=\"cycle__caption-item cycle__caption--center\" style=\"flex-grow: "
+  return "<div class=\"cycle__caption cycle__caption--top\">\n    <span class=\"cycle__caption-item cycle__caption-item--start\">\n        <span class=\"cycle__caption-text\">0m</span>\n    </span>\n    <span class=\"cycle__caption-item cycle__caption--center\" style=\"flex-grow: "
     + alias2(alias1(((stack1 = ((stack1 = (depth0 != null ? lookupProperty(depth0,"data") : depth0)) != null ? lookupProperty(stack1,"firstCycleTime") : stack1)) != null ? lookupProperty(stack1,"full") : stack1), depth0))
-    + ";\">\r\n        <span class=\"cycle__caption-text\">First cycle:&nbsp;<span>\r\n                "
+    + ";\">\n        <span class=\"cycle__caption-text\">First cycle:&nbsp;<span>\n                "
     + alias2(alias1(((stack1 = ((stack1 = (depth0 != null ? lookupProperty(depth0,"data") : depth0)) != null ? lookupProperty(stack1,"firstCycleTime") : stack1)) != null ? lookupProperty(stack1,"hours") : stack1), depth0))
     + "h "
     + alias2(alias1(((stack1 = ((stack1 = (depth0 != null ? lookupProperty(depth0,"data") : depth0)) != null ? lookupProperty(stack1,"firstCycleTime") : stack1)) != null ? lookupProperty(stack1,"minutes") : stack1), depth0))
-    + "m</span>\r\n        </span>\r\n    </span>\r\n    <span class=\"cycle__caption-item cycle__caption--ends\" style=\"flex-grow: \r\n          "
+    + "m</span>\n        </span>\n    </span>\n    <span class=\"cycle__caption-item cycle__caption--ends\" style=\"flex-grow: \n          "
     + alias2(alias1(((stack1 = (depth0 != null ? lookupProperty(depth0,"data") : depth0)) != null ? lookupProperty(stack1,"secondCycleTime") : stack1), depth0))
-    + ";\">\r\n        <span class=\"cycle__caption-text\">\r\n            "
+    + ";\">\n        <span class=\"cycle__caption-text\">\n            "
     + alias2(alias1(((stack1 = ((stack1 = (depth0 != null ? lookupProperty(depth0,"data") : depth0)) != null ? lookupProperty(stack1,"fullCycleTime") : stack1)) != null ? lookupProperty(stack1,"hours") : stack1), depth0))
     + "h "
     + alias2(alias1(((stack1 = ((stack1 = (depth0 != null ? lookupProperty(depth0,"data") : depth0)) != null ? lookupProperty(stack1,"fullCycleTime") : stack1)) != null ? lookupProperty(stack1,"minutes") : stack1), depth0))
-    + "m</span>\r\n    </span>\r\n    </span>\r\n</div>\r\n\r\n<div class=\"cycle__line\">\r\n    "
+    + "m</span>\n    </span>\n    </span>\n</div>\n\n<div class=\"cycle__line\">\n    "
     + ((stack1 = ((helper = (helper = lookupProperty(helpers,"cycleLine") || (depth0 != null ? lookupProperty(depth0,"cycleLine") : depth0)) != null ? helper : alias4),(typeof helper === alias5 ? helper.call(alias3,{"name":"cycleLine","hash":{},"data":data,"loc":{"start":{"line":19,"column":4},"end":{"line":19,"column":19}}}) : helper))) != null ? stack1 : "")
-    + "\r\n</div>\r\n\r\n<div class=\"cycle__caption cycle__caption--bottom\">\r\n    "
+    + "\n</div>\n\n<div class=\"cycle__caption cycle__caption--bottom\">\n    "
     + ((stack1 = ((helper = (helper = lookupProperty(helpers,"timeLine") || (depth0 != null ? lookupProperty(depth0,"timeLine") : depth0)) != null ? helper : alias4),(typeof helper === alias5 ? helper.call(alias3,{"name":"timeLine","hash":{},"data":data,"loc":{"start":{"line":23,"column":4},"end":{"line":23,"column":18}}}) : helper))) != null ? stack1 : "")
-    + "\r\n</div>";
+    + "\n</div>";
 },"useData":true});
 
 /***/ }),
@@ -60484,9 +60486,9 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[8,"
     + alias4(((helper = (helper = lookupProperty(helpers,"hidden") || (depth0 != null ? lookupProperty(depth0,"hidden") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"hidden","hash":{},"data":data,"loc":{"start":{"line":1,"column":33},"end":{"line":1,"column":43}}}) : helper)))
     + "\" style=\"flex-grow: "
     + alias4(((helper = (helper = lookupProperty(helpers,"grow") || (depth0 != null ? lookupProperty(depth0,"grow") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"grow","hash":{},"data":data,"loc":{"start":{"line":1,"column":63},"end":{"line":1,"column":71}}}) : helper)))
-    + ";\">\r\n    <span class=\"cycle__caption-item--value\">\r\n        "
+    + ";\">\n    <span class=\"cycle__caption-item--value\">\n        "
     + alias4(((helper = (helper = lookupProperty(helpers,"value") || (depth0 != null ? lookupProperty(depth0,"value") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"value","hash":{},"data":data,"loc":{"start":{"line":3,"column":8},"end":{"line":3,"column":17}}}) : helper)))
-    + "\r\n    </span>\r\n</span>";
+    + "\n    </span>\n</span>";
 },"useData":true});
 
 /***/ }),
@@ -60519,11 +60521,11 @@ function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj);
 module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
-  return "\r\n"
+  return "\n"
     + ((stack1 = container.invokePartial(__webpack_require__(113),depth0,{"name":"header","data":data,"indent":"    ","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
-    + "    <main class=\"content settings-page\">\r\n\r\n        <section class=\"settings\">\r\n            <div class=\"wrapper\">\r\n"
+    + "    <main class=\"content settings-page\">\n\n        <section class=\"settings\">\n            <div class=\"wrapper\">\n"
     + ((stack1 = container.invokePartial(__webpack_require__(116),depth0,{"name":"tab","data":data,"indent":"                ","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
-    + "                <div class=\"settings__container d-none\">\r\n                    <h2 class=\"settings__title\">Categories list overview</h2>\r\n                    <ul class=\"settings__options setting-list\">\r\n                        <li class=\"setting-list__item setting-list__item--work\">\r\n                            Work\r\n                        </li>\r\n                        <li class=\"setting-list__item setting-list__item--education\">\r\n                            Education\r\n                        </li>\r\n                        <li class=\"setting-list__item setting-list__item--other\">\r\n                            Other\r\n                        </li>\r\n                        <li class=\"setting-list__item setting-list__item--sport\">\r\n                            Sport\r\n                        </li>\r\n                        <li class=\"setting-list__item setting-list__item--hobby\">\r\n                            Hobby\r\n                        </li>\r\n                    </ul>\r\n\r\n                    <div class=\"settings__buttons setting-list__btn service-btn service-btn--single\">\r\n                        <button class=\"service-btn__btn service-btn__btn--blue\">Skip</button>\r\n                    </div>\r\n                </div>\r\n                <!-- remove d-none -->\r\n                <div class=\"settings__container\">\r\n                    <h2 class=\"settings__title\">Pomodoros settings</h2>\r\n                    <ul class=\"settings__change change-list\">\r\n                        <li class=\"change-list__item change-list__item--work\" id=\"\">\r\n                            <div class=\"change-list__info\">\r\n                                <h4 class=\"change-list__title\">Work time</h4>\r\n                                <div class=\"change-list__setting\" id=\"work\">\r\n                                    <button class=\"change-list__minus change-list__btn icon-minus icon\"></button>\r\n                                    <span  class=\"change-list__input\">25</span>\r\n                                    <button class=\"change-list__plus change-list__btn icon-plus icon\"></button>\r\n                                </div>\r\n                            </div>\r\n                            <p class=\"change-list__details\">\r\n                                Please select a value between 15 and 25 <span class=\"change-list__details--white\">minutes</span>\r\n                            </p>\r\n                        </li>\r\n                        <li class=\"change-list__item change-list__item--other\">\r\n                            <div class=\"change-list__info\">\r\n                                <h4 class=\"change-list__title\">Work Iteration</h4>\r\n                                <div class=\"change-list__setting\" id=\"iteration\">\r\n                                    <button class=\"change-list__minus change-list__btn icon-minus icon\"></button>\r\n                                    <span  class=\"change-list__input\">5</span>\r\n                                    <button class=\"change-list__plus change-list__btn icon-plus icon\"></button>\r\n                                </div>\r\n                            </div>\r\n                            <p class=\"change-list__details\">\r\n                                Please select a value between 2 and 5 <span class=\"change-list__details--white\">iterations</span>\r\n                            </p>\r\n                        </li>\r\n                        <li class=\"change-list__item change-list__item--education\">\r\n                            <div class=\"change-list__info\">\r\n                                <h4 class=\"change-list__title\">Short Break</h4>\r\n                                <div class=\"change-list__setting\" id=\"shortBreak\">\r\n                                    <button class=\"change-list__minus change-list__btn icon-minus icon\"></button>\r\n                                    <span  class=\"change-list__input\">5</span>\r\n                                    <button class=\"change-list__plus change-list__btn icon-plus icon\"></button>\r\n                                </div>\r\n                            </div>\r\n                            <p class=\"change-list__details\">\r\n                                Please select a value between 3 and 5 <span class=\"change-list__details--white\">minutes</span>\r\n                            </p>\r\n                        </li>\r\n                        <li class=\"change-list__item change-list__item--hobby\">\r\n                            <div class=\"change-list__info\">\r\n                                <h4 class=\"change-list__title\">Long Break</h4>\r\n                                <div class=\"change-list__setting\" id=\"longBreak\">\r\n                                    <button class=\"change-list__minus change-list__btn icon-minus icon\"></button>\r\n                                    <span  class=\"change-list__input\">15</span>\r\n                                    <button class=\"change-list__plus change-list__btn icon-plus icon\"></button>\r\n                                </div>\r\n                            </div>\r\n                            <p class=\"change-list__details\">\r\n                                Please select a value between 15 and 30 <span class=\"change-list__details--white\">minutes</span>\r\n                            </p>\r\n                        </li>\r\n                    </ul>\r\n                    <section class=\"cycle\">\r\n                        <h2 class=\"settings__title\">Your cycle</h2>\r\n                        <div class=\"cycle__container\">\r\n                        </div>\r\n                    </section>\r\n                    <div class=\"settings__buttons service-btn\">\r\n                        <button class=\"service-btn__btn service-btn__btn--blue settings__buttons-return\">Go to Task</button>\r\n                        <button class=\"service-btn__btn service-btn__btn--green settings__buttons-save\">Save</button>\r\n                    </div>\r\n\r\n                </div>\r\n            </div>\r\n        </section>\r\n\r\n\r\n\r\n    </main>";
+    + "                <div class=\"settings__container d-none\">\n                    <h2 class=\"settings__title\">Categories list overview</h2>\n                    <ul class=\"settings__options setting-list\">\n                        <li class=\"setting-list__item setting-list__item--work\">\n                            Work\n                        </li>\n                        <li class=\"setting-list__item setting-list__item--education\">\n                            Education\n                        </li>\n                        <li class=\"setting-list__item setting-list__item--other\">\n                            Other\n                        </li>\n                        <li class=\"setting-list__item setting-list__item--sport\">\n                            Sport\n                        </li>\n                        <li class=\"setting-list__item setting-list__item--hobby\">\n                            Hobby\n                        </li>\n                    </ul>\n\n                    <div class=\"settings__buttons setting-list__btn service-btn service-btn--single\">\n                        <button class=\"service-btn__btn service-btn__btn--blue\">Skip</button>\n                    </div>\n                </div>\n                <!-- remove d-none -->\n                <div class=\"settings__container\">\n                    <h2 class=\"settings__title\">Pomodoros settings</h2>\n                    <ul class=\"settings__change change-list\">\n                        <li class=\"change-list__item change-list__item--work\" id=\"\">\n                            <div class=\"change-list__info\">\n                                <h4 class=\"change-list__title\">Work time</h4>\n                                <div class=\"change-list__setting\" id=\"work\">\n                                    <button class=\"change-list__minus change-list__btn icon-minus icon\"></button>\n                                    <span  class=\"change-list__input\">25</span>\n                                    <button class=\"change-list__plus change-list__btn icon-plus icon\"></button>\n                                </div>\n                            </div>\n                            <p class=\"change-list__details\">\n                                Please select a value between 15 and 25 <span class=\"change-list__details--white\">minutes</span>\n                            </p>\n                        </li>\n                        <li class=\"change-list__item change-list__item--other\">\n                            <div class=\"change-list__info\">\n                                <h4 class=\"change-list__title\">Work Iteration</h4>\n                                <div class=\"change-list__setting\" id=\"iteration\">\n                                    <button class=\"change-list__minus change-list__btn icon-minus icon\"></button>\n                                    <span  class=\"change-list__input\">5</span>\n                                    <button class=\"change-list__plus change-list__btn icon-plus icon\"></button>\n                                </div>\n                            </div>\n                            <p class=\"change-list__details\">\n                                Please select a value between 2 and 5 <span class=\"change-list__details--white\">iterations</span>\n                            </p>\n                        </li>\n                        <li class=\"change-list__item change-list__item--education\">\n                            <div class=\"change-list__info\">\n                                <h4 class=\"change-list__title\">Short Break</h4>\n                                <div class=\"change-list__setting\" id=\"shortBreak\">\n                                    <button class=\"change-list__minus change-list__btn icon-minus icon\"></button>\n                                    <span  class=\"change-list__input\">5</span>\n                                    <button class=\"change-list__plus change-list__btn icon-plus icon\"></button>\n                                </div>\n                            </div>\n                            <p class=\"change-list__details\">\n                                Please select a value between 3 and 5 <span class=\"change-list__details--white\">minutes</span>\n                            </p>\n                        </li>\n                        <li class=\"change-list__item change-list__item--hobby\">\n                            <div class=\"change-list__info\">\n                                <h4 class=\"change-list__title\">Long Break</h4>\n                                <div class=\"change-list__setting\" id=\"longBreak\">\n                                    <button class=\"change-list__minus change-list__btn icon-minus icon\"></button>\n                                    <span  class=\"change-list__input\">15</span>\n                                    <button class=\"change-list__plus change-list__btn icon-plus icon\"></button>\n                                </div>\n                            </div>\n                            <p class=\"change-list__details\">\n                                Please select a value between 15 and 30 <span class=\"change-list__details--white\">minutes</span>\n                            </p>\n                        </li>\n                    </ul>\n                    <section class=\"cycle\">\n                        <h2 class=\"settings__title\">Your cycle</h2>\n                        <div class=\"cycle__container\">\n                        </div>\n                    </section>\n                    <div class=\"settings__buttons service-btn\">\n                        <button class=\"service-btn__btn service-btn__btn--blue settings__buttons-return\">Go to Task</button>\n                        <button class=\"service-btn__btn service-btn__btn--green settings__buttons-save\">Save</button>\n                    </div>\n\n                </div>\n            </div>\n        </section>\n\n\n\n    </main>";
 },"usePartial":true,"useData":true});
 
 /***/ }),
@@ -60533,11 +60535,11 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[8,"
 var Handlebars = __webpack_require__(65);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
-    return "                <button class=\"header__btn icon header__btn-showModal\"></button>\r\n";
+    return "                <button class=\"header__btn icon header__btn-showModal\"></button>\n";
 },"3":function(container,depth0,helpers,partials,data) {
-    return "                    <li class=\"navigation__item navigation__item--plus\">\r\n                        <button class=\"navigation__btn\" title=\"Add Task\">\r\n                            <span class=\"navigation__icon icon icon-add\"></span>\r\n                        </button>\r\n                    </li>\r\n";
+    return "                    <li class=\"navigation__item navigation__item--plus\">\n                        <button class=\"navigation__btn\" title=\"Add Task\">\n                            <span class=\"navigation__icon icon icon-add\"></span>\n                        </button>\n                    </li>\n";
 },"5":function(container,depth0,helpers,partials,data) {
-    return "                    <li class=\"navigation__item\">\r\n                        <button class=\"navigation__btn navigation__btn--delete\" title=\"Delete Task\">\r\n                            <span class=\"navigation__icon navigation__icon--delete icon icon-trash\">\r\n                                <span class=\"navigation__counter\"></span>\r\n                            </span>\r\n                        </button>\r\n                    </li>\r\n";
+    return "                    <li class=\"navigation__item\">\n                        <button class=\"navigation__btn navigation__btn--delete\" title=\"Delete Task\">\n                            <span class=\"navigation__icon navigation__icon--delete icon icon-trash\">\n                                <span class=\"navigation__counter\"></span>\n                            </span>\n                        </button>\n                    </li>\n";
 },"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.escapeExpression, lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
@@ -60546,20 +60548,20 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
         return undefined
     };
 
-  return "<header class=\"header \">\r\n    <div class=\"wrapper\">\r\n        <div class=\"header__container\">\r\n\r\n            <div class=\"header__logo logo\">\r\n                <a href=\"#\" class=\"logo__link\">\r\n                    <img src=\"./images/header.svg\" alt=\"header\" class=\"logo__img\">\r\n                </a>\r\n            </div>\r\n\r\n            <div class=\"header__title-wrapp\">\r\n                <h1 class=\"header__title\">"
+  return "<header class=\"header \">\n    <div class=\"wrapper\">\n        <div class=\"header__container\">\n\n            <div class=\"header__logo logo\">\n                <a href=\"#\" class=\"logo__link\">\n                    <img src=\"/images/header.svg\" alt=\"header\" class=\"logo__img\">\n                </a>\n            </div>\n\n            <div class=\"header__title-wrapp\">\n                <h1 class=\"header__title\">"
     + alias2(__default(__webpack_require__(114)).call(alias1,{"name":"pageTitle","hash":{},"data":data,"loc":{"start":{"line":12,"column":42},"end":{"line":12,"column":55}}}))
-    + "</h1>\r\n"
+    + "</h1>\n"
     + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"titlePlusBtn") : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":13,"column":16},"end":{"line":15,"column":23}}})) != null ? stack1 : "")
-    + "            </div>\r\n\r\n            <nav class=\"navigation header__nav\">\r\n                <ul class=\"navigation__list\">\r\n"
+    + "            </div>\n\n            <nav class=\"navigation header__nav\">\n                <ul class=\"navigation__list\">\n"
     + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"buttonAddTask") : depth0),{"name":"if","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":20,"column":20},"end":{"line":26,"column":27}}})) != null ? stack1 : "")
     + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"deleteBtn") : depth0),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":27,"column":20},"end":{"line":35,"column":27}}})) != null ? stack1 : "")
-    + "                    <li class=\"navigation__item\">\r\n                        <button class=\"navigation__btn "
+    + "                    <li class=\"navigation__item\">\n                        <button class=\"navigation__btn "
     + alias2(__default(__webpack_require__(115)).call(alias1,"task-list",{"name":"checkActivePage","hash":{},"data":data,"loc":{"start":{"line":37,"column":55},"end":{"line":37,"column":86}}}))
-    + "\" data-route=\"task-list\" title=\"Go to Tasks\">\r\n                            <span class=\"navigation__icon icon icon-tasks\"></span>\r\n                        </button>\r\n                    </li>\r\n                    <li class=\"navigation__item\">\r\n                        <button class=\"navigation__btn "
+    + "\" data-route=\"task-list\" title=\"Go to Tasks\">\n                            <span class=\"navigation__icon icon icon-tasks\"></span>\n                        </button>\n                    </li>\n                    <li class=\"navigation__item\">\n                        <button class=\"navigation__btn "
     + alias2(__default(__webpack_require__(115)).call(alias1,"reports",{"name":"checkActivePage","hash":{},"data":data,"loc":{"start":{"line":42,"column":55},"end":{"line":42,"column":84}}}))
-    + "\" data-route=\"reports/day/tasks\" title=\"Go to Reports\">\r\n                            <span class=\"navigation__icon icon icon-statistics\"></span>\r\n                        </button>\r\n                    </li>\r\n                    <li class=\"navigation__item\">\r\n                        <button class=\"navigation__btn "
+    + "\" data-route=\"reports/day/tasks\" title=\"Go to Reports\">\n                            <span class=\"navigation__icon icon icon-statistics\"></span>\n                        </button>\n                    </li>\n                    <li class=\"navigation__item\">\n                        <button class=\"navigation__btn "
     + alias2(__default(__webpack_require__(115)).call(alias1,"settings",{"name":"checkActivePage","hash":{},"data":data,"loc":{"start":{"line":47,"column":55},"end":{"line":47,"column":85}}}))
-    + "\"\r\n                            data-route=\"settings/pomodoros\" title=\"Go to Settings\">\r\n                            <span class=\"navigation__icon icon  icon-settings\"></span>\r\n                        </button>\r\n                    </li>\r\n                </ul>\r\n            </nav>\r\n\r\n        </div>\r\n\r\n    </div>\r\n</header>";
+    + "\"\n                            data-route=\"settings/pomodoros\" title=\"Go to Settings\">\n                            <span class=\"navigation__icon icon  icon-settings\"></span>\n                        </button>\n                    </li>\n                </ul>\n            </nav>\n\n        </div>\n\n    </div>\n</header>";
 },"useData":true});
 
 /***/ }),
@@ -60621,7 +60623,7 @@ __webpack_require__.r(__webpack_exports__);
 var Handlebars = __webpack_require__(65);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
-    return "        <ul class=\"tab__item tab__item--left tab--hidden\">\r\n            <li class=\"tab__btn tab__btn-select-daily-list\">Select all</li>\r\n            <li class=\"tab__btn tab__btn-disselect-daily-list\">Deselect all</li>\r\n        </ul>\r\n";
+    return "        <ul class=\"tab__item tab__item--left tab--hidden\">\n            <li class=\"tab__btn tab__btn-select-daily-list\">Select all</li>\n            <li class=\"tab__btn tab__btn-disselect-daily-list\">Deselect all</li>\n        </ul>\n";
 },"3":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.hooks.helperMissing, alias3="function", alias4=container.escapeExpression, lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
@@ -60640,7 +60642,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + ((stack1 = ((helper = (helper = lookupProperty(helpers,"dataTab") || (depth0 != null ? lookupProperty(depth0,"dataTab") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"dataTab","hash":{},"data":data,"loc":{"start":{"line":11,"column":95},"end":{"line":11,"column":108}}}) : helper))) != null ? stack1 : "")
     + ">"
     + alias4(((helper = (helper = lookupProperty(helpers,"data") || (depth0 != null ? lookupProperty(depth0,"data") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"data","hash":{},"data":data,"loc":{"start":{"line":11,"column":109},"end":{"line":11,"column":117}}}) : helper)))
-    + "</li>\r\n";
+    + "</li>\n";
 },"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.hooks.helperMissing, alias3="function", alias4=container.escapeExpression, lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
@@ -60651,13 +60653,13 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 
   return "<div class=\"tab "
     + alias4(((helper = (helper = lookupProperty(helpers,"typeTabs") || (depth0 != null ? lookupProperty(depth0,"typeTabs") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"typeTabs","hash":{},"data":data,"loc":{"start":{"line":1,"column":16},"end":{"line":1,"column":28}}}) : helper)))
-    + "\">\r\n    <div class=\"tab__container\">\r\n"
+    + "\">\n    <div class=\"tab__container\">\n"
     + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"leftTabs") : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":3,"column":8},"end":{"line":8,"column":15}}})) != null ? stack1 : "")
     + "        <ul class=\"tab__item "
     + alias4(((helper = (helper = lookupProperty(helpers,"tabPosition") || (depth0 != null ? lookupProperty(depth0,"tabPosition") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"tabPosition","hash":{},"data":data,"loc":{"start":{"line":9,"column":29},"end":{"line":9,"column":44}}}) : helper)))
-    + "\">\r\n"
+    + "\">\n"
     + ((stack1 = lookupProperty(helpers,"each").call(alias1,(depth0 != null ? lookupProperty(depth0,"tabData") : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":10,"column":12},"end":{"line":12,"column":21}}})) != null ? stack1 : "")
-    + "        </ul>\r\n    </div>\r\n</div>";
+    + "        </ul>\n    </div>\n</div>";
 },"useData":true});
 
 /***/ }),
@@ -60713,9 +60715,9 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[8,"
     var stack1;
 
   return ((stack1 = container.invokePartial(__webpack_require__(113),depth0,{"name":"header","data":data,"helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
-    + "<main class=\"content settings-page\">\r\n\r\n    <section class=\"settings\">\r\n        <div class=\"wrapper\">\r\n"
+    + "<main class=\"content settings-page\">\n\n    <section class=\"settings\">\n        <div class=\"wrapper\">\n"
     + ((stack1 = container.invokePartial(__webpack_require__(116),depth0,{"name":"tab","data":data,"indent":"            ","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
-    + "            <div class=\"settings__container\">\r\n                <h2 class=\"settings__title\">Categories list overview</h2>\r\n                <ul class=\"settings__options setting-list\">\r\n                    <li class=\"setting-list__item setting-list__item--work\">\r\n                        Work\r\n                    </li>\r\n                    <li class=\"setting-list__item setting-list__item--education\">\r\n                        Education\r\n                    </li>\r\n                    <li class=\"setting-list__item setting-list__item--other\">\r\n                        Other\r\n                    </li>\r\n                    <li class=\"setting-list__item setting-list__item--sport\">\r\n                        Sport\r\n                    </li>\r\n                    <li class=\"setting-list__item setting-list__item--hobby\">\r\n                        Hobby\r\n                    </li>\r\n                </ul>\r\n\r\n                <div class=\"settings__buttons setting-list__btn service-btn service-btn--single\">\r\n                    <button class=\"service-btn__btn service-btn__btn--blue settings__buttons-skip\">Go to Tasks</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </section>\r\n\r\n</main>";
+    + "            <div class=\"settings__container\">\n                <h2 class=\"settings__title\">Categories list overview</h2>\n                <ul class=\"settings__options setting-list\">\n                    <li class=\"setting-list__item setting-list__item--work\">\n                        Work\n                    </li>\n                    <li class=\"setting-list__item setting-list__item--education\">\n                        Education\n                    </li>\n                    <li class=\"setting-list__item setting-list__item--other\">\n                        Other\n                    </li>\n                    <li class=\"setting-list__item setting-list__item--sport\">\n                        Sport\n                    </li>\n                    <li class=\"setting-list__item setting-list__item--hobby\">\n                        Hobby\n                    </li>\n                </ul>\n\n                <div class=\"settings__buttons setting-list__btn service-btn service-btn--single\">\n                    <button class=\"service-btn__btn service-btn__btn--blue settings__buttons-skip\">Go to Tasks</button>\n                </div>\n            </div>\n        </div>\n    </section>\n\n</main>";
 },"usePartial":true,"useData":true});
 
 /***/ }),
@@ -60949,18 +60951,7 @@ var TasksListModel = /*#__PURE__*/function () {
                 return this.settingsData.getTasksData(userId);
 
               case 3:
-                _context.t0 = _context.sent;
-
-                if (_context.t0) {
-                  _context.next = 6;
-                  break;
-                }
-
-                _context.t0 = {};
-
-              case 6:
-                data = _context.t0;
-                console.log(data);
+                data = _context.sent;
                 data = Object.keys(data).map(function (key) {
                   return data[key];
                 });
@@ -60975,7 +60966,7 @@ var TasksListModel = /*#__PURE__*/function () {
                   this.renderAddFirstTaskPageEvent.notify();
                 }
 
-              case 10:
+              case 6:
               case "end":
                 return _context.stop();
             }
@@ -61187,7 +61178,6 @@ var TasksListModel = /*#__PURE__*/function () {
       }
 
       if (this.dailyTasksActive.length === 0 && this.globalTasksActive.length === 0 && this.dailyTasksCompleted.length === 0) {
-        console.log(123);
         this.renderAddFirstTaskPageEvent.notify();
         return false;
       }
@@ -61583,13 +61573,10 @@ var TasksListView = /*#__PURE__*/function () {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                console.log(data);
-
                 if (data.result === true) {
-                  _helpers_eventBus__WEBPACK_IMPORTED_MODULE_6__["eventBus"].post('close-modal');
-
                   _this.renderFirstPage();
 
+                  _helpers_eventBus__WEBPACK_IMPORTED_MODULE_6__["eventBus"].post('close-modal');
                   _helpers_settingsData__WEBPACK_IMPORTED_MODULE_15__["settingsData"].setDataToStorage('userId', data.userData.user.uid);
                   console.log(data.userData);
                   $(document).notification('clean');
@@ -61607,7 +61594,7 @@ var TasksListView = /*#__PURE__*/function () {
                   });
                 }
 
-              case 2:
+              case 1:
               case "end":
                 return _context3.stop();
             }
@@ -62197,27 +62184,27 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[8,"
     + alias4(__default(__webpack_require__(127)).call(alias1,(depth0 != null ? lookupProperty(depth0,"status") : depth0),{"name":"completedTask","hash":{},"data":data,"loc":{"start":{"line":1,"column":38},"end":{"line":1,"column":62}}}))
     + "\" id=\""
     + alias4(((helper = (helper = lookupProperty(helpers,"id") || (depth0 != null ? lookupProperty(depth0,"id") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data,"loc":{"start":{"line":1,"column":68},"end":{"line":1,"column":74}}}) : helper)))
-    + "\">\r\n\r\n    <div class=\"task__info-wrapper icon\">\r\n        <div class=\"task__category task__category--"
+    + "\">\n\n    <div class=\"task__info-wrapper icon\">\n        <div class=\"task__category task__category--"
     + alias4(((helper = (helper = lookupProperty(helpers,"categoryId") || (depth0 != null ? lookupProperty(depth0,"categoryId") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"categoryId","hash":{},"data":data,"loc":{"start":{"line":4,"column":51},"end":{"line":4,"column":65}}}) : helper)))
-    + "\"></div>\r\n        <div class=\"task__date\">\r\n            <span class=\"task__date-number\">"
+    + "\"></div>\n        <div class=\"task__date\">\n            <span class=\"task__date-number\">"
     + alias4(alias5(((stack1 = (depth0 != null ? lookupProperty(depth0,"deadlineDate") : depth0)) != null ? lookupProperty(stack1,"day") : stack1), depth0))
-    + "</span>\r\n            <span class=\"task__date-text\">"
+    + "</span>\n            <span class=\"task__date-text\">"
     + alias4(alias5(((stack1 = (depth0 != null ? lookupProperty(depth0,"deadlineDate") : depth0)) != null ? lookupProperty(stack1,"month") : stack1), depth0))
-    + "</span>\r\n        </div>\r\n    </div>\r\n    <div class=\"task__info\">\r\n        <div class=\"task__title-wrapp\">\r\n            <h2 class=\"task__title task__title--"
+    + "</span>\n        </div>\n    </div>\n    <div class=\"task__info\">\n        <div class=\"task__title-wrapp\">\n            <h2 class=\"task__title task__title--"
     + alias4(((helper = (helper = lookupProperty(helpers,"priority") || (depth0 != null ? lookupProperty(depth0,"priority") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"priority","hash":{},"data":data,"loc":{"start":{"line":12,"column":48},"end":{"line":12,"column":60}}}) : helper)))
     + "\">"
     + alias4(((helper = (helper = lookupProperty(helpers,"title") || (depth0 != null ? lookupProperty(depth0,"title") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"title","hash":{},"data":data,"loc":{"start":{"line":12,"column":62},"end":{"line":12,"column":71}}}) : helper)))
-    + "</h2>\r\n        </div>\r\n        <div class=\"task__text\">\r\n            <p>"
+    + "</h2>\n        </div>\n        <div class=\"task__text\">\n            <p>"
     + alias4(((helper = (helper = lookupProperty(helpers,"description") || (depth0 != null ? lookupProperty(depth0,"description") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"description","hash":{},"data":data,"loc":{"start":{"line":15,"column":15},"end":{"line":15,"column":30}}}) : helper)))
-    + "</p>\r\n        </div>\r\n    </div>\r\n    <div class=\"task__btn-wrapp\">\r\n        <button class=\"task__btn icon icon-arrows-up "
+    + "</p>\n        </div>\n    </div>\n    <div class=\"task__btn-wrapp\">\n        <button class=\"task__btn icon icon-arrows-up "
     + alias4(__default(__webpack_require__(128)).call(alias1,(depth0 != null ? lookupProperty(depth0,"status") : depth0),{"name":"checkButtonHidden","hash":{},"data":data,"loc":{"start":{"line":19,"column":53},"end":{"line":19,"column":81}}}))
-    + " task__btn-up-task\" title=\"Drag to Active\"</button>\r\n        <button class=\"task__btn icon  icon-edit task__btn-edit\" title=\"Edit Task\"></button>\r\n        <button class=\"task__btn icon  icon-trash task__btn-delete\" title=\"Delete Task\"></button>\r\n    </div>\r\n    <div class=\"task__estimation task__estimation--"
+    + " task__btn-up-task\" title=\"Drag to Active\"</button>\n        <button class=\"task__btn icon  icon-edit task__btn-edit\" title=\"Edit Task\"></button>\n        <button class=\"task__btn icon  icon-trash task__btn-delete\" title=\"Delete Task\"></button>\n    </div>\n    <div class=\"task__estimation task__estimation--"
     + alias4(((helper = (helper = lookupProperty(helpers,"priority") || (depth0 != null ? lookupProperty(depth0,"priority") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"priority","hash":{},"data":data,"loc":{"start":{"line":23,"column":51},"end":{"line":23,"column":63}}}) : helper)))
-    + "\">\r\n        <button class=\"task__estimation-btn icon icon-tomato\" id=\""
+    + "\">\n        <button class=\"task__estimation-btn icon icon-tomato\" id=\""
     + alias4(((helper = (helper = lookupProperty(helpers,"id") || (depth0 != null ? lookupProperty(depth0,"id") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data,"loc":{"start":{"line":24,"column":66},"end":{"line":24,"column":72}}}) : helper)))
-    + "\" title=\"Go to Timer\">\r\n            <span class=\"task__estimation-text\">"
+    + "\" title=\"Go to Timer\">\n            <span class=\"task__estimation-text\">"
     + alias4(((helper = (helper = lookupProperty(helpers,"estimation") || (depth0 != null ? lookupProperty(depth0,"estimation") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"estimation","hash":{},"data":data,"loc":{"start":{"line":25,"column":48},"end":{"line":25,"column":62}}}) : helper)))
-    + "</span>\r\n        </button>\r\n    </div>\r\n</div>";
+    + "</span>\n        </button>\n    </div>\n</div>";
 },"useData":true});
 
 /***/ }),
@@ -62259,7 +62246,7 @@ __webpack_require__.r(__webpack_exports__);
 var Handlebars = __webpack_require__(65);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<section class=\"message\">\r\n    <div class=\"message__container\">\r\n        <img src=\"./images/tomato-addv02.svg\" alt=\"Logo\" class=\"message__img\">\r\n        <div class=\"message__text message__text--bottom-margin\">\r\n            <p>Add your first task\r\n            </p>\r\n        </div>\r\n    </div>\r\n</section>";
+    return "<section class=\"message\">\n    <div class=\"message__container\">\n        <img src=\"../../images/tomato-addv02.svg\" alt=\"Logo\" class=\"message__img\">\n        <div class=\"message__text message__text--bottom-margin\">\n            <p>Add your first task\n            </p>\n        </div>\n    </div>\n</section>";
 },"useData":true});
 
 /***/ }),
@@ -62272,7 +62259,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[8,"
     var stack1;
 
   return ((stack1 = container.invokePartial(__webpack_require__(113),depth0,{"name":"header","data":data,"helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
-    + "    <main class=\"content task-list-page\">\r\n        <section class=\"first-message message\">\r\n            <div class=\"wrapper\">\r\n                <div class=\"message__container\">\r\n                    <img src=\"./images/tomato_settings.svg\" alt=\"Logo\" class=\"message__img\">\r\n                    <div class=\"message__text message__text--bottom-margin\">\r\n                        <p>As you visited site for a first time you can\r\n                            check and customize your default\r\n                            application settings\r\n                        </p>\r\n                    </div>\r\n                    <div class=\"message__buttons service-btn\">\r\n                        <button class=\"service-btn__btn service-btn__btn--blue message__buttons-skip\">Skip</button>\r\n                        <button class=\"service-btn__btn service-btn__btn--green message__buttons-settings\">Go to settings</button>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </section>\r\n\r\n\r\n    </main>\r\n";
+    + "    <main class=\"content task-list-page\">\n        <section class=\"first-message message\">\n            <div class=\"wrapper\">\n                <div class=\"message__container\">\n                    <img src=\"../../images/tomato_settings.svg\" alt=\"Logo\" class=\"message__img\">\n                    <div class=\"message__text message__text--bottom-margin\">\n                        <p>As you visited site for a first time you can\n                            check and customize your default\n                            application settings\n                        </p>\n                    </div>\n                    <div class=\"message__buttons service-btn\">\n                        <button class=\"service-btn__btn service-btn__btn--blue message__buttons-skip\">Skip</button>\n                        <button class=\"service-btn__btn service-btn__btn--green message__buttons-settings\">Go to settings</button>\n                    </div>\n                </div>\n            </div>\n        </section>\n\n\n    </main>\n";
 },"usePartial":true,"useData":true});
 
 /***/ }),
@@ -62282,7 +62269,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[8,"
 var Handlebars = __webpack_require__(65);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<section class=\"message\">\r\n  <div class=\"message__container\">\r\n    <img src=\"./images/tomato_settings.svg\" alt=\"Logo\" class=\"message__img\" />\r\n    <div class=\"message__text message__text--bottom-margin\">\r\n      <p>You don’t have any tasks left. Add new tasks to stay productive.\r\n      </p>\r\n    </div>\r\n  </div>\r\n</section>";
+    return "<section class=\"message\">\n  <div class=\"message__container\">\n    <img src=\"./../images/tomato_settings.svg\" alt=\"Logo\" class=\"message__img\" />\n    <div class=\"message__text message__text--bottom-margin\">\n      <p>You don’t have any tasks left. Add new tasks to stay productive.\n      </p>\n    </div>\n  </div>\n</section>";
 },"useData":true});
 
 /***/ }),
@@ -62292,7 +62279,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[8,"
 var Handlebars = __webpack_require__(65);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<section class=\"message message--added-message\">\r\n    <div class=\"message__container\">\r\n        <div class=\"message__text\">\r\n            <p>Task added,</p>\r\n            <p>Go it to the top 5 in daily task list</p>\r\n            <span class=\"message__icon icon icon-arrow-top\"></span>\r\n        </div>\r\n    </div>\r\n</section>";
+    return "<section class=\"message message--added-message\">\n    <div class=\"message__container\">\n        <div class=\"message__text\">\n            <p>Task added,</p>\n            <p>Go it to the top 5 in daily task list</p>\n            <span class=\"message__icon icon icon-arrow-top\"></span>\n        </div>\n    </div>\n</section>";
 },"useData":true});
 
 /***/ }),
@@ -62302,7 +62289,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[8,"
 var Handlebars = __webpack_require__(65);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<section class=\"message message--exelent\">\r\n    <div class=\"message__container\">\r\n        <div class=\"message__text message__text--bottom-margin\">\r\n            <p>Excellent,\r\n                all daily tasks done :)\r\n            </p>\r\n        </div>\r\n    </div>\r\n</section>";
+    return "<section class=\"message message--exelent\">\n    <div class=\"message__container\">\n        <div class=\"message__text message__text--bottom-margin\">\n            <p>Excellent,\n                all daily tasks done :)\n            </p>\n        </div>\n    </div>\n</section>";
 },"useData":true});
 
 /***/ }),
@@ -62315,9 +62302,9 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[8,"
     var stack1;
 
   return ((stack1 = container.invokePartial(__webpack_require__(113),depth0,{"name":"header","data":data,"helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
-    + "<main class=\"content task-list-page\">\r\n\r\n    <section class=\"daily-content\">\r\n        <div class=\"wrapper\">\r\n            <div class=\"daily-content__container\">\r\n\r\n"
+    + "<main class=\"content task-list-page\">\n\n    <section class=\"daily-content\">\n        <div class=\"wrapper\">\n            <div class=\"daily-content__container\">\n\n"
     + ((stack1 = container.invokePartial(__webpack_require__(116),depth0,{"name":"tab","data":data,"indent":"                ","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
-    + "                <div class=\"daily-content__content\">\r\n\r\n                </div>\r\n                <div class=\"daily-content__content--done d-none\">\r\n\r\n                </div>\r\n\r\n            </div>\r\n        </div>\r\n    </section>\r\n    <section class=\"global-list\">\r\n        <div class=\"wrapper\">\r\n            <div class=\"global-list__container\">\r\n                <div class=\"global-list__tabs tab\">\r\n                    <div class=\"tab__container\">\r\n                        <div>\r\n                        <div class=\"tab__item tab__item--global-btn\">\r\n                            <button class=\"tab__btn tab__btn--global\" title=\"Go to Global list\">\r\n                                Global list\r\n                                <span class=\"tab__arrow icon icon-arrow-right\"></span>\r\n                            </button>\r\n                        </div>\r\n                        <ul class=\"tab__item tab__item--left tab--hidden tab__item\">\r\n                            <li class=\"tab__btn tab__btn-select-global-list\">Select all</li>\r\n                            <li class=\"tab__btn tab__btn-disselect-global-list\">Deselect all</li>\r\n                        </ul>\r\n                        </div>\r\n                        <ul class=\"tab__item item--right tab__item--global\">\r\n                            <li class=\"tab__btn\">All</li>\r\n                            <li class=\"tab__btn\">Urgent</li>\r\n                            <li class=\"tab__btn\">High</li>\r\n                            <li class=\"tab__btn\">Middle</li>\r\n                            <li class=\"tab__btn\">Low</li>\r\n                        </ul>\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"global-list__content\">\r\n\r\n                </div>\r\n\r\n                <div class=\"global-list__content--done d-none\">\r\n\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </section>\r\n\r\n\r\n</main>";
+    + "                <div class=\"daily-content__content\">\n\n                </div>\n                <div class=\"daily-content__content--done d-none\">\n\n                </div>\n\n            </div>\n        </div>\n    </section>\n    <section class=\"global-list\">\n        <div class=\"wrapper\">\n            <div class=\"global-list__container\">\n                <div class=\"global-list__tabs tab\">\n                    <div class=\"tab__container\">\n                        <div>\n                        <div class=\"tab__item tab__item--global-btn\">\n                            <button class=\"tab__btn tab__btn--global\" title=\"Go to Global list\">\n                                Global list\n                                <span class=\"tab__arrow icon icon-arrow-right\"></span>\n                            </button>\n                        </div>\n                        <ul class=\"tab__item tab__item--left tab--hidden tab__item\">\n                            <li class=\"tab__btn tab__btn-select-global-list\">Select all</li>\n                            <li class=\"tab__btn tab__btn-disselect-global-list\">Deselect all</li>\n                        </ul>\n                        </div>\n                        <ul class=\"tab__item item--right tab__item--global\">\n                            <li class=\"tab__btn\">All</li>\n                            <li class=\"tab__btn\">Urgent</li>\n                            <li class=\"tab__btn\">High</li>\n                            <li class=\"tab__btn\">Middle</li>\n                            <li class=\"tab__btn\">Low</li>\n                        </ul>\n                    </div>\n                </div>\n\n                <div class=\"global-list__content\">\n\n                </div>\n\n                <div class=\"global-list__content--done d-none\">\n\n                </div>\n            </div>\n        </div>\n    </section>\n\n\n</main>";
 },"usePartial":true,"useData":true});
 
 /***/ }),
@@ -63041,11 +63028,11 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[8,"
     };
 
   return ((stack1 = container.invokePartial(__webpack_require__(113),depth0,{"name":"header","data":data,"helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
-    + "<main class=\"content reports-page\">\r\n\r\n       <section class=\"reports\">\r\n        <div class=\"wrapper\">\r\n            <div class=\"reports__container\">\r\n"
+    + "<main class=\"content reports-page\">\n\n       <section class=\"reports\">\n        <div class=\"wrapper\">\n            <div class=\"reports__container\">\n"
     + ((stack1 = container.invokePartial(__webpack_require__(116),(depth0 != null ? lookupProperty(depth0,"topTabs") : depth0),{"name":"tab","data":data,"indent":"                ","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
-    + "                <div class=\"reports__content\">\r\n                    <a href=\"/task-list\" class=\"reports__link-left icon icon-arrow-left\" title=\"Go to Global List\"></a>   \r\n                    <div class=\"reports__graph\" id=\"reportsGraph\">\r\n                        \r\n                    </div>\r\n                </div>\r\n"
+    + "                <div class=\"reports__content\">\n                    <a href=\"/task-list\" class=\"reports__link-left icon icon-arrow-left\" title=\"Go to Global List\"></a>   \n                    <div class=\"reports__graph\" id=\"reportsGraph\">\n                        \n                    </div>\n                </div>\n"
     + ((stack1 = container.invokePartial(__webpack_require__(116),(depth0 != null ? lookupProperty(depth0,"bottomTabs") : depth0),{"name":"tab","data":data,"indent":"                ","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
-    + "            </div>\r\n        </div>\r\n       </section>\r\n\r\n\r\n    </main>";
+    + "            </div>\n        </div>\n       </section>\n\n\n    </main>";
 },"usePartial":true,"useData":true});
 
 /***/ }),
@@ -63062,19 +63049,19 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[8,"
         return undefined
     };
 
-  return "<table class=\"reports-table\">\r\n    <tr>\r\n        <th>Date</th>\r\n        <th>Urgent</th>\r\n        <th>High</th>\r\n        <th>Medium</th>\r\n        <th>Low</th>\r\n        <th>Failed</th>\r\n    </tr>\r\n    <tr>\r\n        <td>"
+  return "<table class=\"reports-table\">\n    <tr>\n        <th>Date</th>\n        <th>Urgent</th>\n        <th>High</th>\n        <th>Medium</th>\n        <th>Low</th>\n        <th>Failed</th>\n    </tr>\n    <tr>\n        <td>"
     + alias4(((helper = (helper = lookupProperty(helpers,"date") || (depth0 != null ? lookupProperty(depth0,"date") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"date","hash":{},"data":data,"loc":{"start":{"line":11,"column":12},"end":{"line":11,"column":20}}}) : helper)))
-    + "</td>\r\n        <td>"
+    + "</td>\n        <td>"
     + alias4(((helper = (helper = lookupProperty(helpers,"urgent") || (depth0 != null ? lookupProperty(depth0,"urgent") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"urgent","hash":{},"data":data,"loc":{"start":{"line":12,"column":12},"end":{"line":12,"column":22}}}) : helper)))
-    + "</td>\r\n        <td>"
+    + "</td>\n        <td>"
     + alias4(((helper = (helper = lookupProperty(helpers,"high") || (depth0 != null ? lookupProperty(depth0,"high") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"high","hash":{},"data":data,"loc":{"start":{"line":13,"column":12},"end":{"line":13,"column":20}}}) : helper)))
-    + "</td>\r\n        <td>"
+    + "</td>\n        <td>"
     + alias4(((helper = (helper = lookupProperty(helpers,"middle") || (depth0 != null ? lookupProperty(depth0,"middle") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"middle","hash":{},"data":data,"loc":{"start":{"line":14,"column":12},"end":{"line":14,"column":22}}}) : helper)))
-    + "</td>\r\n        <td>"
+    + "</td>\n        <td>"
     + alias4(((helper = (helper = lookupProperty(helpers,"low") || (depth0 != null ? lookupProperty(depth0,"low") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"low","hash":{},"data":data,"loc":{"start":{"line":15,"column":12},"end":{"line":15,"column":19}}}) : helper)))
-    + "</td>\r\n        <td>"
+    + "</td>\n        <td>"
     + alias4(((helper = (helper = lookupProperty(helpers,"failed") || (depth0 != null ? lookupProperty(depth0,"failed") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"failed","hash":{},"data":data,"loc":{"start":{"line":16,"column":12},"end":{"line":16,"column":22}}}) : helper)))
-    + "</td>\r\n    </tr>\r\n</table>";
+    + "</td>\n    </tr>\n</table>";
 },"useData":true});
 
 /***/ }),
@@ -63661,13 +63648,13 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[8,"
     };
 
   return ((stack1 = container.invokePartial(__webpack_require__(113),depth0,{"name":"header","data":data,"indent":" ","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
-    + " <main class=\"content timer-page\">\r\n\r\n        <section class=\"timer-section\">\r\n            <div class=\"wrapper\">\r\n                <div class=\"timer-section__container\">\r\n                    <div class=\"timer-section__info\">\r\n                        <h1 class=\"timer-section__title\">"
+    + " <main class=\"content timer-page\">\n\n        <section class=\"timer-section\">\n            <div class=\"wrapper\">\n                <div class=\"timer-section__container\">\n                    <div class=\"timer-section__info\">\n                        <h1 class=\"timer-section__title\">"
     + alias4(((helper = (helper = lookupProperty(helpers,"title") || (depth0 != null ? lookupProperty(depth0,"title") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"title","hash":{},"data":data,"loc":{"start":{"line":8,"column":57},"end":{"line":8,"column":66}}}) : helper)))
-    + "</h1>\r\n                        <p class=\"timer-section_subtitle\">"
+    + "</h1>\n                        <p class=\"timer-section_subtitle\">"
     + alias4(((helper = (helper = lookupProperty(helpers,"description") || (depth0 != null ? lookupProperty(depth0,"description") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"description","hash":{},"data":data,"loc":{"start":{"line":9,"column":58},"end":{"line":9,"column":73}}}) : helper)))
-    + "</p>\r\n                        <div class=\"estimation timer-section__estimation\">\r\n                            <div class=\"estimation__container\">\r\n                                "
+    + "</p>\n                        <div class=\"estimation timer-section__estimation\">\n                            <div class=\"estimation__container\">\n                                "
     + ((stack1 = __default(__webpack_require__(150)).call(alias1,(depth0 != null ? lookupProperty(depth0,"estimation") : depth0),{"name":"createPomodoros","hash":{},"data":data,"loc":{"start":{"line":12,"column":32},"end":{"line":12,"column":64}}})) != null ? stack1 : "")
-    + "\r\n                                <button class=\"estimation__btn icon d-none icon-add\"></button>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"timer-section__clock\">\r\n                        <a href=\"/task-list\" class=\"timer-section__link timer-section__link--left icon icon-arrow-left go-to-task-list\" title=\"Go to Global List\"></a>\r\n                        <div class=\"timer timer-section__timer\" id=\"timer\">    \r\n\r\n                        </div>\r\n                        <a href=\"/reports/day/tasks\" class=\"timer-section__link timer-section__link--right icon icon-right go-to-reports-page d-none\" title=\"Go to Report\"></a>\r\n                    </div>\r\n                    <div class=\"settings__buttons service-btn timer-section__btn\">\r\n                        <button class=\"service-btn__btn service-btn__btn--green service-btn__btn-start-task\">Start</button>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </section>\r\n\r\n\r\n    </main>";
+    + "\n                                <button class=\"estimation__btn icon d-none icon-add\"></button>\n                            </div>\n                        </div>\n                    </div>\n                    <div class=\"timer-section__clock\">\n                        <a href=\"/task-list\" class=\"timer-section__link timer-section__link--left icon icon-arrow-left go-to-task-list\" title=\"Go to Global List\"></a>\n                        <div class=\"timer timer-section__timer\" id=\"timer\">    \n\n                        </div>\n                        <a href=\"/reports/day/tasks\" class=\"timer-section__link timer-section__link--right icon icon-right go-to-reports-page d-none\" title=\"Go to Report\"></a>\n                    </div>\n                    <div class=\"settings__buttons service-btn timer-section__btn\">\n                        <button class=\"service-btn__btn service-btn__btn--green service-btn__btn-start-task\">Start</button>\n                    </div>\n                </div>\n            </div>\n        </section>\n\n\n    </main>";
 },"usePartial":true,"useData":true});
 
 /***/ }),
@@ -63708,9 +63695,9 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + alias4(((helper = (helper = lookupProperty(helpers,"secondColor") || (depth0 != null ? lookupProperty(depth0,"secondColor") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"secondColor","hash":{},"data":data,"loc":{"start":{"line":6,"column":50},"end":{"line":6,"column":65}}}) : helper)))
     + " "
     + alias4(((helper = (helper = lookupProperty(helpers,"secondServiceClass") || (depth0 != null ? lookupProperty(depth0,"secondServiceClass") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"secondServiceClass","hash":{},"data":data,"loc":{"start":{"line":6,"column":66},"end":{"line":6,"column":88}}}) : helper)))
-    + "\">\r\n    "
+    + "\">\n    "
     + alias4(((helper = (helper = lookupProperty(helpers,"secondData") || (depth0 != null ? lookupProperty(depth0,"secondData") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"secondData","hash":{},"data":data,"loc":{"start":{"line":7,"column":4},"end":{"line":7,"column":18}}}) : helper)))
-    + "\r\n</button>\r\n";
+    + "\n</button>\n";
 },"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.hooks.helperMissing, alias3="function", alias4=container.escapeExpression, lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
@@ -63723,9 +63710,9 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + alias4(((helper = (helper = lookupProperty(helpers,"firstColor") || (depth0 != null ? lookupProperty(depth0,"firstColor") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"firstColor","hash":{},"data":data,"loc":{"start":{"line":1,"column":50},"end":{"line":1,"column":64}}}) : helper)))
     + " "
     + alias4(((helper = (helper = lookupProperty(helpers,"firstServiceClass") || (depth0 != null ? lookupProperty(depth0,"firstServiceClass") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"firstServiceClass","hash":{},"data":data,"loc":{"start":{"line":1,"column":65},"end":{"line":1,"column":86}}}) : helper)))
-    + "\">\r\n    "
+    + "\">\n    "
     + alias4(((helper = (helper = lookupProperty(helpers,"firstData") || (depth0 != null ? lookupProperty(depth0,"firstData") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"firstData","hash":{},"data":data,"loc":{"start":{"line":2,"column":4},"end":{"line":2,"column":17}}}) : helper)))
-    + "\r\n</button>\r\n\r\n"
+    + "\n</button>\n\n"
     + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"secondBtn") : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":5,"column":0},"end":{"line":9,"column":7}}})) != null ? stack1 : "");
 },"useData":true});
 
@@ -64048,11 +64035,11 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 
   return "                <input type=\"text\" id=\"deadline\" name=\"deadline\" value=\""
     + container.escapeExpression(((helper = (helper = lookupProperty(helpers,"deadline") || (depth0 != null ? lookupProperty(depth0,"deadline") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"deadline","hash":{},"data":data,"loc":{"start":{"line":60,"column":72},"end":{"line":60,"column":84}}}) : helper)))
-    + "\"\r\n                    class=\"form__item-input\" readonly required>\r\n";
+    + "\"\n                    class=\"form__item-input\" readonly required>\n";
 },"5":function(container,depth0,helpers,partials,data) {
     return "                <input type=\"text\" id=\"deadline\" name=\"deadline\" placeholder=\""
     + container.escapeExpression(__default(__webpack_require__(161)).call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"renderDateTask","hash":{},"data":data,"loc":{"start":{"line":63,"column":78},"end":{"line":63,"column":96}}}))
-    + "\"\r\n                    class=\"form__item-input\" readonly required>\r\n";
+    + "\"\n                    class=\"form__item-input\" readonly required>\n";
 },"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.hooks.helperMissing, alias3="function", alias4=container.escapeExpression, lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
@@ -64061,47 +64048,47 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
         return undefined
     };
 
-  return "<section class=\"modal\">\r\n    <div class=\"modal__overlay\"></div>\r\n    <div class=\"modal__container\">\r\n        <div class=\"modal__top\">\r\n            <button class=\"modal__btn icon icon-close modal__btn-close\">\r\n            </button>\r\n            <button class=\"modal__btn icon icon-check modal__btn-add\">\r\n            </button>\r\n        </div>\r\n        <h2 class=\"modal__title\">Add task</h2>\r\n        <form action=\"\" class=\"modal__form form\">\r\n            <div class=\"form__item\">\r\n                <label for=\"title\" class=\"form__item-title\">Title</label>\r\n                <input type=\"text\" class=\"form__item-input\" id=\"title\" name=\"title\" placeholder=\"Add title here\"\r\n                    value=\""
+  return "<section class=\"modal\">\n    <div class=\"modal__overlay\"></div>\n    <div class=\"modal__container\">\n        <div class=\"modal__top\">\n            <button class=\"modal__btn icon icon-close modal__btn-close\">\n            </button>\n            <button class=\"modal__btn icon icon-check modal__btn-add\">\n            </button>\n        </div>\n        <h2 class=\"modal__title\">Add task</h2>\n        <form action=\"\" class=\"modal__form form\">\n            <div class=\"form__item\">\n                <label for=\"title\" class=\"form__item-title\">Title</label>\n                <input type=\"text\" class=\"form__item-input\" id=\"title\" name=\"title\" placeholder=\"Add title here\"\n                    value=\""
     + alias4(((helper = (helper = lookupProperty(helpers,"title") || (depth0 != null ? lookupProperty(depth0,"title") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"title","hash":{},"data":data,"loc":{"start":{"line":15,"column":27},"end":{"line":15,"column":36}}}) : helper)))
-    + "\">\r\n            </div>\r\n            <div class=\"form__item\">\r\n                <label for=\"description\" class=\"form__item-title\">Description</label>\r\n                <input type=\"text\" class=\"form__item-input\" id=\"description\" name=\"description\"\r\n                    placeholder=\"Add description here\" value=\""
+    + "\">\n            </div>\n            <div class=\"form__item\">\n                <label for=\"description\" class=\"form__item-title\">Description</label>\n                <input type=\"text\" class=\"form__item-input\" id=\"description\" name=\"description\"\n                    placeholder=\"Add description here\" value=\""
     + alias4(((helper = (helper = lookupProperty(helpers,"description") || (depth0 != null ? lookupProperty(depth0,"description") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"description","hash":{},"data":data,"loc":{"start":{"line":20,"column":62},"end":{"line":20,"column":77}}}) : helper)))
-    + "\">\r\n            </div>\r\n            <div class=\"form__item\">\r\n                <h4 class=\"form__item-title\">Category</h4>\r\n                <div class=\"form__item-category category-item\">\r\n                    <div class=\"category-item__item\">\r\n                        <input type=\"radio\" value=\"work\" id=\"work\" name=\"category\" class=\"category-item__input\"\r\n                            "
+    + "\">\n            </div>\n            <div class=\"form__item\">\n                <h4 class=\"form__item-title\">Category</h4>\n                <div class=\"form__item-category category-item\">\n                    <div class=\"category-item__item\">\n                        <input type=\"radio\" value=\"work\" id=\"work\" name=\"category\" class=\"category-item__input\"\n                            "
     + alias4(__default(__webpack_require__(162)).call(alias1,(depth0 != null ? lookupProperty(depth0,"categoryId") : depth0),"work",{"name":"isChecked","hash":{},"data":data,"loc":{"start":{"line":27,"column":28},"end":{"line":27,"column":60}}}))
     + " "
     + ((stack1 = lookupProperty(helpers,"unless").call(alias1,(depth0 != null ? lookupProperty(depth0,"categoryId") : depth0),{"name":"unless","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":27,"column":61},"end":{"line":27,"column":102}}})) != null ? stack1 : "")
-    + ">\r\n                        <label for=\"work\" class=\"   category-item__label category-item__label--work\">Work</label>\r\n                    </div>\r\n\r\n                    <div class=\"category-item__item\">\r\n                        <input type=\"radio\" value=\"education\" id=\"education\" name=\"category\"\r\n                            class=\"category-item__input\" "
+    + ">\n                        <label for=\"work\" class=\"   category-item__label category-item__label--work\">Work</label>\n                    </div>\n\n                    <div class=\"category-item__item\">\n                        <input type=\"radio\" value=\"education\" id=\"education\" name=\"category\"\n                            class=\"category-item__input\" "
     + alias4(__default(__webpack_require__(162)).call(alias1,(depth0 != null ? lookupProperty(depth0,"categoryId") : depth0),"education",{"name":"isChecked","hash":{},"data":data,"loc":{"start":{"line":33,"column":57},"end":{"line":33,"column":94}}}))
-    + ">\r\n                        <label for=\"education\"\r\n                            class=\"category-item__label category-item__label--education\">Education</label>\r\n                    </div>\r\n\r\n                    <div class=\"category-item__item\">\r\n                        <input type=\"radio\" value=\"hobby\" id=\"hobby\" name=\"category\" class=\"category-item__input\"\r\n                            "
+    + ">\n                        <label for=\"education\"\n                            class=\"category-item__label category-item__label--education\">Education</label>\n                    </div>\n\n                    <div class=\"category-item__item\">\n                        <input type=\"radio\" value=\"hobby\" id=\"hobby\" name=\"category\" class=\"category-item__input\"\n                            "
     + alias4(__default(__webpack_require__(162)).call(alias1,(depth0 != null ? lookupProperty(depth0,"categoryId") : depth0),"hobby",{"name":"isChecked","hash":{},"data":data,"loc":{"start":{"line":40,"column":28},"end":{"line":40,"column":61}}}))
-    + ">\r\n                        <label for=\"hobby\" class=\"category-item__label category-item__label--hobby\">Hobby</label>\r\n                    </div>\r\n\r\n                    <div class=\"category-item__item\">\r\n                        <input type=\"radio\" value=\"sport\" id=\"sport\" name=\"category\" class=\"category-item__input\"\r\n                            "
+    + ">\n                        <label for=\"hobby\" class=\"category-item__label category-item__label--hobby\">Hobby</label>\n                    </div>\n\n                    <div class=\"category-item__item\">\n                        <input type=\"radio\" value=\"sport\" id=\"sport\" name=\"category\" class=\"category-item__input\"\n                            "
     + alias4(__default(__webpack_require__(162)).call(alias1,(depth0 != null ? lookupProperty(depth0,"categoryId") : depth0),"sport",{"name":"isChecked","hash":{},"data":data,"loc":{"start":{"line":46,"column":28},"end":{"line":46,"column":61}}}))
-    + ">\r\n                        <label for=\"sport\" class=\"category-item__label category-item__label--sport\">Sport</label>\r\n                    </div>\r\n\r\n                    <div class=\"category-item__item\">\r\n                        <input type=\"radio\" value=\"other\" id=\"other\" name=\"category\" class=\"category-item__input\"\r\n                            "
+    + ">\n                        <label for=\"sport\" class=\"category-item__label category-item__label--sport\">Sport</label>\n                    </div>\n\n                    <div class=\"category-item__item\">\n                        <input type=\"radio\" value=\"other\" id=\"other\" name=\"category\" class=\"category-item__input\"\n                            "
     + alias4(__default(__webpack_require__(162)).call(alias1,(depth0 != null ? lookupProperty(depth0,"categoryId") : depth0),"other",{"name":"isChecked","hash":{},"data":data,"loc":{"start":{"line":52,"column":28},"end":{"line":52,"column":61}}}))
-    + ">\r\n                        <label for=\"other\" class=\"category-item__label category-item__label--other\">Other</label>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"form__item\">\r\n                <label for=\"deadline\" class=\"form__item-title\">Deadline</label>\r\n"
+    + ">\n                        <label for=\"other\" class=\"category-item__label category-item__label--other\">Other</label>\n                    </div>\n                </div>\n            </div>\n            <div class=\"form__item\">\n                <label for=\"deadline\" class=\"form__item-title\">Deadline</label>\n"
     + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"deadline") : depth0),{"name":"if","hash":{},"fn":container.program(3, data, 0),"inverse":container.program(5, data, 0),"data":data,"loc":{"start":{"line":59,"column":16},"end":{"line":65,"column":23}}})) != null ? stack1 : "")
-    + "\r\n            </div>\r\n\r\n            <div class=\"form__item\">\r\n                <h4 class=\"form__item-title\">Estimation</h4>\r\n                <div class=\"form__item-estimation form-estimation form-estimation--reverse\">\r\n                    <input type=\"radio\" class=\"form-estimation__input\" id=\"tomato-5\" value=\"5\" name=\"estimation\"\r\n                        "
+    + "\n            </div>\n\n            <div class=\"form__item\">\n                <h4 class=\"form__item-title\">Estimation</h4>\n                <div class=\"form__item-estimation form-estimation form-estimation--reverse\">\n                    <input type=\"radio\" class=\"form-estimation__input\" id=\"tomato-5\" value=\"5\" name=\"estimation\"\n                        "
     + alias4(__default(__webpack_require__(162)).call(alias1,(depth0 != null ? lookupProperty(depth0,"estimation") : depth0),"5",{"name":"isChecked","hash":{},"data":data,"loc":{"start":{"line":73,"column":24},"end":{"line":73,"column":53}}}))
-    + ">\r\n                    <label for=\"tomato-5\" class=\"form-estimation__label\"></label>\r\n                    <input type=\"radio\" class=\"form-estimation__input\" id=\"tomato-4\" value=\"4\" name=\"estimation\"\r\n                        "
+    + ">\n                    <label for=\"tomato-5\" class=\"form-estimation__label\"></label>\n                    <input type=\"radio\" class=\"form-estimation__input\" id=\"tomato-4\" value=\"4\" name=\"estimation\"\n                        "
     + alias4(__default(__webpack_require__(162)).call(alias1,(depth0 != null ? lookupProperty(depth0,"estimation") : depth0),"4",{"name":"isChecked","hash":{},"data":data,"loc":{"start":{"line":76,"column":24},"end":{"line":76,"column":53}}}))
-    + ">\r\n                    <label for=\"tomato-4\" class=\"form-estimation__label\"></label>\r\n                    <input type=\"radio\" class=\"form-estimation__input\" id=\"tomato-3\" value=\"3\" name=\"estimation\"\r\n                        "
+    + ">\n                    <label for=\"tomato-4\" class=\"form-estimation__label\"></label>\n                    <input type=\"radio\" class=\"form-estimation__input\" id=\"tomato-3\" value=\"3\" name=\"estimation\"\n                        "
     + alias4(__default(__webpack_require__(162)).call(alias1,(depth0 != null ? lookupProperty(depth0,"estimation") : depth0),"3",{"name":"isChecked","hash":{},"data":data,"loc":{"start":{"line":79,"column":24},"end":{"line":79,"column":53}}}))
-    + ">\r\n                    <label for=\"tomato-3\" class=\"form-estimation__label\"></label>\r\n                    <input type=\"radio\" class=\"form-estimation__input\" id=\"tomato-2\" value=\"2\" name=\"estimation\"\r\n                        "
+    + ">\n                    <label for=\"tomato-3\" class=\"form-estimation__label\"></label>\n                    <input type=\"radio\" class=\"form-estimation__input\" id=\"tomato-2\" value=\"2\" name=\"estimation\"\n                        "
     + alias4(__default(__webpack_require__(162)).call(alias1,(depth0 != null ? lookupProperty(depth0,"estimation") : depth0),"2",{"name":"isChecked","hash":{},"data":data,"loc":{"start":{"line":82,"column":24},"end":{"line":82,"column":53}}}))
-    + ">\r\n                    <label for=\"tomato-2\" class=\"form-estimation__label\"></label>\r\n                    <input type=\"radio\" class=\"form-estimation__input\" id=\"tomato-1\" value=\"1\" name=\"estimation\"\r\n                        "
+    + ">\n                    <label for=\"tomato-2\" class=\"form-estimation__label\"></label>\n                    <input type=\"radio\" class=\"form-estimation__input\" id=\"tomato-1\" value=\"1\" name=\"estimation\"\n                        "
     + alias4(__default(__webpack_require__(162)).call(alias1,(depth0 != null ? lookupProperty(depth0,"estimation") : depth0),"1",{"name":"isChecked","hash":{},"data":data,"loc":{"start":{"line":85,"column":24},"end":{"line":85,"column":53}}}))
     + " "
     + ((stack1 = lookupProperty(helpers,"unless").call(alias1,(depth0 != null ? lookupProperty(depth0,"estimation") : depth0),{"name":"unless","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":85,"column":54},"end":{"line":85,"column":95}}})) != null ? stack1 : "")
-    + ">\r\n                    <label for=\"tomato-1\" class=\"form-estimation__label\"></label>\r\n                </div>\r\n            </div>\r\n            <div class=\"form__item\">\r\n                <h4 class=\"form__item-title\">Priority</h4>\r\n                <div class=\"form__item-category category-item\">\r\n                    <div class=\"category-item__item\">\r\n                        <input type=\"radio\" value=\"urgent\" id=\"urgent\" name=\"priority\" class=\"category-item__input\"\r\n                            "
+    + ">\n                    <label for=\"tomato-1\" class=\"form-estimation__label\"></label>\n                </div>\n            </div>\n            <div class=\"form__item\">\n                <h4 class=\"form__item-title\">Priority</h4>\n                <div class=\"form__item-category category-item\">\n                    <div class=\"category-item__item\">\n                        <input type=\"radio\" value=\"urgent\" id=\"urgent\" name=\"priority\" class=\"category-item__input\"\n                            "
     + alias4(__default(__webpack_require__(162)).call(alias1,(depth0 != null ? lookupProperty(depth0,"priority") : depth0),"urgent",{"name":"isChecked","hash":{},"data":data,"loc":{"start":{"line":94,"column":28},"end":{"line":94,"column":60}}}))
     + " "
     + ((stack1 = lookupProperty(helpers,"unless").call(alias1,(depth0 != null ? lookupProperty(depth0,"priority") : depth0),{"name":"unless","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":94,"column":61},"end":{"line":94,"column":100}}})) != null ? stack1 : "")
-    + ">\r\n                        <label for=\"urgent\" class=\"category-item__label category-item__label--urgent\">Urgent</label>\r\n                    </div>\r\n\r\n                    <div class=\"category-item__item\">\r\n                        <input type=\"radio\" value=\"high\" id=\"high\" name=\"priority\" class=\"category-item__input\"\r\n                            "
+    + ">\n                        <label for=\"urgent\" class=\"category-item__label category-item__label--urgent\">Urgent</label>\n                    </div>\n\n                    <div class=\"category-item__item\">\n                        <input type=\"radio\" value=\"high\" id=\"high\" name=\"priority\" class=\"category-item__input\"\n                            "
     + alias4(__default(__webpack_require__(162)).call(alias1,(depth0 != null ? lookupProperty(depth0,"priority") : depth0),"high",{"name":"isChecked","hash":{},"data":data,"loc":{"start":{"line":100,"column":28},"end":{"line":100,"column":58}}}))
-    + ">\r\n                        <label for=\"high\" class=\"category-item__label category-item__label--high\">High</label>\r\n                    </div>\r\n\r\n                    <div class=\"category-item__item\">\r\n                        <input type=\"radio\" value=\"middle\" id=\"middle\" name=\"priority\" class=\"category-item__input\"\r\n                            "
+    + ">\n                        <label for=\"high\" class=\"category-item__label category-item__label--high\">High</label>\n                    </div>\n\n                    <div class=\"category-item__item\">\n                        <input type=\"radio\" value=\"middle\" id=\"middle\" name=\"priority\" class=\"category-item__input\"\n                            "
     + alias4(__default(__webpack_require__(162)).call(alias1,(depth0 != null ? lookupProperty(depth0,"priority") : depth0),"middle",{"name":"isChecked","hash":{},"data":data,"loc":{"start":{"line":106,"column":28},"end":{"line":106,"column":60}}}))
-    + ">\r\n                        <label for=\"middle\" class=\"category-item__label category-item__label--middle\">Middle</label>\r\n                    </div>\r\n\r\n                    <div class=\"category-item__item\">\r\n                        <input type=\"radio\" value=\"low\" id=\"low\" name=\"priority\" class=\"category-item__input\"\r\n                            "
+    + ">\n                        <label for=\"middle\" class=\"category-item__label category-item__label--middle\">Middle</label>\n                    </div>\n\n                    <div class=\"category-item__item\">\n                        <input type=\"radio\" value=\"low\" id=\"low\" name=\"priority\" class=\"category-item__input\"\n                            "
     + alias4(__default(__webpack_require__(162)).call(alias1,(depth0 != null ? lookupProperty(depth0,"priority") : depth0),"low",{"name":"isChecked","hash":{},"data":data,"loc":{"start":{"line":112,"column":28},"end":{"line":112,"column":57}}}))
-    + ">\r\n                        <label for=\"low\" class=\"category-item__label category-item__label--low\">Low</label>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </form>\r\n    </div>\r\n</section>";
+    + ">\n                        <label for=\"low\" class=\"category-item__label category-item__label--low\">Low</label>\n                    </div>\n                </div>\n            </div>\n        </form>\n    </div>\n</section>";
 },"useData":true});
 
 /***/ }),
@@ -66547,9 +66534,9 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[8,"
         return undefined
     };
 
-  return "<div class=\"timer__block\">\r\n  <div class=\"timer__title\">"
+  return "<div class=\"timer__block\">\n  <div class=\"timer__title\">"
     + ((stack1 = ((helper = (helper = lookupProperty(helpers,"content") || (depth0 != null ? lookupProperty(depth0,"content") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"content","hash":{},"data":data,"loc":{"start":{"line":2,"column":28},"end":{"line":2,"column":41}}}) : helper))) != null ? stack1 : "")
-    + "</div>\r\n</div>\r\n";
+    + "</div>\n</div>\n";
 },"useData":true});
 
 /***/ }),
@@ -66559,7 +66546,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[8,"
 var Handlebars = __webpack_require__(65);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
-    return "<div class=\"timer__container\">\r\n";
+    return "<div class=\"timer__container\">\n";
 },"3":function(container,depth0,helpers,partials,data) {
     var helper, lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
@@ -66570,7 +66557,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 
   return "    <div class=\"timer__container\" style=\"--animation-duration: "
     + container.escapeExpression(((helper = (helper = lookupProperty(helpers,"time") || (depth0 != null ? lookupProperty(depth0,"time") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"time","hash":{},"data":data,"loc":{"start":{"line":4,"column":63},"end":{"line":4,"column":71}}}) : helper)))
-    + "s;\">\r\n";
+    + "s;\">\n";
 },"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
@@ -66580,9 +66567,9 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     };
 
   return ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"showFull") : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.program(3, data, 0),"data":data,"loc":{"start":{"line":1,"column":0},"end":{"line":5,"column":15}}})) != null ? stack1 : "")
-    + "        <div class=\"timer__left\"></div>\r\n        <div class=\"timer__right\"></div>\r\n        <div class=\"timer__text\">"
+    + "        <div class=\"timer__left\"></div>\n        <div class=\"timer__right\"></div>\n        <div class=\"timer__text\">"
     + ((stack1 = ((helper = (helper = lookupProperty(helpers,"content") || (depth0 != null ? lookupProperty(depth0,"content") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"content","hash":{},"data":data,"loc":{"start":{"line":8,"column":33},"end":{"line":8,"column":46}}}) : helper))) != null ? stack1 : "")
-    + "</div>\r\n    </div>";
+    + "</div>\n    </div>";
 },"useData":true});
 
 /***/ }),
