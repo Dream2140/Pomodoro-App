@@ -160,7 +160,6 @@ describe('updateTask', () => {
         expect(updatedTask.description).toBe(newDescription);
         expect(tasksListModel.createTaskListCollection).toBeCalled();
         expect(tasksListModel.sendTaskData).toHaveBeenCalledWith(
-            'tasks',
             newTask,
             newTask.id
         );
@@ -172,29 +171,6 @@ describe('updateTask', () => {
     });
 });
 
-describe('changeTaskStatus', () => {
-    it('should change task status', () => {
-        jest.spyOn(tasksListModel.settingsData, 'sendData');
-
-        const id = tasks[0].id;
-        const newStatus = 'TEST';
-        tasksListModel.changeTaskStatus(id, newStatus);
-        const updatedTask = tasksListModel.taskListCollection.find(
-            item => item.id === id
-        );
-        expect(updatedTask.status).toBe(newStatus);
-        expect(tasksListModel.settingsData.sendData).toHaveBeenCalledWith(
-            'tasks',
-            updatedTask,
-            id
-        );
-    });
-
-    it('should return falsy value', () => {
-        const res = tasksListModel.changeTaskStatus();
-        expect(res).toBeFalsy();
-    });
-});
 
 describe('changeTaskStatus', () => {
     it('should change task status', () => {
@@ -206,7 +182,6 @@ describe('changeTaskStatus', () => {
         tasksListModel.removeTask(idsToRemove);
         expect(tasksListModel.taskListCollection.length).toBeFalsy();
         expect(tasksListModel.settingsData.removeItem).toHaveBeenCalledWith(
-            'tasks',
             idsToRemove
         );
         expect(tasksListModel.renderNoTasksLeftPageEvent.notify).toBeCalled();

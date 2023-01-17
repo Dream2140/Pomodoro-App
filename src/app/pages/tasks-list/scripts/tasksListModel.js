@@ -323,8 +323,6 @@ export class TasksListModel {
       task => task.id === id
     );
     taskToBeChanged.status = newStatus;
-    const userId = settingsData.getDataFromStorage('userId');
-
 
     return this.settingsData.sendTask({ [id]: taskToBeChanged });
   }

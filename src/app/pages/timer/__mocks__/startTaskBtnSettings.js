@@ -6,4 +6,4 @@ export const startTaskBtnSettings = {
     secondColor: 'green',
     secondServiceClass: 'finish-pomodora',
     secondData: 'Finish Pomodora'
-}
+};

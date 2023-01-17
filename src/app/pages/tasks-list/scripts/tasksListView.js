@@ -73,7 +73,7 @@ export class TasksListView {
     });
     eventBus.subscribe('user-login-result', async (data) => {
       if (data.result === true) {
-        eventBus.post('close-modal')
+        eventBus.post('close-modal');
         settingsData.setDataToStorage('userId', data.userData.user.uid);
         this.renderTaskListContainer();
         eventBus.post('pageLoaded');
@@ -93,13 +93,13 @@ export class TasksListView {
         });
       }
     });
-    
+
     eventBus.subscribe('user-regestration-result', async (data) => {
       if (data.result === true) {
         this.renderFirstPage();
-        eventBus.post('close-modal')
+        eventBus.post('close-modal');
         settingsData.setDataToStorage('userId', data.userData.user.uid);
-        console.log(data.userData);
+
         $(document).notification('clean');
         $(document).notification({
           type: 'success',

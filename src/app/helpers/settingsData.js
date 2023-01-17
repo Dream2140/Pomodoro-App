@@ -23,7 +23,7 @@ class SettingsData {
       if (userSettins) {
         this.setDataToStorage('settings', userSettins);
       } else {
-        const defualtSettings = await this.getDefaultSettings()
+        const defualtSettings = await this.getDefaultSettings();
         this.setDataToStorage('settings', defualtSettings);
       }
       eventBus.post('load-page');
@@ -50,7 +50,7 @@ class SettingsData {
 
   async getSettingsData() {
     const userId = this.getDataFromStorage('userId');
-    const settings = await this.db.getData("users/" + userId + `/settings`);
+    const settings = await this.db.getData('users/' + userId + '/settings');
     if(!settings){
       return this.setDataToStorage('settings', await this.getDefaultSettings());  
     }
@@ -60,11 +60,11 @@ class SettingsData {
 
   async getTasksData() {
     const userId = this.getDataFromStorage('userId');
-    return await this.db.getData("users/" + userId + `/tasks`);
+    return await this.db.getData('users/' + userId + '/tasks');
   }
 
   async getDefaultSettings() {
-    return await this.db.getData("defaultSettings/");
+    return await this.db.getData('defaultSettings/');
   }
   /**
    * @description sends data to firebase
@@ -80,7 +80,7 @@ class SettingsData {
 
   async sendTask(data) {
     const userId = this.getDataFromStorage('userId');
-    const dataSchema = "users/" + userId + "/tasks/";
+    const dataSchema = 'users/' + userId + '/tasks/';
     return await this.db.writeData(dataSchema, data);
   }
 
@@ -121,7 +121,7 @@ class SettingsData {
    */
   async removeItem(ids) {
     const userId = this.getDataFromStorage('userId');
-    const dataSchema = "users/" + userId + "/tasks/" + ids;
+    const dataSchema = 'users/' + userId + '/tasks/' + ids;
     return await this.db.removeItem(dataSchema);
   }
 

@@ -109,7 +109,7 @@ export class ModalView {
           estimation: form.get('estimation'),
           priority: form.get('priority')
         };
-        console.log(newTask);
+
         eventBus.post('update-task', newTask);
       }
     });

@@ -118,7 +118,7 @@ export class TimerModel {
 
     finishTask() {
         this.activeTask.status = 'COMPLETED';
-        console.log(Helpers.getCurrentDate());
+
         this.activeTask.completeDate = this.date;
 
         if (!this.isTaskCompleted()) {

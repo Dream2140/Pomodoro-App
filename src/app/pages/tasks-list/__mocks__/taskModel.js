@@ -11,6 +11,6 @@ export class TaskModel {
       status : options.status,
       estimation : options.estimation,
       deadline : options.deadline,
-    }
+    };
   }
 }

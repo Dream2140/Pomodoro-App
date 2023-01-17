@@ -2,7 +2,6 @@ const path = require('path');
 const { paths } = require('./webpack.config.paths');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   mode: 'none',
@@ -10,7 +9,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
-    hashFunction: "sha256"
+    hashFunction: 'sha256'
   },
   resolve: {
     modules: [

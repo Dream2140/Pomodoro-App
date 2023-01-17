@@ -29,7 +29,7 @@ describe('Test correct rendering', () => {
 describe('createPomodoros', () => {
     it('should create two pomodoros template', () => {
         const res = createPomodoros('2');
-        const pomodorosTemplate = `<span class="estimation__item"></span><span class="estimation__item">`
+        const pomodorosTemplate = '<span class="estimation__item"></span><span class="estimation__item">';
         expect(res).toMatchSnapshot(pomodorosTemplate);
     });
 

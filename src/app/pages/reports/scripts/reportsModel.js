@@ -107,13 +107,13 @@ export class ReportsModel {
      * @param {string} key key for receiving data from firebase
      * @memberof ReportModel
     */
-    async getAndSaveData(key) {
+    async getAndSaveData() {
         try {
             const data = await this.settingsData.getTasksData();
-            this.tasks =Object.keys(data).map(function(key) {
+            this.tasks = Object.keys(data).map(function (key) {
                 return data[key];
             });
-            console.log(this.tasks );
+
         } catch (err) {
             console.error(err.message);
         }
@@ -168,7 +168,7 @@ export class ReportsModel {
             const fullTimeReport = daysInReport * MILLISECONDS_IN_DAY;
             const currentDateMilliseconds = new Date().getTime();
             const lastDayInPeriod = currentDateMilliseconds - fullTimeReport;
-  
+
             tasksByCurrentPeriod = completedTasks.filter(
                 task =>
                     Helpers.getNumberDate(task.completeDate).getTime() > lastDayInPeriod
@@ -198,9 +198,9 @@ export class ReportsModel {
      * @memberof ReportModel
      */
     createReportsData(category, tasks, period) {
-        
+
         const dataForRender = this.categories[category](tasks);
-        
+
         eventBus.post('create-report', [dataForRender, period]);
     }
 

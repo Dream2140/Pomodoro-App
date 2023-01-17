@@ -26,29 +26,8 @@ class DataBase {
   async getData(searchSchema) {
     let ref = this.db.ref(searchSchema);
 
-    const data = await ref.once("value");
-    return data.val()
-    /*return new Promise((resolve, reject) => {
-      const userRef = this.db.ref("users/" + userId);
-      const ref = this.db.ref(key).orderByKey();
-      ref.once(
-        'value',
-        snapshot => {
-          let result = [];
-          this.data = snapshot.val();
-
-          snapshot.forEach(childSnapshot => {
-            if (childSnapshot.exists()) {
-              result.push(childSnapshot.val());
-            }
-          });
-          resolve(result);
-        },
-        error => {
-          reject(error);
-        }
-      );
-    });*/
+    const data = await ref.once('value');
+    return data.val();
   }
 
   /**
@@ -73,7 +52,7 @@ class DataBase {
     try {
       const content = {};
       content[typeData] = data;
-      const userRef = this.db.ref("users/" + userId);
+      const userRef = this.db.ref('users/' + userId);
       await userRef.update(content);
     } catch (err) {
       console.error(err);
@@ -93,16 +72,18 @@ class DataBase {
     try {
       const user = await firebase.auth().createUserWithEmailAndPassword(email, password);
       const userId = user.user.uid;
-      const userRef = await this.db.ref('users/' + userId);
+
+      await this.db.ref('users/' + userId);
+
       eventBus.post('user-regestration-result', {
         result: true,
         userData: user
-      })
+      });
     } catch (error) {
       eventBus.post('user-regestration-result', {
         result: false,
         message: error.message
-      })
+      });
     }
   }
 
@@ -112,13 +93,12 @@ class DataBase {
       eventBus.post('user-login-result', {
         result: true,
         userData: user
-      })
+      });
     } catch (error) {
-      console.log(error);
       eventBus.post('user-login-result', {
         result: false,
         message: error.message
-      })
+      });
     }
   }
 }
