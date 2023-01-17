@@ -56366,7 +56366,7 @@ var HeaderView = /*#__PURE__*/function () {
 
       _this.setNavListeners();
 
-      if (window.location.pathname === '/task-list') {
+      if (window.location.hash === '#/task-list') {
         _this.addHeaderListeners();
       }
     });
@@ -60139,16 +60139,16 @@ var SettingsView = /*#__PURE__*/function () {
     this.cycleBottom = _template_cycleBottom_hbs__WEBPACK_IMPORTED_MODULE_5__;
     this.settingsCategories = _template_settingsCategories_hbs__WEBPACK_IMPORTED_MODULE_8__;
     this.model.changeButtonsEvent.subscribe(this.renderSettingsElement.bind(this));
-    _helpers_eventBus__WEBPACK_IMPORTED_MODULE_3__["eventBus"].subscribe('renderSettingsPage', function () {
+    _helpers_eventBus__WEBPACK_IMPORTED_MODULE_3__["eventBus"].subscribe("renderSettingsPage", function () {
       _this.initializeSettingPage();
 
       _this.addSettingsPageEvents();
 
       _this.activateSettingsTabs();
 
-      _helpers_eventBus__WEBPACK_IMPORTED_MODULE_3__["eventBus"].post('pageLoaded');
+      _helpers_eventBus__WEBPACK_IMPORTED_MODULE_3__["eventBus"].post("pageLoaded");
     });
-    _helpers_eventBus__WEBPACK_IMPORTED_MODULE_3__["eventBus"].subscribe('settings-category-page-loading', function () {
+    _helpers_eventBus__WEBPACK_IMPORTED_MODULE_3__["eventBus"].subscribe("settings-category-page-loading", function () {
       _this.initializeCategoriesPage();
 
       _this.addSettingsPageEvents();
@@ -60157,14 +60157,13 @@ var SettingsView = /*#__PURE__*/function () {
 
       _this.addCategoriesPageEvents();
 
-      _helpers_eventBus__WEBPACK_IMPORTED_MODULE_3__["eventBus"].post('pageLoaded');
+      _helpers_eventBus__WEBPACK_IMPORTED_MODULE_3__["eventBus"].post("pageLoaded");
     });
-    window.addEventListener('resize', function () {
+    window.addEventListener("resize", function () {
       var currentRoute = window.location.hash;
-      console.log('here');
 
       if (/^#\/settings/.test(currentRoute)) {
-        _helpers_eventBus__WEBPACK_IMPORTED_MODULE_3__["eventBus"].post('load-page');
+        _helpers_eventBus__WEBPACK_IMPORTED_MODULE_3__["eventBus"].post("load-page");
       }
     });
   }
@@ -60177,8 +60176,8 @@ var SettingsView = /*#__PURE__*/function () {
   _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_2___default()(SettingsView, [{
     key: "addCategoriesPageEvents",
     value: function addCategoriesPageEvents() {
-      document.querySelector('.settings__buttons-skip').addEventListener('click', function () {
-        _routes__WEBPACK_IMPORTED_MODULE_9__["router"].navigate('/task-list');
+      document.querySelector(".settings__buttons-skip").addEventListener("click", function () {
+        _routes__WEBPACK_IMPORTED_MODULE_9__["router"].navigate("/task-list");
       });
     }
     /**
@@ -60189,12 +60188,14 @@ var SettingsView = /*#__PURE__*/function () {
   }, {
     key: "activateSettingsTabs",
     value: function activateSettingsTabs() {
-      if (window.location.pathname === 'settings/pomodoros') {
-        document.querySelector('.tab__btn-pomodoros').classList.add('tab__btn--active');
+      var currentRoute = window.location.hash;
+
+      if (/^#\/settings\/pomodoros/.test(currentRoute)) {
+        document.querySelector(".tab__btn-pomodoros").classList.add("tab__btn--active");
       }
 
-      if (window.location.pathname === 'settings/categories') {
-        document.querySelector('.tab__btn-categories').classList.add('tab__btn--active');
+      if (/^#\/settings\/categories/.test(currentRoute)) {
+        document.querySelector(".tab__btn-categories").classList.add("tab__btn--active");
       }
     }
     /**
@@ -60215,11 +60216,11 @@ var SettingsView = /*#__PURE__*/function () {
   }, {
     key: "addSettingsPageEvents",
     value: function addSettingsPageEvents() {
-      document.querySelector('.tab__btn-pomodoros').addEventListener('click', function () {
-        _routes__WEBPACK_IMPORTED_MODULE_9__["router"].navigate('/settings/pomodoros');
+      document.querySelector(".tab__btn-pomodoros").addEventListener("click", function () {
+        _routes__WEBPACK_IMPORTED_MODULE_9__["router"].navigate("/settings/pomodoros");
       });
-      document.querySelector('.tab__btn-categories').addEventListener('click', function () {
-        _routes__WEBPACK_IMPORTED_MODULE_9__["router"].navigate('/settings/categories');
+      document.querySelector(".tab__btn-categories").addEventListener("click", function () {
+        _routes__WEBPACK_IMPORTED_MODULE_9__["router"].navigate("/settings/categories");
       });
     }
     /**
@@ -60253,11 +60254,11 @@ var SettingsView = /*#__PURE__*/function () {
   }, {
     key: "initSaveButtons",
     value: function initSaveButtons() {
-      document.querySelector('.settings__buttons-save').addEventListener('click', function () {
-        _helpers_eventBus__WEBPACK_IMPORTED_MODULE_3__["eventBus"].post('saveData', 'settings');
+      document.querySelector(".settings__buttons-save").addEventListener("click", function () {
+        _helpers_eventBus__WEBPACK_IMPORTED_MODULE_3__["eventBus"].post("saveData", "settings");
       });
-      document.querySelector('.settings__buttons-return').addEventListener('click', function () {
-        _helpers_eventBus__WEBPACK_IMPORTED_MODULE_3__["eventBus"].post('returnToHome');
+      document.querySelector(".settings__buttons-return").addEventListener("click", function () {
+        _helpers_eventBus__WEBPACK_IMPORTED_MODULE_3__["eventBus"].post("returnToHome");
       });
     }
     /**
@@ -60268,17 +60269,17 @@ var SettingsView = /*#__PURE__*/function () {
   }, {
     key: "initSettingsButtons",
     value: function initSettingsButtons() {
-      var buttons = _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default()(document.querySelectorAll('.change-list__btn'));
+      var buttons = _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default()(document.querySelectorAll(".change-list__btn"));
 
       buttons.forEach(function (btn) {
-        btn.addEventListener('click', function (e) {
+        btn.addEventListener("click", function (e) {
           var id = e.target.parentElement.id;
-          var currentValue = Number(e.target.parentElement.querySelector('.change-list__input').innerHTML);
+          var currentValue = Number(e.target.parentElement.querySelector(".change-list__input").innerHTML);
 
-          if (e.target.classList.contains('change-list__plus')) {
-            _helpers_eventBus__WEBPACK_IMPORTED_MODULE_3__["eventBus"].post('increaseValue', [id, currentValue]);
+          if (e.target.classList.contains("change-list__plus")) {
+            _helpers_eventBus__WEBPACK_IMPORTED_MODULE_3__["eventBus"].post("increaseValue", [id, currentValue]);
           } else {
-            _helpers_eventBus__WEBPACK_IMPORTED_MODULE_3__["eventBus"].post('decreaseValue', [id, currentValue]);
+            _helpers_eventBus__WEBPACK_IMPORTED_MODULE_3__["eventBus"].post("decreaseValue", [id, currentValue]);
           }
         });
       });
@@ -60293,7 +60294,7 @@ var SettingsView = /*#__PURE__*/function () {
     value: function changeInputData() {
       var _this2 = this;
 
-      var input = _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default()(document.querySelectorAll('.change-list__input'));
+      var input = _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default()(document.querySelectorAll(".change-list__input"));
 
       input.forEach(function (input) {
         var id = input.parentElement.id;
@@ -60309,11 +60310,11 @@ var SettingsView = /*#__PURE__*/function () {
   }, {
     key: "renderSettingsElement",
     value: function renderSettingsElement(data) {
-      document.querySelector('.cycle__container').innerHTML = this.getCycleTemplate(data);
+      document.querySelector(".cycle__container").innerHTML = this.getCycleTemplate(data);
       this.changeInputData();
     }
     /**
-     * @description returns cycle template 
+     * @description returns cycle template
      * @param {object} data settings data
      * @return {string} template for timeline
      * @memberof SettingsView
@@ -60338,13 +60339,13 @@ var SettingsView = /*#__PURE__*/function () {
   }, {
     key: "getScaleLinesTemplate",
     value: function getScaleLinesTemplate(data) {
-      var firstCycleTemplate = this.createCycleTemplate(this.getScaleLine('work', data.buttonsValues.work.value), this.getScaleLine('short-break', data.buttonsValues.shortBreak.value), data.buttonsValues.iteration.value);
-      var fullCycleTemplate = this.createCycleTemplate(firstCycleTemplate, this.getScaleLine('long-break', data.buttonsValues.longBreak.value), data.cycleCount);
+      var firstCycleTemplate = this.createCycleTemplate(this.getScaleLine("work", data.buttonsValues.work.value), this.getScaleLine("short-break", data.buttonsValues.shortBreak.value), data.buttonsValues.iteration.value);
+      var fullCycleTemplate = this.createCycleTemplate(firstCycleTemplate, this.getScaleLine("long-break", data.buttonsValues.longBreak.value), data.cycleCount);
       return fullCycleTemplate;
     }
     /**
      * @description returns scale line template
-     * @param {string} name 
+     * @param {string} name
      * @param {number} value
      * @return {string} cycle line
      * @memberof SettingsView
@@ -60360,7 +60361,7 @@ var SettingsView = /*#__PURE__*/function () {
     }
     /**
      * @description returns full cicle template
-     * @param {string} element 
+     * @param {string} element
      * @param {number} delimiter
      * @param {number} iteration
      * @return {string} cycle line template
@@ -60370,7 +60371,7 @@ var SettingsView = /*#__PURE__*/function () {
   }, {
     key: "createCycleTemplate",
     value: function createCycleTemplate(element, delimiter, iteration) {
-      var template = '';
+      var template = "";
       template += element;
 
       for (var i = 0; i < iteration - 1; i++) {
@@ -60389,7 +60390,7 @@ var SettingsView = /*#__PURE__*/function () {
   }, {
     key: "createTimeLine",
     value: function createTimeLine(info) {
-      var template = '';
+      var template = "";
       var date = new Date();
       date.setHours(0);
       date.setMinutes(info.minutesInSchedule);
@@ -60419,9 +60420,9 @@ var SettingsView = /*#__PURE__*/function () {
   }, {
     key: "createTimeLineBottomItem",
     value: function createTimeLineBottomItem(date, info) {
-      var hiddenElement = date.getMinutes() > 0 ? 'cycle__caption-item--hidden' : '',
+      var hiddenElement = date.getMinutes() > 0 ? "cycle__caption-item--hidden" : "",
           elementGrowth = info.minutesInSchedule,
-          value = "".concat(date.getHours() > 0 ? date.getHours() + 'h ' : '', " ").concat(date.getMinutes() > 0 ? date.getMinutes() + 'm' : '');
+          value = "".concat(date.getHours() > 0 ? date.getHours() + "h " : "", " ").concat(date.getMinutes() > 0 ? date.getMinutes() + "m" : "");
       return this.cycleBottom({
         hidden: hiddenElement,
         grow: elementGrowth,
@@ -60581,7 +60582,7 @@ __webpack_require__.r(__webpack_exports__);
     reports: 'Report',
     timer: ' '
   };
-  var pageHash = "".concat(window.location.pathname, "/").match(/^\/(.*?)\//);
+  var pageHash = "".concat(window.location.hash, "/").match(/^#\/(.*?)\//);
 
   if (pageHash) {
     var pageTitle = pageTitles[pageHash[1]];
@@ -60603,14 +60604,14 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * @description manages page hash and active css class according to it
  * @exports checkActivePage
- * @param {string} value contains the button value 
+ * @param {string} value contains the button value
  * @return {string} css class of active nav button
  */
 /* harmony default export */ __webpack_exports__["default"] = (function (value) {
-  var pageHash = "".concat(window.location.pathname, "/").match(/^\/(.*?)\//);
+  var pageHash = "".concat(window.location.hash, "/").match(/^#\/(.*?)\//);
 
   if (pageHash && pageHash[1] === value) {
-    return 'navigation__btn--active';
+    return "navigation__btn--active";
   }
 });
 
@@ -60675,8 +60676,8 @@ __webpack_require__.r(__webpack_exports__);
  */
 /* harmony default export */ __webpack_exports__["default"] = (function (period, value) {
   if (period) {
-    var regex = /(^\/reports\/)(.*)\//gm;
-    var match = regex.exec("".concat(window.location.pathname));
+    var regex = /(^#\/reports\/)(.*)\//gm;
+    var match = regex.exec("".concat(window.location.hash));
     var time;
 
     if (match) {
@@ -60684,12 +60685,12 @@ __webpack_require__.r(__webpack_exports__);
     }
 
     if (time === value) {
-      return 'tab__btn--active';
+      return "tab__btn--active";
     }
   } else {
-    var _regex = /(^\/reports\/)(.*)\/(.*)$/gm;
+    var _regex = /(^#\/reports\/)(.*)\/(.*)$/gm;
 
-    var _match = _regex.exec("".concat(window.location.pathname));
+    var _match = _regex.exec("".concat(window.location.hash));
 
     var category;
 
@@ -60698,7 +60699,7 @@ __webpack_require__.r(__webpack_exports__);
     }
 
     if (category === value) {
-      return 'tab__btn--active';
+      return "tab__btn--active";
     }
   }
 });
