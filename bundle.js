@@ -56365,10 +56365,9 @@ var HeaderView = /*#__PURE__*/function () {
       _this.stickyHeader();
 
       _this.setNavListeners();
-
-      if (window.location.hash === '#/task-list') {
-        _this.addHeaderListeners();
-      }
+    });
+    _helpers_eventBus__WEBPACK_IMPORTED_MODULE_3__["eventBus"].subscribe('load-task-list-listeners', function () {
+      _this.addHeaderListeners();
     });
     _helpers_eventBus__WEBPACK_IMPORTED_MODULE_3__["eventBus"].subscribe('raise-counter', function () {
       _this.checkTasksToDelete();
@@ -60787,6 +60786,7 @@ function TasksListController(view, model) {
   this.model = model;
   _helpers_eventBus__WEBPACK_IMPORTED_MODULE_2__["eventBus"].subscribe('task-list-loading', function () {
     _helpers_eventBus__WEBPACK_IMPORTED_MODULE_2__["eventBus"].post('renderTaskListPage', _this.model.isNewUser());
+    _helpers_eventBus__WEBPACK_IMPORTED_MODULE_2__["eventBus"].post('load-task-list-listeners');
   });
   _helpers_eventBus__WEBPACK_IMPORTED_MODULE_2__["eventBus"].subscribe('start-task', function (id) {
     _this.model.changeTaskStatus(id, 'ACTIVE');
