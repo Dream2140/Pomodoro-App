@@ -60929,6 +60929,7 @@ var TasksListModel = /*#__PURE__*/function () {
     this.renderEmptyDailyTasks = new _helpers_observer__WEBPACK_IMPORTED_MODULE_8__["Observer"]();
     this.registerNewUser = new _helpers_observer__WEBPACK_IMPORTED_MODULE_8__["Observer"]();
     this.globalTaskListChangedEvent = new _helpers_observer__WEBPACK_IMPORTED_MODULE_8__["Observer"]();
+    this.addFirstTaskMEssage = new _helpers_observer__WEBPACK_IMPORTED_MODULE_8__["Observer"]();
   }
   /**
    * @description saves tasks list from database
@@ -60965,18 +60966,20 @@ var TasksListModel = /*#__PURE__*/function () {
                 data = Object.keys(data).map(function (key) {
                   return data[key];
                 });
+                console.log(123);
 
                 if (Array.isArray(data) && data.length) {
                   data = data.filter(function (item) {
                     return !!item;
                   });
                   this.taskListCollection = data;
+                  console.log('here');
                   this.createTaskListCollection();
                 } else {
-                  this.renderAddFirstTaskPageEvent.notify();
+                  this.addFirstTaskMEssage.notify();
                 }
 
-              case 10:
+              case 11:
               case "end":
                 return _context.stop();
             }
@@ -61116,6 +61119,7 @@ var TasksListModel = /*#__PURE__*/function () {
         globalActive: this.globalTasksActiveCategories,
         globalCompleted: this.globalTasksCompletedCategories
       };
+      console.log('_____________');
       console.log(this.tasksCollection);
 
       if (this.checkLeftTasks()) {
@@ -61178,11 +61182,13 @@ var TasksListModel = /*#__PURE__*/function () {
     key: "checkLeftTasks",
     value: function checkLeftTasks() {
       if (this.taskListCollection.length === 0) {
+        console.log(1);
         this.renderNoTasksLeftPageEvent.notify();
         return false;
       }
 
       if (this.dailyTasksActive.length === 0 && !this.globalTasksActive.length) {
+        console.log(2);
         this.renderEmptyDailyTasks.notify();
         return false;
       }
@@ -61198,11 +61204,13 @@ var TasksListModel = /*#__PURE__*/function () {
       console.log(this.globalTasksActive);
 
       if (this.dailyTasksActive.length === 0 && this.globalTasksActive.length !== 0) {
+        console.log('here123');
         this.renderAddFirstTaskPageEvent.notify();
         this.globalTaskListChangedEvent.notify(this.tasksCollection);
         return false;
       }
 
+      console.log(123);
       return true;
     }
     /**
@@ -61482,6 +61490,7 @@ var TasksListView = /*#__PURE__*/function () {
     this.model.taskListChangedEvent.subscribe(this.renderGlobalTasks.bind(this));
     this.model.orderTasksEvent.subscribe(this.orderTasks.bind(this));
     this.model.renderAddFirstTaskPageEvent.subscribe(this.renderFirstTaskMessage.bind(this));
+    this.model.addFirstTaskMEssage.subscribe(this.addFirstTaskMEssage.bind(this));
     this.model.renderEmptyDailyTasks.subscribe(this.renderEmptyDailyTasksMessage.bind(this));
     this.model.renderTasksDonePageEvent.subscribe(this.renderAllTasksDoneMessage.bind(this));
     this.model.renderNoTasksLeftPageEvent.subscribe(this.renderNoTasksLeftMessage.bind(this));
@@ -61673,6 +61682,11 @@ var TasksListView = /*#__PURE__*/function () {
     value: function renderFirstTaskMessage() {
       document.querySelector('.daily-content__content').innerHTML = _template_task_added_hbs__WEBPACK_IMPORTED_MODULE_11___default()();
       ;
+    }
+  }, {
+    key: "addFirstTaskMEssage",
+    value: function addFirstTaskMEssage() {
+      document.querySelector('.daily-content__content').innerHTML = _template_add_firts_task_hbs__WEBPACK_IMPORTED_MODULE_8___default()();
     }
     /**
      * @description renders empty daily tasks message template
@@ -63668,7 +63682,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[8,"
     + alias4(((helper = (helper = lookupProperty(helpers,"description") || (depth0 != null ? lookupProperty(depth0,"description") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"description","hash":{},"data":data,"loc":{"start":{"line":9,"column":58},"end":{"line":9,"column":73}}}) : helper)))
     + "</p>\r\n                        <div class=\"estimation timer-section__estimation\">\r\n                            <div class=\"estimation__container\">\r\n                                "
     + ((stack1 = __default(__webpack_require__(150)).call(alias1,(depth0 != null ? lookupProperty(depth0,"estimation") : depth0),{"name":"createPomodoros","hash":{},"data":data,"loc":{"start":{"line":12,"column":32},"end":{"line":12,"column":64}}})) != null ? stack1 : "")
-    + "\r\n                                <button class=\"estimation__btn icon d-none icon-add\"></button>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"timer-section__clock\">\r\n                        <a href=\"/task-list\" class=\"timer-section__link timer-section__link--left icon icon-arrow-left go-to-task-list\" title=\"Go to Global List\"></a>\r\n                        <div class=\"timer timer-section__timer\" id=\"timer\">    \r\n\r\n                        </div>\r\n                        <a href=\"/reports/day/tasks\" class=\"timer-section__link timer-section__link--right icon icon-right go-to-reports-page d-none\" title=\"Go to Report\"></a>\r\n                    </div>\r\n                    <div class=\"settings__buttons service-btn timer-section__btn\">\r\n                        <button class=\"service-btn__btn service-btn__btn--green service-btn__btn-start-task\">Start</button>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </section>\r\n\r\n\r\n    </main>";
+    + "\r\n                                <button class=\"estimation__btn icon d-none icon-add\"></button>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"timer-section__clock\">\r\n                        <a href=\"/#/task-list\" class=\"timer-section__link timer-section__link--left icon icon-arrow-left go-to-task-list\" title=\"Go to Global List\"></a>\r\n                        <div class=\"timer timer-section__timer\" id=\"timer\">    \r\n\r\n                        </div>\r\n                        <a href=\"/#/reports/day/tasks\" class=\"timer-section__link timer-section__link--right icon icon-right go-to-reports-page d-none\" title=\"Go to Report\"></a>\r\n                    </div>\r\n                    <div class=\"settings__buttons service-btn timer-section__btn\">\r\n                        <button class=\"service-btn__btn service-btn__btn--green service-btn__btn-start-task\">Start</button>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </section>\r\n\r\n\r\n    </main>";
 },"usePartial":true,"useData":true});
 
 /***/ }),

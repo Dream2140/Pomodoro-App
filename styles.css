@@ -831,7 +831,7 @@ body .ui-tooltip {
 }
 .header__logo {
   display: none;
-  width: 15.125rem;
+  width: 10.625rem;
   height: 4.625rem;
 }
 .header--fixed {
@@ -1391,7 +1391,7 @@ body .ui-tooltip {
   margin-left: 2.25rem;
 }
 .settings__buttons {
-  margin-top: 16.9375rem;
+  margin-top: 4.375rem;
 }
 .cycle {
   display: flex;
@@ -2297,7 +2297,7 @@ body .ui-tooltip {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 11.9375rem;
+  margin-bottom: 4.375rem;
 }
 .reports__link-left {
   position: fixed;
@@ -2307,6 +2307,7 @@ body .ui-tooltip {
   color: #8DA5B8;
   background: transparent;
   left: 0;
+  display: none;
 }
 .reports__link-left:hover {
   color: #82C7E0;
@@ -2687,6 +2688,9 @@ body .ui-tooltip {
 .modal {
   font-family: 'Roboto', sans-serif;
 }
+.modal + .header {
+  display: none;
+}
 .modal__overlay {
   position: fixed;
   top: 0;
@@ -2760,10 +2764,10 @@ body .ui-tooltip {
   justify-content: center;
   align-items: center;
   font-weight: 300;
-  font-size: 2.25rem;
+  font-size: 1.5625rem;
   line-height: 3rem;
   letter-spacing: 0.04375rem;
-  padding: 0 7.3125rem;
+  padding: 0 3.125rem;
   margin: 19.75rem auto 21.5rem;
   color: #8DA5B8;
   text-align: center;
