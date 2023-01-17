@@ -60696,10 +60696,6 @@ __webpack_require__.r(__webpack_exports__);
     if (_match) {
       category = _match[3];
     }
-
-    if (category === value) {
-      return "tab__btn--active";
-    }
   }
 });
 
@@ -60914,7 +60910,7 @@ var TasksListModel = /*#__PURE__*/function () {
       typeTabs: 'daily-content__tabs',
       tabPosition: 'tab__item--right',
       tabData: [{
-        serviceClass: 'tab__btn-toDo',
+        serviceClass: 'tab__btn-toDo tab__btn--active',
         data: 'To Do'
       }, {
         serviceClass: 'tab__btn-done',
