@@ -2891,7 +2891,7 @@ body .ui-tooltip {
   background-color: #FDDC43;
 }
 .category-item__input:checked + .category-item__label::after {
-  content: '';
+  content: "";
   position: absolute;
   left: -1.28125rem;
   top: 0.35rem;
@@ -3003,11 +3003,34 @@ body .ui-tooltip {
   background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxOS4yLjEsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9IjAgMCAzMjYgMzA5LjYiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDMyNiAzMDkuNjsiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPHN0eWxlIHR5cGU9InRleHQvY3NzIj4NCgkuc3Qwe2ZpbGw6dXJsKCNTVkdJRF8xXyk7fQ0KPC9zdHlsZT4NCjxnPg0KCTxsaW5lYXJHcmFkaWVudCBpZD0iU1ZHSURfMV8iIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiB4MT0iMTYzLjU5NzIiIHkxPSIzMDkuNTcwNSIgeDI9IjE2My41OTcyIiB5Mj0iLTQuNTI5Mjg0ZS0xMCI+DQoJCTxzdG9wICBvZmZzZXQ9IjAiIHN0eWxlPSJzdG9wLWNvbG9yOiNGMDVENEUiLz4NCgkJPHN0b3AgIG9mZnNldD0iMC4zMyIgc3R5bGU9InN0b3AtY29sb3I6I0YyNzQyMSIvPg0KCQk8c3RvcCAgb2Zmc2V0PSIwLjY2IiBzdHlsZT0ic3RvcC1jb2xvcjojRkNEQjQzIi8+DQoJCTxzdG9wICBvZmZzZXQ9IjAuOTMzNSIgc3R5bGU9InN0b3AtY29sb3I6IzI3Qjg5OSIvPg0KCTwvbGluZWFyR3JhZGllbnQ+DQoJPHBhdGggY2xhc3M9InN0MCIgZD0iTTIwNi4zLDM5LjdjLTExLjEsMC0yMi4xLDEuNC0zMi42LDQuM1YwbC0xOS4zLDEwLjRjLTAuNSwwLjMtMC45LDAuOC0wLjksMS40VjQ0Yy0xMC42LTIuOC0yMS41LTQuMy0zMi42LTQuMw0KCQlDNTQuNCwzOS43LDAuMyw5MS4xLDAuMywxNTQuM2MwLDQxLjUsMTcsODAuNCw0Ny44LDEwOS44YzMwLjcsMjkuMSw3Mi4xLDQ1LjUsMTE1LjQsNDUuNWM0My42LDAsODQuNi0xNi4xLDExNS41LTQ1LjUNCgkJYzMwLjgtMjkuMyw0Ny44LTY4LjMsNDcuOC0xMDkuOEMzMjYuOSw5MS4xLDI3Mi44LDM5LjcsMjA2LjMsMzkuN3ogTTE2My4zLDY5LjFMMjE4LDg0LjdsLTIuMy0xLjZMMTg1LjQsNjENCgkJYzYuOC0xLjQsMTMuOC0yLjEsMjAuOS0yLjFjNTUuMywwLDEwMC4zLDQyLjgsMTAwLjMsOTUuNGMwLDc1LTY0LjIsMTM2LTE0My4xLDEzNnMtMTQzLjEtNjEtMTQzLjEtMTM2YzAtNTIuNiw0NS05NS40LDEwMC4zLTk1LjQNCgkJYzcuMSwwLDE0LjEsMC43LDIwLjksMi4xbC0zMy4xLDI0LjFMMTYzLjMsNjkuMXogTTE1My41LDc2LjciLz4NCjwvZz4NCjwvc3ZnPg0K);
 }
 @media (max-width: 768px) {
-  .modal-auth .modal__overlay {
-    background-color: #2A3F50;
+  .modal .modal__overlay {
+    background-color: #2a3f50;
+    opacity: 1;
+  }
+  .modal__container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .modal__message {
+    margin: 0;
+  }
+  .modal__buttons {
+    padding-bottom: 35px;
+  }
+  .modal .modal__top {
+    margin-bottom: 5px;
+    margin-top: 25px;
+  }
+  .modal .form {
+    padding: 0 25px;
   }
   .modal-auth .form {
     padding: 0 2rem 5rem;
+  }
+  .modal-auth .modal__container {
+    justify-content: center;
   }
   .modal-auth .service-btn__btn {
     max-width: 38.5%;
@@ -3106,7 +3129,7 @@ body .ui-tooltip {
   background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAA7UlEQVQ4jcWQMUvDUBSFz4n9Ox2lk27tsxQRQQTb2M3BNaR7dkO2Tg4F+6JChlJE0uimIDg4+XvMcbJD6WsaRDzrO/d7373AXyVJFzdxWuxX9TznS4lrQlkVxAkIzg9eRfqEsqu7olXfAEDYN8+Chl6peWzz3XUdbgL8JLZFl9REYC8cmI+tDZYmvskpXRJ6SOxjszYAAAK/OwOYiY00iqLl3FYrAEBi82ORY+rLBH7vsxbgVzdI7FOH1ETS4epwpUF8W7QpTUuPR6Mz876us+P8ebrYA3Ev8HTUN2+unnsFDxcscRIOzMsmy//PN2qsWF9fL8NkAAAAAElFTkSuQmCC");
 }
 .ui-datepicker-prev {
-  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAA9klEQVQ4jcWRsU7DQBBEZw4+JhUgujSUxFZaGtsNQgLRxsK9+xjyAXREPhAgAULBZwS0tHzRLg2KUJycLgViy92d0dtZ4K+rqtu9i9pdrZpv+sQT2/RF9U5V07UNJlO3K4oHMTgqkvh91Z5ZKq5fd4SYkTwukmjmo+Ri43zqtkE4Eqd5Fj35xB2CyrY9GLyQOgoRA78yKMvSUHEL8D7PopsQMbBwQmXbHoE3qpzlWRxk0slgbJstI2xDM+gYAD9fUGloeJKng2efwdI3jrL9L6MYqurl+NoN1yaYk9imL8pHIZMiHXwEE8xJ0viTgoMN1UPf3v/WN3nmWBg723aCAAAAAElFTkSuQmCC');
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAA9klEQVQ4jcWRsU7DQBBEZw4+JhUgujSUxFZaGtsNQgLRxsK9+xjyAXREPhAgAULBZwS0tHzRLg2KUJycLgViy92d0dtZ4K+rqtu9i9pdrZpv+sQT2/RF9U5V07UNJlO3K4oHMTgqkvh91Z5ZKq5fd4SYkTwukmjmo+Ri43zqtkE4Eqd5Fj35xB2CyrY9GLyQOgoRA78yKMvSUHEL8D7PopsQMbBwQmXbHoE3qpzlWRxk0slgbJstI2xDM+gYAD9fUGloeJKng2efwdI3jrL9L6MYqurl+NoN1yaYk9imL8pHIZMiHXwEE8xJ0viTgoMN1UPf3v/WN3nmWBg723aCAAAAAElFTkSuQmCC");
 }
 .ui-datepicker .ui-datepicker-prev {
   left: 14px;
