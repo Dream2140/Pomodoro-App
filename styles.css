@@ -524,9 +524,9 @@ html {
 }
 .wrapper {
   max-width: 1440px;
-  padding: 0 1.5rem;
+  padding: 0 0.3125rem;
   margin: 0 auto;
-  width: calc(100% - 2 * 1.5rem);
+  width: calc(100% - 2 * 0.3125rem);
 }
 @media screen and (min-width: 768px) {
   .wrapper {
@@ -1304,9 +1304,23 @@ body .ui-tooltip {
 .change-list__btn--active::before {
   color: #FFFFFF;
 }
-@media screen and (max-width: 620px) {
+@media screen and (max-width: 768px) {
   .change-list {
-    padding-right: 3.125rem;
+    align-items: flex-start;
+  }
+  .change-list__item {
+    width: 100%;
+    position: relative;
+    left: 40%;
+    transform: translateX(-50%);
+  }
+}
+@media screen and (max-width: 500px) {
+  .change-list__item {
+    left: 30%;
+  }
+  .change-list__item:before {
+    left: -1.5rem;
   }
 }
 .setting-list {
@@ -2988,7 +3002,10 @@ body .ui-tooltip {
   left: 0;
   background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxOS4yLjEsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9IjAgMCAzMjYgMzA5LjYiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDMyNiAzMDkuNjsiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPHN0eWxlIHR5cGU9InRleHQvY3NzIj4NCgkuc3Qwe2ZpbGw6dXJsKCNTVkdJRF8xXyk7fQ0KPC9zdHlsZT4NCjxnPg0KCTxsaW5lYXJHcmFkaWVudCBpZD0iU1ZHSURfMV8iIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiB4MT0iMTYzLjU5NzIiIHkxPSIzMDkuNTcwNSIgeDI9IjE2My41OTcyIiB5Mj0iLTQuNTI5Mjg0ZS0xMCI+DQoJCTxzdG9wICBvZmZzZXQ9IjAiIHN0eWxlPSJzdG9wLWNvbG9yOiNGMDVENEUiLz4NCgkJPHN0b3AgIG9mZnNldD0iMC4zMyIgc3R5bGU9InN0b3AtY29sb3I6I0YyNzQyMSIvPg0KCQk8c3RvcCAgb2Zmc2V0PSIwLjY2IiBzdHlsZT0ic3RvcC1jb2xvcjojRkNEQjQzIi8+DQoJCTxzdG9wICBvZmZzZXQ9IjAuOTMzNSIgc3R5bGU9InN0b3AtY29sb3I6IzI3Qjg5OSIvPg0KCTwvbGluZWFyR3JhZGllbnQ+DQoJPHBhdGggY2xhc3M9InN0MCIgZD0iTTIwNi4zLDM5LjdjLTExLjEsMC0yMi4xLDEuNC0zMi42LDQuM1YwbC0xOS4zLDEwLjRjLTAuNSwwLjMtMC45LDAuOC0wLjksMS40VjQ0Yy0xMC42LTIuOC0yMS41LTQuMy0zMi42LTQuMw0KCQlDNTQuNCwzOS43LDAuMyw5MS4xLDAuMywxNTQuM2MwLDQxLjUsMTcsODAuNCw0Ny44LDEwOS44YzMwLjcsMjkuMSw3Mi4xLDQ1LjUsMTE1LjQsNDUuNWM0My42LDAsODQuNi0xNi4xLDExNS41LTQ1LjUNCgkJYzMwLjgtMjkuMyw0Ny44LTY4LjMsNDcuOC0xMDkuOEMzMjYuOSw5MS4xLDI3Mi44LDM5LjcsMjA2LjMsMzkuN3ogTTE2My4zLDY5LjFMMjE4LDg0LjdsLTIuMy0xLjZMMTg1LjQsNjENCgkJYzYuOC0xLjQsMTMuOC0yLjEsMjAuOS0yLjFjNTUuMywwLDEwMC4zLDQyLjgsMTAwLjMsOTUuNGMwLDc1LTY0LjIsMTM2LTE0My4xLDEzNnMtMTQzLjEtNjEtMTQzLjEtMTM2YzAtNTIuNiw0NS05NS40LDEwMC4zLTk1LjQNCgkJYzcuMSwwLDE0LjEsMC43LDIwLjksMi4xbC0zMy4xLDI0LjFMMTYzLjMsNjkuMXogTTE1My41LDc2LjciLz4NCjwvZz4NCjwvc3ZnPg0K);
 }
-@media (max-width: 680px) {
+@media (max-width: 768px) {
+  .modal-auth .modal__overlay {
+    background-color: #2A3F50;
+  }
   .modal-auth .form {
     padding: 0 2rem 5rem;
   }
