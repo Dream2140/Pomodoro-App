@@ -5,6 +5,7 @@ import {
   registerUser,
   loginUser,
   logoutUser,
+  resetPassword as resetPasswordApi,
 } from '@/services/firebase';
 
 interface AuthContextValue {
@@ -13,6 +14,7 @@ interface AuthContextValue {
   login: (email: string, password: string) => Promise<void>;
   register: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
+  resetPassword: (email: string) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null);
@@ -41,8 +43,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     await logoutUser();
   }
 
+  async function resetPassword(email: string) {
+    await resetPasswordApi(email);
+  }
+
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, register, logout, resetPassword }}>
       {children}
     </AuthContext.Provider>
   );

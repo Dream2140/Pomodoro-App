@@ -9,6 +9,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  sendPasswordResetEmail,
   type User,
 } from 'firebase/auth';
 import { auth, database } from '@/config/firebase';
@@ -30,6 +31,10 @@ export async function loginUser(email: string, password: string) {
 
 export async function logoutUser() {
   await signOut(auth);
+}
+
+export async function resetPassword(email: string) {
+  await sendPasswordResetEmail(auth, email);
 }
 
 export async function getUserTasks(userId: string): Promise<Record<string, Task> | null> {
