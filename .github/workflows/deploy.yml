@@ -20,6 +20,15 @@ jobs:
 
       - run: npm ci
       - run: npm run build
+        env:
+          VITE_FIREBASE_API_KEY: AIzaSyBHsXcAcXqo1C9aDPOTA4X0MThuyqbufqM
+          VITE_FIREBASE_AUTH_DOMAIN: pomodoro-e2c62.firebaseapp.com
+          VITE_FIREBASE_DATABASE_URL: https://pomodoro-e2c62-default-rtdb.europe-west1.firebasedatabase.app
+          VITE_FIREBASE_PROJECT_ID: pomodoro-e2c62
+          VITE_FIREBASE_STORAGE_BUCKET: pomodoro-e2c62.appspot.com
+          VITE_FIREBASE_MESSAGING_SENDER_ID: '657324600429'
+          VITE_FIREBASE_APP_ID: '1:657324600429:web:f79f2abd8707825038e364'
+          VITE_FIREBASE_MEASUREMENT_ID: G-8GG4SLJFBT
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v4
