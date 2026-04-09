@@ -5,47 +5,49 @@
   z-index: 1000;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  max-width: 28rem;
+  gap: 0.625rem;
+  max-width: 26rem;
   width: calc(100% - 3rem);
 }
 
 .notification {
   display: flex;
   align-items: stretch;
-  border-radius: 4px;
+  border-radius: var(--radius-md);
   overflow: hidden;
   animation: slideIn 0.3s ease-out;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .iconWrap {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 3.5rem;
-  min-height: 3.5rem;
-  font-size: 1.25rem;
+  width: 3rem;
+  min-height: 3rem;
+  font-size: 1.125rem;
   color: white;
+  flex-shrink: 0;
 }
 
-.success .iconWrap { background-color: var(--notification-success); }
-.error .iconWrap { background-color: var(--notification-error); }
-.warning .iconWrap { background-color: var(--notification-warning); }
-.info .iconWrap { background-color: var(--notification-info); }
+.success .iconWrap { background: var(--notification-success); }
+.error .iconWrap { background: var(--notification-error); }
+.warning .iconWrap { background: var(--notification-warning); }
+.info .iconWrap { background: var(--notification-info); }
 
 .content {
   flex: 1;
   display: flex;
   align-items: center;
   padding: 0.75rem 1rem;
-  background-color: var(--bg-secondary);
+  background: var(--bg-card);
 }
 
 .text {
-  font-size: 0.875rem;
-  font-weight: 700;
-  line-height: 1.2;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.35;
   color: var(--text-primary);
 }
 
@@ -53,11 +55,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 1rem;
-  background-color: var(--bg-secondary);
-  color: var(--text-secondary);
-  font-size: 1.25rem;
-  transition: color 0.2s;
+  padding: 0 0.875rem;
+  background: var(--bg-card);
+  color: var(--text-muted);
+  font-size: 1.125rem;
+  transition: color var(--transition-fast);
 }
 
 .closeBtn:hover {
@@ -65,18 +67,6 @@
 }
 
 @keyframes slideIn {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@media (min-width: 768px) {
-  .container {
-    max-width: 30rem;
-  }
+  from { transform: translateX(110%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
 }

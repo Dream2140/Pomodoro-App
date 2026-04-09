@@ -170,17 +170,17 @@ export function Timer() {
         {/* Timer Circle */}
         <div className={styles.timerCircle} role="timer" aria-label={`Timer: ${formatTime(timeLeft)}`}>
           <svg viewBox="0 0 200 200" className={styles.svg}>
-            <circle cx="100" cy="100" r="90" fill="none" stroke="var(--bg-secondary)" strokeWidth="8" />
+            <circle cx="100" cy="100" r="88" fill="none" stroke="var(--bg-elevated)" strokeWidth="6" />
             <circle
               cx="100"
               cy="100"
-              r="90"
+              r="88"
               fill="none"
               stroke={categoryColor}
-              strokeWidth="8"
+              strokeWidth="6"
               strokeLinecap="round"
-              strokeDasharray={`${2 * Math.PI * 90}`}
-              strokeDashoffset={`${2 * Math.PI * 90 * (1 - progress / 100)}`}
+              strokeDasharray={`${2 * Math.PI * 88}`}
+              strokeDashoffset={`${2 * Math.PI * 88 * (1 - progress / 100)}`}
               transform="rotate(-90 100 100)"
               className={styles.progressRing}
             />

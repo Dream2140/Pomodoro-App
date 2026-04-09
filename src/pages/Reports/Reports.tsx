@@ -9,14 +9,39 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
+  type TooltipProps,
 } from 'recharts';
 import { useTasks } from '@/hooks/useTasks';
-import type { ReportPeriod, ReportCategory, ReportDataPoint, Task } from '@/types';
+import type { ReportPeriod, ReportCategory, Task, Priority } from '@/types';
 import { PRIORITY_COLORS } from '@/types';
 import { formatDate, parseDate, getWeekDays, getMonthDays, getWeekDayByDate, getMonthDayIndex } from '@/utils/helpers';
 import styles from './Reports.module.css';
 
 const MS_PER_DAY = 86400000;
+
+function CustomTooltip({ active, payload, label }: TooltipProps<number, string>) {
+  if (!active || !payload?.length) return null;
+  return (
+    <div style={{
+      background: '#283845',
+      border: '1px solid rgba(255,255,255,0.1)',
+      borderRadius: 8,
+      padding: '10px 14px',
+      boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
+    }}>
+      <p style={{ color: '#94a8bc', fontSize: 11, fontWeight: 600, marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+        {label}
+      </p>
+      {payload.map((entry) => (
+        <div key={entry.name} style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 2 }}>
+          <span style={{ width: 8, height: 8, borderRadius: '50%', background: entry.color, flexShrink: 0 }} />
+          <span style={{ color: '#c8d6e0', fontSize: 12, textTransform: 'capitalize' }}>{entry.name}</span>
+          <span style={{ color: '#f0f4f8', fontSize: 12, fontWeight: 600, marginLeft: 'auto' }}>{entry.value}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
 
 export function Reports() {
   const navigate = useNavigate();
@@ -61,71 +86,68 @@ export function Reports() {
   return (
     <div className={styles.page}>
       {/* Period Tabs */}
-      <div className={styles.tabs} role="tablist" aria-label="Report period">
-        {(['day', 'week', 'month'] as ReportPeriod[]).map((p) => (
-          <button
-            key={p}
-            role="tab"
-            aria-selected={period === p}
-            className={`${styles.tab} ${period === p ? styles.activeTab : ''}`}
-            onClick={() => navigate(`/reports/${p}/${category}`)}
-          >
-            {p.charAt(0).toUpperCase() + p.slice(1)}
-          </button>
-        ))}
-      </div>
+      <div className={styles.tabsRow}>
+        <div className={styles.tabs} role="tablist" aria-label="Report period">
+          {(['day', 'week', 'month'] as ReportPeriod[]).map((p) => (
+            <button
+              key={p}
+              role="tab"
+              aria-selected={period === p}
+              className={`${styles.tab} ${period === p ? styles.activeTab : ''}`}
+              onClick={() => navigate(`/reports/${p}/${category}`)}
+            >
+              {p.charAt(0).toUpperCase() + p.slice(1)}
+            </button>
+          ))}
+        </div>
 
-      {/* Category Tabs */}
-      <div className={styles.tabs} role="tablist" aria-label="Report category">
-        {(['pomodoros', 'tasks'] as ReportCategory[]).map((c) => (
-          <button
-            key={c}
-            role="tab"
-            aria-selected={category === c}
-            className={`${styles.tab} ${category === c ? styles.activeTab : ''}`}
-            onClick={() => navigate(`/reports/${period}/${c}`)}
-          >
-            {c.charAt(0).toUpperCase() + c.slice(1)}
-          </button>
-        ))}
+        <div className={styles.tabs} role="tablist" aria-label="Report category">
+          {(['pomodoros', 'tasks'] as ReportCategory[]).map((c) => (
+            <button
+              key={c}
+              role="tab"
+              aria-selected={category === c}
+              className={`${styles.tab} ${category === c ? styles.activeTab : ''}`}
+              onClick={() => navigate(`/reports/${period}/${c}`)}
+            >
+              {c.charAt(0).toUpperCase() + c.slice(1)}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Chart */}
       <div className={styles.chartContainer} role="img" aria-label={`${period} ${category} report chart`}>
         {chartData.length > 0 ? (
-          <ResponsiveContainer width="100%" height={350}>
-            <BarChart data={chartData} margin={{ top: 20, right: 20, bottom: 5, left: 0 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="var(--bg-secondary)" />
+          <ResponsiveContainer width="100%" height={320}>
+            <BarChart data={chartData} margin={{ top: 10, right: 10, bottom: 5, left: -10 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" vertical={false} />
               <XAxis
                 dataKey="name"
-                tick={{ fill: 'var(--text-primary)', fontSize: 11 }}
-                axisLine={{ stroke: 'var(--text-primary)' }}
+                tick={{ fill: '#94a8bc', fontSize: 11, fontWeight: 500 }}
+                axisLine={{ stroke: 'rgba(255,255,255,0.1)' }}
+                tickLine={false}
               />
               <YAxis
-                tick={{ fill: 'var(--text-primary)', fontSize: 12 }}
-                axisLine={{ stroke: 'var(--text-primary)' }}
+                tick={{ fill: '#94a8bc', fontSize: 11 }}
+                axisLine={false}
+                tickLine={false}
                 allowDecimals={false}
               />
-              <Tooltip
-                contentStyle={{
-                  backgroundColor: 'var(--bg-secondary)',
-                  border: 'none',
-                  borderRadius: 4,
-                  color: 'var(--text-primary)',
-                }}
-              />
+              <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(255,255,255,0.03)' }} />
               <Legend
-                wrapperStyle={{
-                  color: 'var(--text-secondary)',
-                  fontSize: '0.8125rem',
-                  textTransform: 'capitalize',
-                }}
+                wrapperStyle={{ paddingTop: 12, fontSize: 11, fontWeight: 500 }}
+                iconType="circle"
+                iconSize={8}
+                formatter={(value: string) => (
+                  <span style={{ color: '#94a8bc', textTransform: 'capitalize', marginRight: 12 }}>{value}</span>
+                )}
               />
-              <Bar dataKey="urgent" stackId="a" fill={PRIORITY_COLORS.urgent} />
+              <Bar dataKey="urgent" stackId="a" fill={PRIORITY_COLORS.urgent} radius={[0, 0, 0, 0]} />
               <Bar dataKey="high" stackId="a" fill={PRIORITY_COLORS.high} />
               <Bar dataKey="middle" stackId="a" fill={PRIORITY_COLORS.middle} />
-              <Bar dataKey="low" stackId="a" fill={PRIORITY_COLORS.low} />
-              <Bar dataKey="failed" fill={PRIORITY_COLORS.failed} />
+              <Bar dataKey="low" stackId="a" fill={PRIORITY_COLORS.low} radius={[3, 3, 0, 0]} />
+              <Bar dataKey="failed" fill={PRIORITY_COLORS.failed} radius={[3, 3, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         ) : (
@@ -152,12 +174,12 @@ export function Reports() {
             <tbody>
               {chartData.map((row) => (
                 <tr key={row.name}>
-                  <td>{row.name}</td>
-                  <td>{row.urgent}</td>
-                  <td>{row.high}</td>
-                  <td>{row.middle}</td>
-                  <td>{row.low}</td>
-                  <td>{row.failed}</td>
+                  <td style={{ textTransform: 'capitalize', fontWeight: 500 }}>{row.name}</td>
+                  <td>{row.urgent || '-'}</td>
+                  <td>{row.high || '-'}</td>
+                  <td>{row.middle || '-'}</td>
+                  <td>{row.low || '-'}</td>
+                  <td>{row.failed || '-'}</td>
                 </tr>
               ))}
             </tbody>
@@ -179,23 +201,12 @@ interface ChartRow {
 
 function buildPomodorosData(tasks: Task[], period: ReportPeriod): ChartRow[] {
   if (period === 'day') {
-    const totals: ReportDataPoint = {
-      date: '',
-      urgent: 0,
-      high: 0,
-      middle: 0,
-      low: 0,
-      failed: 0,
-    };
-
+    const totals: Record<Priority | 'failed', number> = { urgent: 0, high: 0, middle: 0, low: 0, failed: 0 };
     tasks.forEach((t) => {
       if (t.completedCount) totals[t.priority] += t.completedCount.length;
       if (t.failedPomodoros) totals.failed += t.failedPomodoros.length;
     });
-
-    return [
-      { name: 'urgent', ...totals },
-    ];
+    return [{ name: 'Today', ...totals }];
   }
 
   const grouped = groupByDate(tasks);
