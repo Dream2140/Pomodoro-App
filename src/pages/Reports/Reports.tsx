@@ -9,7 +9,6 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
-  type TooltipProps,
 } from 'recharts';
 import { useTasks } from '@/hooks/useTasks';
 import type { ReportPeriod, ReportCategory, Task, Priority } from '@/types';
@@ -19,7 +18,8 @@ import styles from './Reports.module.css';
 
 const MS_PER_DAY = 86400000;
 
-function CustomTooltip({ active, payload, label }: TooltipProps<number, string>) {
+function CustomTooltip(props: { active?: boolean; payload?: Array<{ name: string; value: number; color: string }>; label?: string }) {
+  const { active, payload, label } = props;
   if (!active || !payload?.length) return null;
   return (
     <div style={{
@@ -32,7 +32,7 @@ function CustomTooltip({ active, payload, label }: TooltipProps<number, string>)
       <p style={{ color: '#94a8bc', fontSize: 11, fontWeight: 600, marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
         {label}
       </p>
-      {payload.map((entry) => (
+      {payload.map((entry: { name: string; value: number; color: string }) => (
         <div key={entry.name} style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 2 }}>
           <span style={{ width: 8, height: 8, borderRadius: '50%', background: entry.color, flexShrink: 0 }} />
           <span style={{ color: '#c8d6e0', fontSize: 12, textTransform: 'capitalize' }}>{entry.name}</span>
