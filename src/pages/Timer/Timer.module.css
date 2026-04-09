@@ -1,0 +1,219 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.loading {
+  text-align: center;
+  padding: 4rem 0;
+  color: var(--text-secondary);
+}
+
+.backBtn {
+  align-self: flex-start;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  transition: color 0.2s;
+}
+
+.backBtn:hover {
+  color: var(--accent);
+}
+
+.timerSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.taskTitle {
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.taskSubtitle {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.timerCircle {
+  position: relative;
+  width: 220px;
+  height: 220px;
+}
+
+.svg {
+  width: 100%;
+  height: 100%;
+}
+
+.progressRing {
+  transition: stroke-dashoffset 1s linear;
+}
+
+.timerText {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+}
+
+.time {
+  font-size: 2.5rem;
+  font-weight: 300;
+  font-family: var(--font-secondary);
+  letter-spacing: 0.05em;
+}
+
+.timeLabel {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.breakLabel {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.idleText {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--text-secondary);
+}
+
+.finishedText {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--btn-green);
+}
+
+.estimation {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pomodoro {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  border: 2px solid var(--btn-red);
+  background-color: transparent;
+  transition: background-color 0.3s;
+}
+
+.pomodoro.done {
+  background-color: var(--btn-green);
+  border-color: var(--btn-green);
+}
+
+.pomodoro.failed {
+  background-color: var(--btn-red);
+  border-color: var(--btn-red);
+}
+
+.addPomBtn {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  border: 2px dashed var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  transition: all 0.2s;
+}
+
+.addPomBtn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.controls {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.primaryBtn,
+.secondaryBtn,
+.dangerBtn,
+.successBtn {
+  padding: 0.75rem 2rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 700;
+  transition: background-color 0.2s;
+}
+
+.primaryBtn {
+  background-color: var(--btn-green);
+  color: white;
+}
+
+.primaryBtn:hover {
+  background-color: var(--btn-green-hover);
+}
+
+.secondaryBtn {
+  background-color: var(--btn-blue);
+  color: white;
+}
+
+.secondaryBtn:hover {
+  background-color: var(--btn-blue-hover);
+}
+
+.dangerBtn {
+  background-color: var(--btn-red);
+  color: white;
+}
+
+.dangerBtn:hover {
+  background-color: var(--btn-red-hover);
+}
+
+.successBtn {
+  background-color: var(--btn-green);
+  color: white;
+}
+
+.successBtn:hover {
+  background-color: var(--btn-green-hover);
+}
+
+@media (min-width: 768px) {
+  .timerCircle {
+    width: 280px;
+    height: 280px;
+  }
+
+  .time {
+    font-size: 3rem;
+  }
+
+  .taskTitle {
+    font-size: 1.75rem;
+  }
+
+  .pomodoro {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+}

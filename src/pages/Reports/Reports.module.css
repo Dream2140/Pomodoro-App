@@ -1,0 +1,90 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.loading {
+  text-align: center;
+  padding: 4rem 0;
+  color: var(--text-secondary);
+}
+
+.tabs {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  border-bottom: 1px solid var(--bg-secondary);
+  padding-bottom: 0.75rem;
+}
+
+.tab {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  padding: 0.25rem 0;
+  position: relative;
+  transition: color 0.2s;
+}
+
+.tab:hover { color: var(--text-primary); }
+
+.activeTab {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.activeTab::after {
+  content: '';
+  position: absolute;
+  bottom: -0.75rem;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--accent);
+}
+
+.chartContainer {
+  width: 100%;
+  min-height: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.noData {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 1.125rem;
+  padding: 4rem 0;
+}
+
+.tableContainer {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.table th,
+.table td {
+  padding: 0.625rem 0.75rem;
+  text-align: center;
+  border-bottom: 1px solid var(--bg-secondary);
+}
+
+.table th {
+  color: var(--text-secondary);
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.table td {
+  color: var(--text-primary);
+}
+
+.table tbody tr:hover {
+  background-color: var(--bg-secondary);
+}

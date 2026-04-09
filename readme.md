@@ -1,42 +1,59 @@
-## GENERAL
+# Pomodoro App
 
-This is starting kit that allows to start developing on already configured `Node.js` development server.
+A productivity application based on the Pomodoro Technique. Manage tasks, track time, and view reports.
 
-It has already build-in structure of application, according to components approach and examples of further development direction.
+## Tech Stack
 
-## NOTE
+- **React 18** + **TypeScript** — UI framework with type safety
+- **Vite** — fast build tool with HMR
+- **React Router v6** — SPA routing
+- **Firebase v11** (modular SDK) — Authentication + Realtime Database
+- **Recharts** — data visualization for reports
+- **CSS Modules** — scoped component styles
+- **Vitest** + **React Testing Library** — testing
 
-Main goal of this starting kit is quick starting developing on working server for students, it's not an sample app or best practices, so students can modify, extend configs according to their needs during productivity app iteration
+## Getting Started
 
-All improvements, that are not mentioned in phase acceptance criteria will be evaluated in the last phase.
+```bash
+# Install dependencies
+npm install
 
-## OVERVIEW
+# Copy environment variables
+cp .env.example .env
+# Edit .env with your Firebase credentials
 
-`package.json` has all project's dependencies
+# Start dev server
+npm run dev
 
-`webpack.config.js` module bundler configuration. This is basic configuration for quick start and should be changed during development.
+# Build for production
+npm run build
 
-`src` folder should contain all project's sources
+# Run tests
+npm test
+```
 
-`src/app` folder should contain all components. All they should be splitted into a logical parts. Components folder should contain common and reusable components.
+## Features
 
-All specific components should be inside pages folder. For example - `app/pages/task-list/task` etc.
+- **Task Management** — Create, edit, delete tasks with categories and priorities
+- **Pomodoro Timer** — Configurable work/break cycles with visual countdown
+- **Daily/Global Lists** — Organize tasks by day or keep them in a global backlog
+- **Reports** — Day/week/month analytics with stacked bar charts
+- **Authentication** — Email/password login via Firebase Auth
+- **Settings** — Customize pomodoro durations and iteration counts
+- **Responsive Design** — Works on mobile, tablet, and desktop
+- **Accessible** — ARIA attributes, keyboard navigation, screen reader support
 
-As a result each component should contain `index.js` file for exporting component, component itself, files with unit test for this component and template for this component if required.
+## Project Structure
 
-`src/assets` folder should contain assets of your application
-
-- `less` folder should contain all common styles and helpers
-
-- `images` folder should contain all images of the project
-
-- `fonts` folder should contain all custom fonts
-
-`static` folder used for holding `*.html` files while building markup on first phase, after students will start using template engine and all html should be moved to a separate views inside the components and static folder can be deleted.
-
-## STEPS TO INSTALL AND RUN DEVELOPMENT ENV
-1. install Node.js from official site https://nodejs.org/
-1. run terminal of your choice and make sure that you are in root of a project
-1. run `npm install` - this will install all required packages
-1. run `npm start` command - this will run server on http://localhost:3000 (to access HTML files from static folder use URL like http://localhost:3000/static/task-list.html)
-1. you can run `npm run build` to see resulting structure in file system (helps with path to images etc.)
+```
+src/
+├── components/     # Shared UI (Header, Modal, Notification, Layout)
+├── context/        # React Contexts (Auth, Settings, Notification)
+├── hooks/          # Custom hooks (useTasks)
+├── pages/          # Page components (TaskList, Timer, Settings, Reports, Auth)
+├── services/       # Firebase API layer
+├── types/          # TypeScript type definitions
+├── utils/          # Helper functions
+├── styles/         # Global styles and CSS variables
+└── test/           # Test setup
+```

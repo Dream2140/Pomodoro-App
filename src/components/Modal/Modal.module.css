@@ -1,0 +1,65 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 4rem;
+  overflow-y: auto;
+}
+
+.container {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--bg-secondary);
+  border-radius: 8px;
+  width: 100%;
+  max-width: 32rem;
+  margin: 0 1rem;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.25rem 0;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.closeBtn {
+  font-size: 1.75rem;
+  color: var(--text-secondary);
+  transition: color 0.2s;
+  line-height: 1;
+}
+
+.closeBtn:hover {
+  color: var(--text-primary);
+}
+
+.body {
+  padding: 1.25rem;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    margin-top: 2rem;
+  }
+}
